@@ -7,6 +7,6 @@
 
 		public function get_index()
 		{
-			// 
+			return View::make('login.elections.elections');
 		}
 	}

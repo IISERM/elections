@@ -93,7 +93,7 @@
 
 			if (Auth::attempt($credentials))
 			{
-				return Redirect::to('oppcell');
+				return Redirect::to('vote');
 			}
 			else
 			{
