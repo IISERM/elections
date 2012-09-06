@@ -99,7 +99,7 @@ p\
 
 	//Auto Initializations
 	{
-		var base_path=$('#lara_path').val();
+		var base_path=$('#lara_path').val()+'index.php\'';
 		var processing_last_request=false;
 		var reg_no_selected="guest";
 		var login_invoked=false;
