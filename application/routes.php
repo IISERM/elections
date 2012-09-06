@@ -49,10 +49,10 @@ Route::get('logout', function()
 );
 
 // Login Things
-Route::controller(array('login'));
+Route::controller(array('login','view'));
 
 // Vote Things
-Route::controller(array('vote'));
+// Route::controller(array('vote'));
 
 /*
 |--------------------------------------------------------------------------

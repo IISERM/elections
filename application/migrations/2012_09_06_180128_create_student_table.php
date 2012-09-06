@@ -23,6 +23,9 @@ class Create_Student_Table {
 			// Registration Number
 			$table->string('reg_no')->unique();
 
+			// Role
+			$table->integer('role');
+
 			// Role (1 - Monkey, 0 - Human)
 			$table->integer('voted')->boolean();
 
