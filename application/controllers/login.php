@@ -23,7 +23,7 @@
 			if(Input::has('ajax'))
 			{
 				$s = "'%".mysql_real_escape_string(Input::get('s'))."%'";
-				$query = DB::query("select created_at, updated_at, concat_ws(' ', first_name, middle_name, last_name) as name, role, reg_no, img from students where concat_ws(' ', first_name, middle_name, last_name, reg_no) like $s ORDER BY name ASC LIMIT 8");
+				$query = DB::query("select created_at, updated_at, concat_ws(' ', first_name, middle_name, last_name) as name, role, reg_no, voted as img, hostel, batch from students where concat_ws(' ', first_name, middle_name, last_name, reg_no) like $s ORDER BY name ASC LIMIT 8");
 				return json_encode($query);
 			}
 			else
