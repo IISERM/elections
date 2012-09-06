@@ -32,10 +32,27 @@
 |
 */
 
-Route::get('/', function()
+/*Route::get('/', function()
 {
 	return View::make('home.index');
-});
+});*/
+
+// Login Page
+Route::get('/', 'login@index');
+
+// Logout Page
+Route::get('logout', function()
+	{
+		Auth::logout();
+		return Redirect::to('/'); 
+	}
+);
+
+// Login Things
+Route::controller(array('login'));
+
+// Vote Things
+Route::controller(array('vote'));
 
 /*
 |--------------------------------------------------------------------------
