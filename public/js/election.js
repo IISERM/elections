@@ -133,7 +133,7 @@ function(){
 		template: '<div class="main_group"> \
 						<h1>{{title}}</h1> \
 						<div ng-transclude></div> \
-						<input type="radio" name="{{id}}" ng-model="selected.id" value="0">I am an agnostic little b*st*rd!</input> \
+						<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane" /><label for="{{id}}_abstane">I am an agnostic little b*st*rd!</label> \
 					</div>',		
 		compile:function (tElement, tAttrs)
 		{
@@ -160,13 +160,15 @@ function(){
 				name:'@',
 				link:'@',
 				selected:'=',
+				basepath:'@',
 				category:'@'},
+
 		// transclude: true,
 		// ng-model="{{selection}}"
 		//ng-model="{{select.selection}}" 
-		template:  '<p>{{link}}</p> \
-		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}">{{name}}</input> \
-		</div>',
+		template:  '<label for="{{category}}_{{id}}"> <img width="150" src="{{basepath+link}}" /> </label>\
+		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
+		</div> <br/>',
 		compile:function (tElement, tAttrs)
 		{
 			//GLOBALS FOR THIS ZONE
@@ -203,10 +205,10 @@ function elections($scope){
 	$scope.categories=[
 	{id:1, title:'Fothermuffin 1',selected:{id:'-1'},
 									list:[
-										{id:1,name:'Muffin 1',link:'Image1 Link :)'},
-										{id:2,name:'Muffin 2',link:'Image2 Link :)'},
-										{id:3,name:'Muffin 3',link:'Image3 Link :)'},
-										{id:4,name:'Muffin 4',link:'Image4 Link :)'},
+										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
+										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
+										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
+										{id:4,name:'Muffin 4',link:'487384_410881738958783_1398366316_n.jpg'},
 										]},
 	{id:2, title:'Fothermuffin 2',selected:{id:'-1'},
 									list:[
@@ -232,11 +234,21 @@ function elections($scope){
 		else
 			return "Not Selected";
 			
-	}
+	};
+
+    $scope.cast=function(){
+    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
+    	if(r==1)
+    		alert("Submitted!");
+    	else
+    		alert("Cancelled");
+    };
+
 }
 
 function Ctrl($scope){
-	    $scope.color = 'green';
+	// $scope.base_path=<?php echo URL::base()."/img/"; ?>;
+	$scope.color = 'green';
     $scope.choices = ['red', 'green', 'blue'];
     
     $scope.bam={selection:'red'};
@@ -244,4 +256,5 @@ function Ctrl($scope){
     $scope.$watch('bam.selection',function(x){
     	// alert(x);
     });
+
 }
