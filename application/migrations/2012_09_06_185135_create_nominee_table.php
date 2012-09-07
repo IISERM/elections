@@ -9,7 +9,7 @@ class Create_Nominee_Table {
 	 */
 	public function up()
 	{
-		Schema::create('nominee',function($table)
+		Schema::create('nominees',function($table)
 		{
 			// Autoincrement ID
 			$table->increments('id')->unsigned();
@@ -19,6 +19,9 @@ class Create_Nominee_Table {
 
 			// Post
 			$table->integer('post');
+
+			// Image
+			$table->string('img');
 
 			// Timestamps
 			$table->timestamps();
@@ -33,7 +36,7 @@ class Create_Nominee_Table {
 	 */
 	public function down()
 	{
-		Schema::drop('nominee');
+		Schema::drop('nominees');
 	}
 
 }

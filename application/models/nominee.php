@@ -2,6 +2,6 @@
 
 	class Nominee extends Eloquent
 	{
-		public static $table = 'nominee';
+		public static $table = 'nominees';
 		public static $timestamps = true;
 	}
