@@ -1,133 +1,14 @@
 angular.module('myApp',[])
-.directive('markdown',function() {
-	var converter=new Showdown.converter();
-	var editTemplate='<textarea ng-show="isEditMode" ng-dblclick="switchToPreview()" rows="10" cols="20" ng-model="markdown"></textarea>';
-	var previewTemplate='<div ng-hide="isEditMode" ng-dblclick="switchToEdit()">Preview</div>';
-	return {
-		restrict: 'E',
-		scope:{},		//Iscolate scope	
-		// transclue: true,
-		// link:function(scope, element, attrs) {
-		// 	var htmlText=converter.makeHtml(element.text());
-		// 	element.html(htmlText);
-		// },
-		// template:'<textarea rows="30" cols="30" ng-transclude></textarea>'
-		compile:function (tElement, tAttrs, transclude){
-			var markdown=tElement.text();			
- 			tElement.html(editTemplate);
- 			var previewElement=angular.element(previewTemplate);
- 			tElement.append(previewElement);
- 			
- 			//Linking function
- 			return function(scope,element,attrs){
- 				scope.isEditMode=true;
- 				scope.markdown=markdown;
- 				scope.switchToPreview=function(){
- 					var makeHtml = converter.makeHtml(scope.markdown);
- 					previewElement.html(makeHtml);
- 					scope.isEditMode=false;
- 				}
- 				scope.switchToEdit=function(){
- 					scope.isEditMode=true;
- 				}
-
- 			}
-		}
-	}
-}).directive('myWidget',function(){
-	var linkFn;
-	linkFn=function(scope,element,attrs){
-		var animateUp, animateRight;
-
-		animateRight=function(){
-			$(this).animate({
-				left:'+=50'
-			});
-		}
-		animateDown=function(){
-			$(this).animate({
-				top:'+=50'
-			});
-		}
-		$('#one').on('click',animateRight);
-		$('#two').on('click',animateDown);
-	};
-
-	return {
-		restrict:'E',
-		link: linkFn
-	}
-}).directive('cover',function(){
-	//GLobals for all covers go here
-	var border=200;
-	return {	//compile function this is
-		restrict:'E',	//Its an element tag
-		scope:{
-			title:'@',
-			img:'@',
-			id:'@'
-		},	//we want the scope iscolated
-		template: '<div id="cf_{{id}}" class="coverFlowCovers"> <img id="cf_img_{{id}}" src="{{img}}" height="200" width="200"/>' + 
-				'<p id="cf_cap_{{id}}">{{title}} What is your problem?</p> </div>',
-		link:function(scope,element,attr){
-			;
-			// $(element).show(1000);
-			// $(element).hide();
-		}
-	}
-}).directive('coverflow',
-// coverflow_directive_function);
-function(){
-	//Globals
-	
-	return {
-		restrict:'E',
-		scope:{selected:'=',
-				elementcount:'@'},
-		transclude: true,
-		template: '<div class="coverFlowContainer" ng-transclude></div> <input type="range" name="points" step="1" min="1" max="1000" />',
-		compile:function (tElement, tAttrs)
-		{
-			//GLOBALS FOR THIS ZONE
-			// var selected=1;
-
- 			//Linking function
- 			return function(scope,element,attrs){
- 				//var i=scope.selected;
- 				
- 				// var i=$(element).children('.coverFlowCovers').size();
-
- 				//.hide();
-
-                scope.$watch('elementcount', function (x) {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue                	
-				// scope.$watch(attrs.elementcount, function (x) {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue                	                	
-                    // element.css('left', x + 'px');
-                    alert(x);
-                });
-
-                scope.$watch(attrs.selected, function (x) {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue
-                    // element.css('left', x + 'px');
-                    // alert(x);
-                });
-
- 				//children()[1]
- 				// alert(i);
- 				// var i=scope.covers_data.length;
-// angular.forEach($scope.todos, function(todo) {
-//       count += todo.done ? 0 : 1;
-//     });
- 				//;
- 			}
-
-		}
-
-	}
+.config(function($routeProvider) {
+    $routeProvider.
+      when('/logout', {redirectTo:'/logout'}).
+      otherwise({redirectTo:'/'});
 }).directive('votepanel', function() {
 	return {
 		restrict:'E',
 		scope:{id:'@',
 				title:'@',
-				list:'@',
+				list:'@',				
 				selected:'='},
 		transclude: true,
 		template: '<div class="main_group"> \
@@ -159,8 +40,8 @@ function(){
 		scope:{id:'@',
 				name:'@',
 				link:'@',
-				selected:'=',
 				basepath:'@',
+				selected:'=',				
 				category:'@'},
 
 		// transclude: true,
@@ -218,8 +99,18 @@ function elections($scope){
 										{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
 										]}
 	];
+	$scope.user={name:"Atul Singh Arora", batch:"MS11", hostel:"7", gender:"Male", voted:false}
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};
+	$scope.custom={showvotes:false};
+	$scope.toggle_votes=function(){
+
+		if($scope.custom.showvotes) 
+			$scope.custom.showvotes=false;
+		else
+			$scope.custom.showvotes=true;
+	}
+
 	$scope.getNameFromList=function(category,t_id){
 		var i;
 		for(i=0;i<category.list.length;i++)
@@ -237,13 +128,37 @@ function elections($scope){
 	};
 
     $scope.cast=function(){
-    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
-    	if(r==1)
-    		alert("Submitted!");
-    	else
-    		alert("Cancelled");
+    	var i,passed=true;
+    	categories=$scope.categories;
+
+		for(i=0;i<categories.length;i++)
+		{
+			if(categories[i].selected.id==-1)
+				passed=false;
+		}
+		if(passed)
+		{
+	    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
+	    	if(r==1)
+	    		$scope.user.voted=true;			
+		}
+		else
+		{
+			alert("You've left some categories unmarked! If you do not wish to vote, explicitly press the abstane option and try again.");
+		}
+
+    		// alert("Submitted!");
+    	// else
+    		// alert("Cancelled");
     };
 
+    // $scope.logout=function(){
+    	// $scope.$apply(function() { $location.path("/route"); });
+    	// $location.path()
+    	// $route.reload();
+    	// alert("Logged out");
+    	// alert($scope.likethis);
+    // };
 }
 
 function Ctrl($scope){
