@@ -14,7 +14,7 @@ angular.module('myApp',[])
 		template: '<div class="main_group"> \
 						<h1>{{title}}</h1> \
 						<div ng-transclude></div> \
-						<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane" /><label for="{{id}}_abstane">I am an agnostic little b*st*rd!</label> \
+						<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane" /><label for="{{id}}_abstane">No vote for me Sire!</label> \
 					</div>',		
 		compile:function (tElement, tAttrs)
 		{
@@ -74,24 +74,24 @@ angular.module('myApp',[])
 
 function prof_coverflow($scope){
 	$scope.covers_data=[
-	{id:1, title:'Fothermuffin 1'},
-	{id:2, title:'Fothermuffin 2'},
-	{id:3, title:'Fothermuffin 3'},
-	{id:4, title:'Fothermuffin 4'},
-	{id:5, title:'Fothermuffin 5'},
+	{id:1, title:'Category 1'},
+	{id:2, title:'Category 2'},
+	{id:3, title:'Category 3'},
+	{id:4, title:'Category 4'},
+	{id:5, title:'Category 5'},
 	];
 }
 
 function elections($scope){
 	$scope.categories=[
-	{id:1, title:'Fothermuffin 1',selected:{id:'-1'},
+	{id:1, title:'Category 1',selected:{id:'-1'},
 									list:[
 										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
 										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
 										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
 										{id:4,name:'Muffin 4',link:'487384_410881738958783_1398366316_n.jpg'},
 										]},
-	{id:2, title:'Fothermuffin 2',selected:{id:'-1'},
+	{id:2, title:'Category 2',selected:{id:'-1'},
 									list:[
 										{id:1,name:'MuffinB 1',link:'Image1 Link :)'},
 										{id:2,name:'MuffinB 2',link:'Image2 Link :)'},
