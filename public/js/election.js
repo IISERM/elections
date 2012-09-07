@@ -144,13 +144,17 @@ function elections($scope){
 		}
 		else
 		{
-			alert("You've left some categories unmarked! If you do not wish to vote, explicitly press the abstane option and try again.");
+			alert("You've left some categories unmarked! If you do not wish to vote, explicitly select the abstane option and try again.");
 		}
 
     		// alert("Submitted!");
     	// else
     		// alert("Cancelled");
     };
+    $scope.hideSide='Hide this';
+    $scope.hideSideF=function(){
+    	$scope.hideSide=($scope.hideSide=='Hide this')? 'Show' : 'Hide this';
+    }
 
     // $scope.logout=function(){
     	// $scope.$apply(function() { $location.path("/route"); });

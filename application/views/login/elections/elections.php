@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
 	<meta chrset="utf-8">
-	<title>Elections @ IISER M</title>
+	<title>Online Elections @ IISER M</title>
 
 	<link rel="Shortcut Icon" href=<?php echo "\"".URL::base()."/img/favicon.ico\""; ?> />
 	<link rel="stylesheet" type="text/css" href=<?php echo "\"".URL::base()."/css/election.css\""; ?> />
@@ -29,7 +29,7 @@
 		<!-- <input ng-model="base_path" value="haha" /> -->
 		<!-- value="<?php echo URL::base()."/img/"; ?>" /> -->
 
-		<div class="selection_state">
+		<div class="selection_state {{hideSide}}">
 			<table>
 				<tr>
 					<th>Category</th>
@@ -42,6 +42,8 @@
 				</tr>
 			</table>
 			<p class="linklike" ng-click="cast()">Cast My Vote!</p>
+			<p class="smallLink" ng-click="hideSideF()">{{hideSide}}</p>
+
 			<!-- <div ng-repeat="category in categories"> <p><tt>For Category:</tt>{{category.title}}, <br> <tt>you've selected:</tt>{{getNameFromList(category,category.selected.id)}}</p>	</div> -->
 		</div>
 		<center>
