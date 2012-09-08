@@ -13,6 +13,8 @@ TODO: Complete this section
 - Pseudonym for transparency and privacy 
 - Secure
 
+## Screenshots
+![After you log in, you land here!](/screenshots/1.png "Voting Page")
 
 ## License
 
