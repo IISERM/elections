@@ -2,7 +2,7 @@
 
 You read it, its just a system for holding elections online. Wicked as it sounds, it takes effort to build. Taylored to the needs of IISER, we hope this turbo charges development.
 
-Can't live live until you die; we're still learning how. Join us if you're interested.
+Can't live until you die; we're still learning how. Join us if you're interested.
 
 ## Feature Overview
 

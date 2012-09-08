@@ -47,7 +47,7 @@ angular.module('myApp',[])
 		// transclude: true,
 		// ng-model="{{selection}}"
 		//ng-model="{{select.selection}}" 
-		template:  '<label for="{{category}}_{{id}}"> <img width="150" src="{{basepath+link}}" /> </label>\
+		template:  '<label class="categoryChild" for="{{category}}_{{id}}"> <img width="150" src="{{basepath+link}}" /> </label>\
 		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
 		</div> <br/>',
 		compile:function (tElement, tAttrs)
