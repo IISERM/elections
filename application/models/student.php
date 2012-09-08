@@ -19,4 +19,16 @@
 		{
 			return $this->has_one('Subject');
 		}
+
+		public function sex()
+		{
+			if($this->sex == 1)
+			{
+				return 'male';
+			}
+			else
+			{
+				return 'female';
+			}
+		}
 	}

@@ -15,9 +15,9 @@
 			$user = Auth::user();
 			$details = array(
 					'name' => $user->first_name.' '.$user->middle_name.' '.$user->last_name,
-					'hostel' => $user->hostel,
-					'batch' => $user->batch,
-					'gender' => $user->sex,
+					'hostel' => $user->hostel(),
+					'batch' => $user->batch(),
+					'gender' => $user->sex(),
 					'voted' => $user->voted
 				);
 			return json_encode($details);
