@@ -11,7 +11,6 @@ angular.module('myApp',[])
 				list:'@',				
 				selected:'='},
 		transclude: true,
-		//<label for="{{id}}_abstane">No vote for me Sire!</label> \
 		template: '<div class="main_group"> \
 						<h1>{{catName}}</h1> \
 						<div ng-transclude></div> \
@@ -25,16 +24,10 @@ angular.module('myApp',[])
 		compile:function (tElement, tAttrs)
 		{
 			//GLOBALS FOR THIS ZONE
-
  			//Linking function
  			return function(scope,element,attrs)
  			{
-                scope.$watch('catName', function (x) 
-	                {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue                	
-	                    // alert(x);
-	                }
-                );
-
+ 				;
  			}
 
 		}
@@ -51,8 +44,6 @@ angular.module('myApp',[])
 				category:'@'},
 
 		// transclude: true,
-		// ng-model="{{selection}}"
-		//ng-model="{{select.selection}}" 
 		template:  '<div class="categoryChild" > \
 		<label for="{{category}}_{{id}}"> <img class="thumbnail" src="{{basepath+link}}" /> </label>\
 		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
@@ -65,15 +56,7 @@ angular.module('myApp',[])
  			//Linking function
  			return function(scope,element,attrs)
  			{
- 				scope.selection_work={select:'cool'};
-                scope.$watch('selected.id', function (x) 
-	                {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue                	
-	                    // alert(x);
-	                }
-                );
-                scope.selectme=function(){
-                	// alert("clicked");
-                }
+ 				;
  			}
 		}
 
@@ -82,8 +65,6 @@ angular.module('myApp',[])
 	//CONVENTIONS
 	//everything is small camel cased
 	//functions start with capitals
-
-	// var truth={userInfo:{}};
 
 	var truth={
 		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},category:{Fetch:{}},
@@ -94,73 +75,38 @@ angular.module('myApp',[])
 		{
 			$.ajax({
 				type: 'POST',
-				// url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk,
-				url: 'http://localhost/IISERM/elections/public/index.php/vote/details',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.userInfo.lnk,
+				// url: 'http://localhost/IISERM/elections/public/index.php/vote/details',
 				statusCode: {
 					404: function () {
 						;
-						// $('#DEBUG').append("Page not found\n");
 					},
 					500: function () {
 						;
-						// $('#DEBUG').append("Other Error\n");	
 					}
 				},
 				data: {ajax: '1'},
 				success: function (data) {
-					
-					
 					var dat = jQuery.parseJSON(data);
-					truth.userInfo.data=dat;					
-					// alert(dat.name);
-					// alert(truth.userInfo.data.name);
-					// alert(dat.name);
-					// alert(data);
+					truth.userInfo.data=dat;	
+					//alert(dat.name);				
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 
-					// data.clone(truth);
-					// if(data=='')
-					// {
-						// show_forgot_password_msg();
-					// }
-					// else
-					// {
-						// show_error_msg(data);
-					// }
-					//workingonrequest=false;
-					//updatelistNOW(data);
-					// }
-					;
 				}
 				}).error(function() {
-					// show_error_msg('');
-					//workingonrequest=false;
-					//$('#DEBUG').append("An Error Occured!\n");
 					;
 				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.userInfo.lnk);
+					
 					OnComplete(truth.userInfo.data);
-					// forgot_password_request_completed=true;
-					// alert('called');					
-					// $('#forgot_password').removeClass('link_not_available');
-					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					// alert('completed');
 			});
-
-			// return truth.userInfo.data;
 		};
 
 		return truth;
 
 });
 
-function prof_coverflow($scope){
-	$scope.covers_data=[
-	{id:1, title:'Category 1'},
-	{id:2, title:'Category 2'},
-	{id:3, title:'Category 3'},
-	{id:4, title:'Category 4'},
-	{id:5, title:'Category 5'},
-	];
-}
+var ext_hideSideF_show;
 
 function elections($scope,truthSource){
 	$scope.categories=[
@@ -181,22 +127,12 @@ function elections($scope,truthSource){
 										{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
 										]}
 	];
-	// $scope.user={name:"Atul Singh Arora", batch:"MS11", hostel:"7", gender:"Male", voted:false}
-	truthSource.userInfo.Fetch(function(val){
-		// alert(val.name);
+	
+	truthSource.userInfo.Fetch(function(val){		
 		$scope.user=val;
 		$scope.$digest();
-		// alert($scope.user.name);
 	});
 	
-
-	// $scope.$watch('user',function(){
-		// alert($scope.user.name);	
-	// });
-	
-
-	// alert($scope.user.name);
-
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};
 	$scope.custom={showvotes:false};
@@ -206,6 +142,23 @@ function elections($scope,truthSource){
 		else
 			$scope.custom.showvotes=true;
 	}
+
+
+	// $scope.$watch('categories',function(){
+ //    	var i,passed=true;
+ //    	categories=$scope.categories;
+
+	// 	for(i=0;i<categories.length;i++)
+	// 	{
+	// 		if(categories[i].selected.id==-1)
+	// 			passed=false;
+	// 	}
+	// 	if(passed)
+	// 	{
+	// 		$scope.hideSide='Show';
+	// 	}		
+	// 	alert('changed!');
+	// });
 
 	$scope.getNameFromList=function(category,t_id){
 		var i;
@@ -242,34 +195,58 @@ function elections($scope,truthSource){
 		{
 			alert("You've left some categories unmarked! If you do not wish to vote, explicitly select the abstane option and try again.");
 		}
-
-    		// alert("Submitted!");
-    	// else
-    		// alert("Cancelled");
     };
-    $scope.hideSide='Hide this';
+    // $scope.hideSide='Hide this';
+    $scope.hideSide='Show';
     $scope.hideSideF=function(){
     	$scope.hideSide=($scope.hideSide=='Hide this')? 'Show' : 'Hide this';
     }
 
-    // $scope.logout=function(){
-    	// $scope.$apply(function() { $location.path("/route"); });
-    	// $location.path()
-    	// $route.reload();
-    	// alert("Logged out");
-    	// alert($scope.likethis);
-    // };
+    // ext_hideSideF_show=function(){
+    // 	alert('called');
+    // 	$scope.hideSide='Show';
+    // 	$scope.digest();
+    // }
 }
 
-function Ctrl($scope){
-	// $scope.base_path=<?php echo URL::base()."/img/"; ?>;
-	$scope.color = 'green';
-    $scope.choices = ['red', 'green', 'blue'];
-    
-    $scope.bam={selection:'red'};
+// var scrollRefresh = {
+//     pastTop: false,
+//     pastBottom: false,
+//     previous: 0,
+//     bottom: function(callback) {
+//       var pBottom = $(window).height() + $(window).scrollTop() >= $(document).height();
+//       if(!this.pastBottom && pBottom) {
+//         callback($(window).height() + $(window).scrollTop());
+//         this.pastBottom = true;
+//       } else {
+//         if(!pBottom) this.pastBottom = false;
+//       }
+//       this.previous = $(window).scrollTop();
+//     },
+//     top: function(callback) {
+//       var pTop = $(window).scrollTop() < this.scrollPrevious && $(window).scrollTop <= 0;
+//       if(!this.pastTop && pTop) {
+//         callback($(window).scrollTop());
+//         this.pastTop = true;
+//       } else {
+//         if(!pTop) this.pastTop = false;
+//       }
+//       this.previous = $(window).scrollTop();
+//     }
+//   };
 
-    $scope.$watch('bam.selection',function(x){
-    	// alert(x);
-    });
-
-}
+// $(document).scroll(function(){
+	
+// 	// alert($(window).scrollTop() + $(window).height());
+// 	// alert($(document).height());
+// 	// alert( ($(window).scrollTop() + $(window).height() + 5 >= $(document).height()) ? 1 : 0 );
+// 	// if(($(window).scrollTop() + $(window).height() + 5 >= $(document).height()))
+// 	// {
+// 	// 	// alert('hello');
+// 	// 	ext_hideSideF_show();
+// 	// }
+// // scrollRefresh.bottom(function(pos) {
+//       // console.log("Loading bottom. " + pos);
+//       // alert("scrolled to bottom"); //You should delete this line
+//     // });
+// });

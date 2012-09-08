@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
+
 <head>
 	<meta chrset="utf-8">
 	<title>Online Elections @ IISER M</title>
@@ -11,7 +12,7 @@
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/angular-1.0.1.js\""; ?>> </script>
 </head>
 
-<body ng-controller="elections" style="background-image: url(<?php echo URL::base()."/img/pattern.png"; ?>), url(<?php echo URL::base()."/img/Research_at_IISER_background.jpg"; ?>);">
+<body ng-controller="elections" style="background-image: url(<?php echo URL::base()."/img/pattern.png"; ?>), url(<?php echo URL::base()."/img/100_9048.jpg"; ?>);">
 	<div class="Bar">
 		<div class="Vertical_Align_Top Bar_height">
 			<div class="Bar_link"><a class="Bar_link" href= "<?php echo URL::base()."/index.php/logout" ?> "  >Sign Out</a></div>
@@ -50,7 +51,10 @@
 			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" selected="category.selected" ng-model="category.selected" >				
 					<nominee ng-repeat="person in category.list" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
 			</votepanel>
+			<br/>
+			<p class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</p>
 		</center>
+
 	</div>
 	<div ng-show="user.voted">
 		<center>
