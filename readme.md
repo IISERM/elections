@@ -14,7 +14,7 @@ TODO: Complete this section
 - Secure
 
 ## Screenshots
-![After you log in, you land here!](/screenshots/1.png "Voting Page")
+![After you log in, you land here!](https://raw.github.com/IISERM/elections/master/screenshots/1.png "Voting Page")
 
 ## License
 
