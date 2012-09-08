@@ -11,10 +11,17 @@ angular.module('myApp',[])
 				list:'@',				
 				selected:'='},
 		transclude: true,
+		//<label for="{{id}}_abstane">No vote for me Sire!</label> \
 		template: '<div class="main_group"> \
 						<h1>{{title}}</h1> \
 						<div ng-transclude></div> \
-						<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane" /><label for="{{id}}_abstane">No vote for me Sire!</label> \
+						<div class="categoryChild"> \
+							<label for="{{id}}_abstane"> \
+								<div class="abstane"> ABSTANE </div> \
+							</label> \
+							<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane"></input> \
+						</div> \
+						 \
 					</div>',		
 		compile:function (tElement, tAttrs)
 		{
@@ -81,14 +88,15 @@ angular.module('myApp',[])
 
 	var truth={
 		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},category:{Fetch:{}},
-		io:{state:{log:{},last:{}},config:{basePath:'http://localhost/IISERM/elections/public',addIndexDotPHP:'/index.php'}},
+		io:{state:{log:{},last:{}},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}},
 		};
 
-		truth.userInfo.Fetch=function()
+		truth.userInfo.Fetch=function(OnComplete)
 		{
 			$.ajax({
 				type: 'POST',
-				url: truth.basePath + truth.addIndexDotPHP + truth.userInfo.lnk,
+				// url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk,
+				url: 'http://localhost/IISERM/elections/public/index.php/vote/details',
 				statusCode: {
 					404: function () {
 						;
@@ -102,7 +110,13 @@ angular.module('myApp',[])
 				data: {ajax: '1'},
 				success: function (data) {
 					
-					truth.userInfo.data=jQuery.parseJSON(data_json);
+					
+					var dat = jQuery.parseJSON(data);
+					truth.userInfo.data=dat;					
+					// alert(dat.name);
+					// alert(truth.userInfo.data.name);
+					// alert(dat.name);
+					// alert(data);
 
 					// data.clone(truth);
 					// if(data=='')
@@ -124,11 +138,15 @@ angular.module('myApp',[])
 					//$('#DEBUG').append("An Error Occured!\n");
 					;
 				}).complete(function() {
+					OnComplete(truth.userInfo.data);
 					// forgot_password_request_completed=true;
-					//alert('called');
+					// alert('called');					
 					// $('#forgot_password').removeClass('link_not_available');
-					;
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					// alert('completed');
 			});
+
+			// return truth.userInfo.data;
 		};
 
 		return truth;
@@ -165,15 +183,25 @@ function elections($scope,truthSource){
 										]}
 	];
 	// $scope.user={name:"Atul Singh Arora", batch:"MS11", hostel:"7", gender:"Male", voted:false}
-	truthSource.userInfo.Fetch();
+	truthSource.userInfo.Fetch(function(val){
+		// alert(val.name);
+		$scope.user=val;
+		$scope.$digest();
+		// alert($scope.user.name);
+	});
+	
 
-	$scope.user=truthSource.userInfo.data;
+	// $scope.$watch('user',function(){
+		// alert($scope.user.name);	
+	// });
+	
+
+	// alert($scope.user.name);
 
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};
 	$scope.custom={showvotes:false};
 	$scope.toggle_votes=function(){
-
 		if($scope.custom.showvotes) 
 			$scope.custom.showvotes=false;
 		else
