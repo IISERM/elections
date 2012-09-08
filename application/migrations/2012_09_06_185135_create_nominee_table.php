@@ -24,7 +24,7 @@ class Create_Nominee_Table {
 			$table->string('img');
 
 			// Sex
-			$table->integer('male');
+			$table->integer('sex');
 
 			// Timestamps
 			$table->timestamps();
