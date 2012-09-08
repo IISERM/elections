@@ -11,7 +11,10 @@
 .categoryChild{
 	float:left;	
 }
-
+.thumbnail{
+	height:150px;
+	margin:5px;
+}
 .selection_state{
 	background-color:rgba(200,200,200,0.8);
 	padding-left:20px;

@@ -48,7 +48,7 @@ angular.module('myApp',[])
 		// ng-model="{{selection}}"
 		//ng-model="{{select.selection}}" 
 		template:  '<div class="categoryChild" > \
-		<label for="{{category}}_{{id}}"> <img width="150" src="{{basepath+link}}" /> </label>\
+		<label for="{{category}}_{{id}}"> <img class="thumbnail" src="{{basepath+link}}" /> </label>\
 		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
 		</div> \
 		</div>',
@@ -72,6 +72,67 @@ angular.module('myApp',[])
 		}
 
 	}
+}).factory('truthSource',function(){
+	//CONVENTIONS
+	//everything is small camel cased
+	//functions start with capitals
+
+	// var truth={userInfo:{}};
+
+	var truth={
+		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},category:{Fetch:{}},
+		io:{state:{log:{},last:{}},config:{basePath:'http://localhost/IISERM/elections/public',addIndexDotPHP:'/index.php'}},
+		};
+
+		truth.userInfo.Fetch=function()
+		{
+			$.ajax({
+				type: 'POST',
+				url: truth.basePath + truth.addIndexDotPHP + truth.userInfo.lnk,
+				statusCode: {
+					404: function () {
+						;
+						// $('#DEBUG').append("Page not found\n");
+					},
+					500: function () {
+						;
+						// $('#DEBUG').append("Other Error\n");	
+					}
+				},
+				data: {ajax: '1'},
+				success: function (data) {
+					
+					truth.userInfo.data=jQuery.parseJSON(data_json);
+
+					// data.clone(truth);
+					// if(data=='')
+					// {
+						// show_forgot_password_msg();
+					// }
+					// else
+					// {
+						// show_error_msg(data);
+					// }
+					//workingonrequest=false;
+					//updatelistNOW(data);
+					// }
+					;
+				}
+				}).error(function() {
+					// show_error_msg('');
+					//workingonrequest=false;
+					//$('#DEBUG').append("An Error Occured!\n");
+					;
+				}).complete(function() {
+					// forgot_password_request_completed=true;
+					//alert('called');
+					// $('#forgot_password').removeClass('link_not_available');
+					;
+			});
+		};
+
+		return truth;
+
 });
 
 function prof_coverflow($scope){
@@ -84,14 +145,16 @@ function prof_coverflow($scope){
 	];
 }
 
-function elections($scope){
+function elections($scope,truthSource){
 	$scope.categories=[
 	{id:1, title:'Category 1',selected:{id:'-1'},
 									list:[
 										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
 										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
 										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
-										{id:4,name:'Muffin 4',link:'487384_410881738958783_1398366316_n.jpg'},
+										{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg'},
+										{id:5,name:'Muffin 5',link:'487384_410881738958783_1398366316_n.jpg'},
+										{id:6,name:'Muffin 6',link:'487384_410881738958783_1398366316_n.jpg'},
 										]},
 	{id:2, title:'Category 2',selected:{id:'-1'},
 									list:[
@@ -101,7 +164,11 @@ function elections($scope){
 										{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
 										]}
 	];
-	$scope.user={name:"Atul Singh Arora", batch:"MS11", hostel:"7", gender:"Male", voted:false}
+	// $scope.user={name:"Atul Singh Arora", batch:"MS11", hostel:"7", gender:"Male", voted:false}
+	truthSource.userInfo.Fetch();
+
+	$scope.user=truthSource.userInfo.data;
+
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};
 	$scope.custom={showvotes:false};
@@ -120,7 +187,7 @@ function elections($scope){
 			if(category.list[i].id==t_id)
 			{
 				return category.list[i].name;
-			}			
+			}		
 		}
 		if(t_id==0)
 			return "Abstane!";
