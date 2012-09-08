@@ -89,7 +89,7 @@
 		{
 			$credentials = array('username' => Input::get('reg_no'), 'password' => Input::get('password'));
 
-			$user = Student::where('reg_no','=',Input::get('reg_no'))->first();
+			// $user = Student::where('reg_no','=',Input::get('reg_no'))->first();
 
 			if (Auth::attempt($credentials))
 			{
