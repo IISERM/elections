@@ -9,7 +9,7 @@ class Home_Controller extends Base_Controller {
 
 	public function action_result()
 	{
-		return View::make('admin.results')
+		return View::make('admin.results');
 	}
 
 }
