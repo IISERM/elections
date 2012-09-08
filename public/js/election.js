@@ -7,21 +7,20 @@ angular.module('myApp',[])
 	return {
 		restrict:'E',
 		scope:{id:'@',
-				title:'@',
+				catName:'@',
 				list:'@',				
 				selected:'='},
 		transclude: true,
 		//<label for="{{id}}_abstane">No vote for me Sire!</label> \
 		template: '<div class="main_group"> \
-						<h1>{{title}}</h1> \
+						<h1>{{catName}}</h1> \
 						<div ng-transclude></div> \
 						<div class="categoryChild"> \
 							<label for="{{id}}_abstane"> \
 								<div class="abstane"> ABSTANE </div> \
 							</label> \
-							<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane"></input> \
+							<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane">I vote for neither of them!</input> \
 						</div> \
-						 \
 					</div>',		
 		compile:function (tElement, tAttrs)
 		{
@@ -30,7 +29,7 @@ angular.module('myApp',[])
  			//Linking function
  			return function(scope,element,attrs)
  			{
-                scope.$watch('title', function (x) 
+                scope.$watch('catName', function (x) 
 	                {    //updated everytime the variable changes the first parameter is the newValue, second (omitted here) is the oldValue                	
 	                    // alert(x);
 	                }

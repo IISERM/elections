@@ -2,10 +2,12 @@
 	background-color:rgba(0,255,0,0.4);
 	padding-left:20px;
 	margin:20px;
+	/*margin-right:40px;*/
 	/*height:400px;*/
-	width:800px;
+	/*width:800px;*/
+	width:70%;
 	overflow:auto;
-	font-family:paraText;	
+	font-family:paraText;
 	font-size:25px;	
 }
 .categoryChild{
@@ -13,13 +15,14 @@
 }
 .abstane{
 	/*background-color: red;*/
-	height:160px;
+	height:165px;
 	margin:5px;
 	width:140px;
 	font-family: paraText;
 	font-size:50px;
 	vertical-align:middle;
 	display:table-cell;
+	color:red;
 }
 .thumbnail{
 	height:150px;
