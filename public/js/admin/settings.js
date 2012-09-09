@@ -48,8 +48,8 @@ angular.module('myApp',[])
 });
 
 
-function settings($scope,truthSource){
-	$scope.indexify
+function settings($scope,truthSource,$window){
+	$scope.indexify=
 	[
 		{hostel:
 			[
@@ -76,10 +76,37 @@ function settings($scope,truthSource){
 	$scope.students=[
 	{id:1, first_name:'Atul', middle_name:'Singh', last_name:'Arora', 
 		hostel:'7', batch:'11',subject:'NA',sex:'Male',reg_no:'MS11003'},
-	{id:1, first_name:'Gagan', middle_name:'Preet', last_name:'Singh', 
-		hostel:'7', batch:'08',subject:'NA',sex:'Male',reg_no:'MS08021'}
+	{id:2, first_name:'Gagan', middle_name:'Preet', last_name:'Singh', 
+		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'},	
 	];
+
+	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
 	
+	$scope.studentFields={hostels:['7','5'],
+							batches:['07','08','09','10','11','12'],
+							subjects:['Physics','Mathematics','Chemistry','Biology','NA'],
+							sexes:['Male','Female']
+							};
+	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
+	$scope.compareSelect=function(var1,var2){
+		if(var1==var2)
+			return "selected";
+		else
+			return "";	
+	}
+	// $scope.$watch('deleteStudent',function(val){
+	// 	alert(val);
+	// 	$scope.deleteStudent='';
+	// });
+	
+	$scope.DeleteStudent=function(id){
+		alert(id);
+
+	}
+
+	$scope.UpdateStudent=function(student){
+		alert(student.sex);
+	}
 	// truthSource.userInfo.Fetch(function(val){		
 	// 	$scope.user=val;
 	// 	$scope.$digest();

@@ -1,0 +1,9 @@
+tr{
+	/*-webkit-transition:all 1s;*/
+	background-color:rgba(255,255,255,0.0);
+}
+
+tr:hover{
+	background-color:rgba(230,230,230,0.8);
+	/*color:white;*/
+}

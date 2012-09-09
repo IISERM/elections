@@ -26,6 +26,13 @@
 		</tr>
 		<tr ng-repeat="student in students">
 			<td>{{student.first_name + student.middle_name + student.last_name}}</td>
+			<td>
+				<select>
+					<option selected="selected" value="{{indexify.hostel[student.hostel]}}">{{student.hostel}}</option>
+					<option value="{{indexify.hostel['5']}}">5</option>
+					<option value="{{indexify.hostel['7']}}">7</option>
+				</select>
+			</td>
 		</tr>
 	</table>
 	
