@@ -26,8 +26,8 @@
 		public function action_options()
 		{
 			$user = Auth::user();
-			$options = Type::find(1)->categories()->nominees()->get();
-			return json_encode($options);
+			$options = 
+			return json_encode($options->to_array());
 		}
 
 		public function action_vote()

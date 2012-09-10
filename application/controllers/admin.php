@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Controller extends Base_Controller {
+class Admin\_Controller extends Base_Controller {
 
 	public function action_settings()
 	{
