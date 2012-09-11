@@ -97,7 +97,7 @@ class Admin_Controller extends Base_Controller {
 		return json_encode($user_ref);
 	}
 
-	public function get_sadd()
+	public function post_sadd()
 	{
 		$user = new Student;
 		$user->first_name = Input::get('first_name');
