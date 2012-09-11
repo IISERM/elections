@@ -62,7 +62,7 @@ function settings($scope,truthSource){
 		},
 		{batch:
 			[
-				{'07':1},{'08':2},{'09':3},{'10':4},{'11':5}
+				{'07':1},{'08':2},{'09':3},{'10':4},{'11':5},{'12':6}
 			]
 		},
 		{subject:
@@ -84,15 +84,7 @@ function settings($scope,truthSource){
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
 
-	// $scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
-	$scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
-						middle_name:$scope.students.slice(-1)[0].middle_name,
-						last_name:$scope.students.slice(-1)[0].last_name,
-						hostel:$scope.students.slice(-1)[0].hostel,
-						batch:$scope.students.slice(-1)[0].batch,
-						subject:$scope.students.slice(-1)[0].subject,
-						sex:$scope.students.slice(-1)[0].sex,
-						reg_no:$scope.students.slice(-1)[0].reg_no};
+	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
 	
 	$scope.studentFields={hostels:['7','5'],
 							batches:['07','08','09','10','11','12'],
@@ -101,21 +93,29 @@ function settings($scope,truthSource){
 							};
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
 
+	//UPDATE the values from the server
+	truthSource.student.fetch.Now(function(val){
+		$scope.students=val;
+
+		// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
+		// 					middle_name:$scope.students.slice(-1)[0].middle_name,
+		// 					last_name:$scope.students.slice(-1)[0].last_name,
+		// 					hostel:$scope.students.slice(-1)[0].hostel,
+		// 					batch:$scope.students.slice(-1)[0].batch,
+		// 					subject:$scope.students.slice(-1)[0].subject,
+		// 					sex:$scope.students.slice(-1)[0].sex,
+		// 					reg_no:$scope.students.slice(-1)[0].reg_no};
+		$scope.$apply();
+		// alert("hwllo");
+	});
+
+
 	$scope.compareSelect=function(var1,var2){
 		if(var1==var2)
 			return "selected";
 		else
 			return "";	
 	}
-	// $scope.$watch('deleteStudent',function(val){
-	// 	alert(val);
-	// 	$scope.deleteStudent='';
-	// });
-	
-	// $scope.$watch('truthSource.io.state.working',function(state){
-	// 	// $scope.logMessage=state.log;
-	// 	$scope.working=state.working;
-	// });
 
 	$scope.DeleteStudent=function(id){
 		alert(id);
@@ -131,8 +131,5 @@ function settings($scope,truthSource){
 		alert(student.sex);
 	}
 
-	truthSource.student.fetch.Now(function(val){
-		$scope.students=val;
-		$scope.$apply();
-	});
+
 }
