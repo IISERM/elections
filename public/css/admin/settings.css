@@ -69,3 +69,17 @@ background-color:rgba(200,200,200,0.9);
 	/*opacity:0;*/
 	display:none;
 }
+
+.loadingStat{
+	padding-top:10%;
+	display:fixed;
+	position:absolute;
+	text-align: center;
+	vertical-align: middle;
+	background-color: rgba(0,0,0,0.9);
+	color:white;
+	font-size:40px;
+	font-family: monospace;
+	height:100%;
+	width:100%;
+}

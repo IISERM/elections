@@ -31,9 +31,13 @@
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
-			<div ng-show="truthSource.io.state.working || updatingInterface">				
-				Loading..
-			</div>
+		</div>
+
+		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
+			The supernatural is being invoked and data processed,<br/>
+			Sit tight, and for your sins, you may now confess. <br/>
+			The morning shall reveal, hidden faces, protected and concealed <br/>
+			Fail, if the sun to rise, with persistence, fight we will, the night.
 		</div>
 		
 		<br/><br/><br/><br/><br/><br/>
