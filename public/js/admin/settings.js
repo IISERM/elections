@@ -203,6 +203,7 @@ function settings($scope,truthSource,$timeout){
 		studentC.subject=$scope.indexify.subject[student.subject];
 		studentC.sex=$scope.indexify.sex[student.sex];
 		studentC.reg_no=student.reg_no;
+		studentC.id=student.id;
 		// studentC.reg_no=$scope.indexify.reg_no[student.reg_no];
 		
 		// alert(studentC.hostel);
