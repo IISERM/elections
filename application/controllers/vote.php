@@ -26,7 +26,7 @@
 		public function action_options()
 		{
 			$user = Auth::user();
-			$options = 
+			$options = $user->;
 			return json_encode($options->to_array());
 		}
 
