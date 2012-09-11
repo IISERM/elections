@@ -20,7 +20,7 @@
 			return $this->has_one('Subject','subject');
 		}
 
-		public function sex()
+		/*public function sex()
 		{
 			if($this->sex == 1)
 			{
@@ -30,7 +30,7 @@
 			{
 				return 'female';
 			}
-		}
+		}*/
 
 		public function page()
 		{

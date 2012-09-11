@@ -36,7 +36,7 @@ class Create_Student_Table {
 			$table->integer('batch')->length(4);
 
 			// Subject
-			$table->integer('subject');
+			$table->integer('subject')->default(1);
 
 			// Sex
 			$table->integer('sex')->length(1);
