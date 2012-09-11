@@ -12,9 +12,27 @@ class Admin_Controller extends Base_Controller {
 		return View::make('admin.results');
 	}
 
-	public function action_list()
+	public function action_supdate()
 	{
-		$columns = array('id','first_name','last_name','middle_name','hostel','batch','sex','reg_no');
+		$user = Student::find(Input::get('id'));
+		if($user&&Input::get('hostel')&&Input::get('batch')&&Input::get('sex')&&Input::get('reg_no')==$user->reg_no&&Input::get('subject'))
+		{
+			$user->hostel = Input::get('hostel');
+			$user->batch = Input::get('batch');
+			$user->sex = Input::get('sex');
+			$user->subject = Input::get('subject');
+			$user->save();
+			return '1';
+		}
+		else
+		{
+			return '0';
+		}
+	}
+
+	public function action_slist()
+	{
+		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no');
 		$users=Student::get($columns);
 		foreach ($users as $user)
 		{
