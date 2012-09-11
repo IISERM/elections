@@ -5,14 +5,14 @@ angular.module('myApp',[])
 	//functions start with capitals
 
 	var truth={
-		student:{	fetch:{Now:{},lnk:'/fetch'},
+		student:{	fetch:{Now:{},lnk:'/list'},
 					add:{Now:{},lnk:'/add'},
 					remove:{Now:{},lnk:'/remove'},
 					update:{Now:{},lnk:'/update'},
 					config:{basePath:'/adming/student'},
 					data:{}
 				},
-		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
+		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php",postBase:"/admin"}}
 
 		};
 
@@ -21,7 +21,7 @@ angular.module('myApp',[])
 			truth.working=true;
 			$.ajax({
 				type: 'POST',
-				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.postBase + truth.student.fetch.lnk,
 				statusCode: {
 					404: function () {
 						;
@@ -119,7 +119,6 @@ function settings($scope,truthSource){
 
 	$scope.DeleteStudent=function(id){
 		alert(id);
-
 	}
 
 	$scope.UpdateStudent=function(student){
