@@ -2,40 +2,22 @@
 
 class Admin_Controller extends Base_Controller {
 
-	public function action_settings()
+	public $restful = true;
+
+	public function get_settings()
 	{
 		return View::make('admin.settings');
 	}
 
-	public function action_result()
+	public function get_result()
 	{
 		return View::make('admin.results');
 	}
 
-	public function action_supdate()
+	public function post_supdate()
 	{
 		$user = Student::find(Input::get('id'));
-		if($user)
-		{
-			print("Yes");
-		}
-		if(Input::get('reg_no')==$user->reg_no)
-		{
-			print("Maybe");
-		}
-		if(Input::get('hostel'))
-		{
-			print("hostel");
-		}
-		if(Input::get('batch'))
-		{
-			print("batch");
-		}
-		if(Input::get('sex'))
-		{
-			print("sex");
-		}
-		if($user&&Input::has('hostel')&&Input::has('batch')&&Input::has('sex')&&Input::has('subject')&&Input::get('reg_no')==$user->reg_no)
+		if($user&&Input::has('hostel')&&Input::has('batch')&&Input::has('sex')&&Input::has('subject')&&Input::has('reg_no')&&Input::has('ajax'))
 		{
 			$user->hostel = Input::get('hostel');
 			$user->batch = Input::get('batch');
@@ -53,7 +35,7 @@ class Admin_Controller extends Base_Controller {
 		}
 	}
 
-	public function action_slist()
+	public function post_slist()
 	{
 		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no','subject');
 		$users=Student::with('subject')->get($columns);
@@ -112,6 +94,22 @@ class Admin_Controller extends Base_Controller {
 				);
 */		}
 		return json_encode($user_ref);
+	}
+
+	public function get_sadd()
+	{
+		$user = new Student;
+		$user->first_name = Input::get('first_name');
+		$user->middle_name = Input::get('middle_name');
+		$user->last_name = Input::get('last_name');
+		$user->batch = Input::get('batch');
+		$user->hostel = Input::get('hostel');
+		$user->sex = Input::get('sex');
+		$user->reg_no = Input::get('reg_no');
+		if($user->save())
+			return 'Success';
+		else
+			return 'fail';
 	}
 
 }
