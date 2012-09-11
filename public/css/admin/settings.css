@@ -59,3 +59,6 @@ tr:hover{
 	height:130px;
 	/*background-color: rgba(100,200,0,0.8)*/
 }
+.hidden{
+	display:none;
+}

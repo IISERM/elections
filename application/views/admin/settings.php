@@ -13,6 +13,8 @@
 </head>
 
 <body ng-controller="settings" style="background-image: url(<?php echo URL::base()."/img/pattern.png"; ?>), url(<?php echo URL::base()."/img/100_9048.jpg"; ?>);">
+	<input type="text" ng-model="truthSource.io.config.basePath" value="<?php echo "\"".URL::base(); ?>" class="hidden"/>
+
 	<center>
 		<div class="fullWidthContainer" ng-hide="truthSource.io.state.working">
 			<div class="communicationLog">				
@@ -20,9 +22,7 @@
 				<br/>
 				<br/>
 				{{truthSource.io.state.log}}
-
-				<!-- ng-show="truthSource.io.working">			 -->
-				
+				<!-- ng-show="truthSource.io.working">			 -->				
 			</div>
 		</div>
 
@@ -31,10 +31,10 @@
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
-			<br/>			
+			<div ng-show="truthSource.io.state.working">Loading..{{truthSource.io.state.working}}</div>
 		</div>
 		
-		<br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/>
 
 		<p class="subSubTitle">Students</p>
 		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />

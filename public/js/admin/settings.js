@@ -22,7 +22,6 @@ angular.module('myApp',[])
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
-				// url: 'http://localhost/IISERM/elections/public/index.php/vote/details',
 				statusCode: {
 					404: function () {
 						;
@@ -82,7 +81,7 @@ function settings($scope,truthSource){
 	{id:1, first_name:'Atul', middle_name:'Singh', last_name:'Arora', 
 		hostel:'7', batch:'11',subject:'NA',sex:'Male',reg_no:'MS11003'},
 	{id:2, first_name:'Gagan', middle_name:'Preet', last_name:'Singh', 
-		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'},	
+		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
 
 	// $scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
@@ -131,8 +130,9 @@ function settings($scope,truthSource){
 		// truthSource.
 		alert(student.sex);
 	}
-	// truthSource.userInfo.Fetch(function(val){		
-	// 	$scope.user=val;
-	// 	$scope.$digest();
-	// });
+
+	truthSource.student.fetch.Now(function(val){
+		$scope.students=val;
+		$scope.$apply();
+	});
 }
