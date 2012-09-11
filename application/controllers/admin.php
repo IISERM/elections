@@ -22,11 +22,11 @@ class Admin_Controller extends Base_Controller {
 			$user->sex = Input::get('sex');
 			$user->subject = Input::get('subject');
 			$user->save();
-			return '1';
+			print_r($user);
 		}
 		else
 		{
-			return '0';
+			print_r(Input::all());
 		}
 	}
 
@@ -87,7 +87,7 @@ class Admin_Controller extends Base_Controller {
 					'id' => $user->id,
 				);
 */		}
-		print_r(json_encode($user_ref));
+		return json_encode($user_ref);
 	}
 
 }
