@@ -12,4 +12,60 @@ class Admin_Controller extends Base_Controller {
 		return View::make('admin.results');
 	}
 
+	public function action_list()
+	{
+		$columns = array('id','first_name','last_name','middle_name','hostel','batch','sex','reg_no');
+		$users=Student::get($columns);
+		foreach ($users as $user)
+		{
+			$user = $user->attributes;
+			if($user['hostel'] == 1)
+			{
+				$user['hostel'] = 7;
+			}
+			if($user['hostel'] == 2)
+			{
+				$user['hostel'] = 5;
+			}
+			if($user['batch'] == 1)
+			{
+				$user['batch'] = 'MS07';
+			}
+			if($user['batch'] == 2)
+			{
+				$user['batch'] = 'MS08';
+			}
+			if($user['batch'] == 3)
+			{
+				$user['batch'] = 'MS09';
+			}
+			if($user['batch'] == 4)
+			{
+				$user['batch'] = 'MS10';
+			}
+			if($user['batch'] == 5)
+			{
+				$user['batch'] = 'MS11';
+			}
+			if($user['batch'] == 6)
+			{
+				$user['batch'] = 'MS12';
+			}
+			if($user['sex'] == 1)
+			{
+				$user['sex'] = 'Male';
+			}
+			if($user['batch'] == 0)
+			{
+				$user['sex'] = 'Female';
+			}
+			print_r($user);
+			$user_ref[]=$user;
+/*			$u = array(
+					'id' => $user->id,
+				);
+*/		}
+		print_r(json_encode($user_ref));
+	}
+
 }

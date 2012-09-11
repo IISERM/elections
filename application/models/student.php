@@ -31,4 +31,16 @@
 				return 'female';
 			}
 		}
+
+		public function page()
+		{
+			$this->data = array(
+				'id' => $user->id,
+				'first_name' => $user->first_name,
+				'middle_name' => $user->middle_name,
+				'last_name' => $user->last_name,
+				// 'hostel' = $user->hostel()->name,
+				);
+			return $this->data;
+		}
 	}
