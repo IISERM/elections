@@ -23,6 +23,7 @@ class Admin_Controller extends Base_Controller {
 			$user->batch = Input::get('batch');
 			$user->sex = Input::get('sex');
 			$user->subject = Input::get('subject');
+			$user->reg_no = Input::get('reg_no');
 			$user->save();
 			print("Success");
 			print_r(Input::all());
@@ -110,6 +111,12 @@ class Admin_Controller extends Base_Controller {
 			return 'Success';
 		else
 			return 'fail';
+	}
+
+	public function post_sdel()
+	{
+		$user = Student::find(Input::get('id'));
+		$user->delete();
 	}
 
 }
