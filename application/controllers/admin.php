@@ -19,6 +19,10 @@ class Admin_Controller extends Base_Controller {
 		foreach ($users as $user)
 		{
 			$user = $user->attributes;
+			if($user['middle_name'] == NULL)
+			{
+				$user['middle_name'] = ' ';
+			}
 			if($user['hostel'] == 1)
 			{
 				$user['hostel'] = 7;
