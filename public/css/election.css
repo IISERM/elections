@@ -1,3 +1,17 @@
+body{
+	/*background-color: black;*/
+    /*background-repeat: repeat, no-repeat;*/
+    /*background-position: center center;*/
+    background-attachment: fixed;
+    -webkit-background-size: auto, cover;
+    -moz-background-size: auto, cover;
+    -o-background-size: auto, cover;
+    background-size: auto, cover;
+	
+	/*font-family:sans-serif;*/
+	/*text-align:center;*/
+}
+
 .main_group{
 	background-color:rgba(0,255,0,0.4);
 	padding-left:20px;
