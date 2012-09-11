@@ -37,6 +37,8 @@
 		<br/><br/><br/><br/><br/><br/>
 
 		<p class="subSubTitle">Students</p>
+
+		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
 		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />
 		<span>		
 			<a href='' ng-click="config.student.reverse=false">Ascending</a> | 

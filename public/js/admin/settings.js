@@ -5,21 +5,20 @@ angular.module('myApp',[])
 	//functions start with capitals
 
 	var truth={
-		student:{	fetch:{Now:{},lnk:'/list'},
-					add:{Now:{},lnk:'/add'},
-					remove:{Now:{},lnk:'/remove'},
-					update:{Now:{},lnk:'/update'},
+		student:{	fetch:{Now:{},lnk:'/slist'},
+					add:{Now:{},lnk:'/sadd'},
+					remove:{Now:{},lnk:'/sremove'},
+					update:{Now:{},lnk:'/supdate'},
 					config:{basePath:'/admin'},
 					data:{}
 				},
-		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
+		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
 
 		};
 
 		truth.student.fetch.Now=function(OnComplete)
 		{
 			truth.working=true;
-			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk);
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
@@ -43,6 +42,39 @@ angular.module('myApp',[])
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					truth.working=false;
 					OnComplete(truth.student.data);
+			});
+		};
+
+		truth.student.update.Now=function(student, OnComplete)
+		{
+			truth.working=true;
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {id:student.id, batch:student.batch, sex:student.sex, hostel:student.hostel, 
+						reg_no:student.reg_no, subject:student.subject, ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					if(data=='1')
+						alert("Updated Successfully");
+					else
+						alert("Something went wrong");
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
 			});
 		};
 
@@ -112,6 +144,24 @@ function settings($scope,truthSource){
 		// alert("hwllo");
 	});
 
+	$scope.StudentsRefresh = function(){
+		truthSource.student.fetch.Now(function(val){
+			$scope.students=val;
+
+			// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
+			// 					middle_name:$scope.students.slice(-1)[0].middle_name,
+			// 					last_name:$scope.students.slice(-1)[0].last_name,
+			// 					hostel:$scope.students.slice(-1)[0].hostel,
+			// 					batch:$scope.students.slice(-1)[0].batch,
+			// 					subject:$scope.students.slice(-1)[0].subject,
+			// 					sex:$scope.students.slice(-1)[0].sex,
+			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
+			alert("This may take a little while");
+			$scope.$apply();
+			// alert("hwllo");
+		});
+
+	}
 
 	$scope.compareSelect=function(var1,var2){
 		if(var1==var2)
@@ -125,7 +175,15 @@ function settings($scope,truthSource){
 	}
 
 	$scope.UpdateStudent=function(student){
-		alert(student.sex);
+		
+		truthSource.student.update.Now(student,function(val){
+			if(val=='1')
+				alert("SUCCESS");
+			else
+				alert("FAILURE");
+
+		});
+
 	}
 
 	$scope.AddStudent=function(student){
