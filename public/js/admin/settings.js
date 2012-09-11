@@ -88,6 +88,7 @@ function settings($scope,truthSource,$window){
 							sexes:['Male','Female']
 							};
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
+	
 	$scope.compareSelect=function(var1,var2){
 		if(var1==var2)
 			return "selected";
