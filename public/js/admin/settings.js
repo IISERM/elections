@@ -9,19 +9,20 @@ angular.module('myApp',[])
 					add:{Now:{},lnk:'/add'},
 					remove:{Now:{},lnk:'/remove'},
 					update:{Now:{},lnk:'/update'},
-					config:{basePath:'/adming/student'},
+					config:{basePath:'/admin'},
 					data:{}
 				},
-		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php",postBase:"/admin"}}
+		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
 
 		};
 
 		truth.student.fetch.Now=function(OnComplete)
 		{
 			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk);
 			$.ajax({
 				type: 'POST',
-				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.postBase + truth.student.fetch.lnk,
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
 				statusCode: {
 					404: function () {
 						;
@@ -32,6 +33,7 @@ angular.module('myApp',[])
 				},
 				data: {ajax: '1'},
 				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
 					var dat = jQuery.parseJSON(data);
 					truth.student.data=dat;					
 				}
@@ -105,6 +107,7 @@ function settings($scope,truthSource){
 		// 					subject:$scope.students.slice(-1)[0].subject,
 		// 					sex:$scope.students.slice(-1)[0].sex,
 		// 					reg_no:$scope.students.slice(-1)[0].reg_no};
+		alert("This may take a little while");
 		$scope.$apply();
 		// alert("hwllo");
 	});
