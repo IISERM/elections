@@ -11,13 +11,14 @@ angular.module('myApp',[])
 					update:{Now:{},lnk:'/update'},
 					config:{basePath:'/adming/student'},
 					data:{}
-				},	
-		
-		io:{state:{log:{},last:{}},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}},
+				},
+		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:{},working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
+
 		};
 
 		truth.student.fetch.Now=function(OnComplete)
 		{
+			truth.working=true;
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
@@ -39,6 +40,7 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
 					OnComplete(truth.student.data);
 			});
 		};
@@ -48,7 +50,10 @@ angular.module('myApp',[])
 });
 
 
-function settings($scope,truthSource,$window){
+function settings($scope,truthSource){
+	
+	$scope.truthSource=truthSource;
+
 	$scope.indexify=
 	[
 		{hostel:
@@ -80,7 +85,15 @@ function settings($scope,truthSource,$window){
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'},	
 	];
 
-	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
+	// $scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
+	$scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
+						middle_name:$scope.students.slice(-1)[0].middle_name,
+						last_name:$scope.students.slice(-1)[0].last_name,
+						hostel:$scope.students.slice(-1)[0].hostel,
+						batch:$scope.students.slice(-1)[0].batch,
+						subject:$scope.students.slice(-1)[0].subject,
+						sex:$scope.students.slice(-1)[0].sex,
+						reg_no:$scope.students.slice(-1)[0].reg_no};
 	
 	$scope.studentFields={hostels:['7','5'],
 							batches:['07','08','09','10','11','12'],
@@ -88,7 +101,7 @@ function settings($scope,truthSource,$window){
 							sexes:['Male','Female']
 							};
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
-	
+
 	$scope.compareSelect=function(var1,var2){
 		if(var1==var2)
 			return "selected";
@@ -100,12 +113,22 @@ function settings($scope,truthSource,$window){
 	// 	$scope.deleteStudent='';
 	// });
 	
+	// $scope.$watch('truthSource.io.state.working',function(state){
+	// 	// $scope.logMessage=state.log;
+	// 	$scope.working=state.working;
+	// });
+
 	$scope.DeleteStudent=function(id){
 		alert(id);
 
 	}
 
 	$scope.UpdateStudent=function(student){
+		alert(student.sex);
+	}
+
+	$scope.AddStudent=function(student){
+		// truthSource.
 		alert(student.sex);
 	}
 	// truthSource.userInfo.Fetch(function(val){		

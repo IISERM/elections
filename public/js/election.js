@@ -189,7 +189,7 @@ function elections($scope,truthSource){
 		{
 	    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
 	    	if(r==1)
-	    		$scope.user.voted=true;			
+	    		$scope.user.voted=true;
 		}
 		else
 		{
