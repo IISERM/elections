@@ -31,19 +31,21 @@
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
+			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
+			<div class="smallStat" ng-hide="truthSource.io.state.last==''">Last Response: {{truthSource.io.state.last}}</div>
 		</div>
 
-		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
+<!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
 			The supernatural is being invoked and data processed,<br/>
 			Sit tight, and for your sins, you may now confess. <br/>
 			The morning shall reveal, hidden faces, protected and concealed <br/>
 			Fails, if the sun to rise, with persistence, we will fight the fierce night.
 		</div>
-		
+ -->		
 		<br/><br/><br/><br/><br/><br/>
 
 		<p class="subSubTitle">Students</p>
-
+		<!-- <a href='' ng-click="apply()">Soft Update</a> -->
 		<a href='' ng-hide="studentsCollapse=='hide'" ng-click="studentsCollapse='hide'">Collapse</a>
 		<a href='' ng-show="studentsCollapse=='hide'" ng-click="studentsCollapse='show'">Show</a>
 		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
@@ -87,8 +89,8 @@
 				<td>{{student.first_name + ' ' + student.middle_name + ' ' + student.last_name}}</td>
 				<td>
 					<select ng-model="student.hostel">
- 						<option value="5">5</option>
 						<option value="7">7</option>
+						<option value="5">5</option>
 					</select>
 				</td>
 				<td>
@@ -132,6 +134,7 @@
 					<input type="text" ng-model="studentNew.first_name" placeholder="First"/>
 					<input type="text" ng-model="studentNew.middle_name" placeholder="Middle"/>
 					<input type="text" ng-model="studentNew.last_name" placeholder="Last"/>
+					<input type="text" ng-model="studentNew.email" placeholder="e-mail" />
 				</td>
 
 				<td>
@@ -175,6 +178,7 @@
 				</td>
 			</tr>		
 		</table>
+
 	</center>	
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/admin/settings.js\""; ?>> </script>
 </body>

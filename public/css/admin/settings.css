@@ -83,3 +83,11 @@ background-color:rgba(200,200,200,0.9);
 	height:100%;
 	width:100%;
 }
+
+.smallStat{
+	text-align: center;
+	background-color: rgba(0,0,0,0.4);
+	color:white;
+	font-size:20px;
+	font-family: monospace;	
+}

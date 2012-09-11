@@ -67,10 +67,6 @@ angular.module('myApp',[])
 					truth.io.state.last=data;
 					alert(data);
 
-					// if(data=='1')
-					// 	alert("Updated Successfully");
-					// else
-					// 	alert("Something went wrong");
 				}
 				}).error(function() {
 					;
@@ -80,6 +76,38 @@ angular.module('myApp',[])
 					OnComplete(truth.io.state.last);
 			});
 		};
+
+		truth.student.add.Now=function(student, OnComplete)
+		{
+			truth.working=true;
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {email:student.email,first_name:student.first_name,middle_name:student.middle_name,last_name:student.last_name,
+				 batch:student.batch, sex:student.sex, hostel:student.hostel, 
+						reg_no:student.reg_no, subject:student.subject, ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
 
 		return truth;
 
@@ -132,7 +160,7 @@ function settings($scope,truthSource,$timeout){
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
 
-	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
+	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:'',email:''};
 	
 	$scope.studentFields={hostels:['7','5'],
 							batches:['07','08','09','10','11','12'],
@@ -225,7 +253,8 @@ function settings($scope,truthSource,$timeout){
 				// alert(studentC.reg_no);
 
 		truthSource.student.update.Now(studentC,function(val){
-			alert(val);
+			// alert(val);
+			$scope.$apply();
 			// if(val=='1')
 			// 	alert("SUCCESS");			
 			// else
@@ -236,8 +265,22 @@ function settings($scope,truthSource,$timeout){
 	}
 
 	$scope.AddStudent=function(student){
-		// truthSource.
-		alert(student.sex);
+		var studentC={};
+		
+		studentC.hostel=$scope.indexify.hostel[student.hostel];
+		studentC.batch=$scope.indexify.batch[student.batch];
+		studentC.subject=$scope.indexify.subject[student.subject];
+		studentC.sex=$scope.indexify.sex[student.sex];
+		studentC.reg_no=student.reg_no;
+		studentC.first_name=student.first_name;
+		studentC.middle_name=student.middle_name;
+		studentC.last_name=student.last_name;
+		studentC.email=student.id;
+
+		truthSource.student.add.Now(studentC,function(val){
+			// alert(val);
+			$scope.$apply();
+		});
 	}
 
 
