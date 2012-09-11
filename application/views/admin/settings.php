@@ -31,13 +31,17 @@
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
-			<div ng-show="truthSource.io.state.working">Loading..{{truthSource.io.state.working}}</div>
+			<div ng-show="truthSource.io.state.working || updatingInterface">				
+				Loading..
+			</div>
 		</div>
 		
 		<br/><br/><br/><br/><br/><br/>
 
 		<p class="subSubTitle">Students</p>
 
+		<a href='' ng-hide="studentsCollapse=='hide'" ng-click="studentsCollapse='hide'">Collapse</a>
+		<a href='' ng-show="studentsCollapse=='hide'" ng-click="studentsCollapse='show'">Show</a>
 		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
 		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />
 		<span>		
@@ -75,7 +79,7 @@
 				<th></th>
 				<th></th>
 			</tr>
-			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse">
+			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse"  class="students_{{studentsCollapse}}">
 				<td>{{student.first_name + ' ' + student.middle_name + ' ' + student.last_name}}</td>
 				<td>
 					<select ng-model="student.hostel">
@@ -85,12 +89,12 @@
 				</td>
 				<td>
 					<select ng-model="student.batch">
- 						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>					
-						<option value="11">12</option>
+ 						<option value="MS07">MS07</option>
+						<option value="MS08">MS08</option>
+						<option value="MS09">MS09</option>
+						<option value="MS10">MS10</option>
+						<option value="MS11">MS11</option>					
+						<option value="MS12">MS12</option>
 					</select>
 				</td>
 				<td>
@@ -134,12 +138,12 @@
 				</td>
 				<td>
 					<select ng-model="studentNew.batch">
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="11">12</option>
+						<option value="MS07">MS07</option>
+						<option value="MS08">MS08</option>
+						<option value="MS09">MS09</option>
+						<option value="MS10">MS10</option>
+						<option value="MS11">MS11</option>
+						<option value="MS12">MS12</option>
 					</select>
 				</td>
 				<td>

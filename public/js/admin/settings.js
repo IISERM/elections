@@ -102,7 +102,7 @@ var basepathProvider="";
 function settings($scope,truthSource,$timeout){
 	
 	$scope.truthSource=truthSource;
-
+	$scope.updatingInterface=true;
 	$scope.indexify=
 	{hostel:
 			{
@@ -111,7 +111,7 @@ function settings($scope,truthSource,$timeout){
 		,
 		batch:
 			{
-				'07':1,'08':2,'09':3,'10':4,'11':5,'12':6
+				'MS07':1,'MS08':2,'MS09':3,'MS10':4,'MS11':5,'MS12':6
 			}
 		,
 		subject:
@@ -147,6 +147,11 @@ function settings($scope,truthSource,$timeout){
 	$timeout(function(){
 		// alert(truthSource.io.config.basePath);
 		truthSource.student.fetch.Now(function(val){
+			//This is to update the UI before putting all the data in ng-repeat
+			// $scope.$digest();
+			// $scope.$apply();
+			// alert("This may take a little while");
+
 			$scope.students=val;
 
 			// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
@@ -157,8 +162,11 @@ function settings($scope,truthSource,$timeout){
 			// 					subject:$scope.students.slice(-1)[0].subject,
 			// 					sex:$scope.students.slice(-1)[0].sex,
 			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
-			alert("This may take a little while");
+			
+			$scope.updatingInterface=false;
+			
 			$scope.$apply();
+
 			// alert("hwllo");
 		});
 
@@ -166,6 +174,7 @@ function settings($scope,truthSource,$timeout){
 
 
 	$scope.StudentsRefresh = function(){
+		$scope.updatingInterface=true;
 		truthSource.student.fetch.Now(function(val){
 			$scope.students=val;
 
@@ -177,7 +186,8 @@ function settings($scope,truthSource,$timeout){
 			// 					subject:$scope.students.slice(-1)[0].subject,
 			// 					sex:$scope.students.slice(-1)[0].sex,
 			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
-			alert("This may take a little while");
+			// alert("This may take a little while");
+			$scope.updatingInterface=false;
 			$scope.$apply();
 			// alert("hwllo");
 		});
