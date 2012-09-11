@@ -14,29 +14,6 @@
 
 <body ng-controller="settings" style="background-image: url(<?php echo URL::base()."/img/pattern.png"; ?>), url(<?php echo URL::base()."/img/100_9048.jpg"; ?>);">
 	<center>
-		<div class="fullWidthContainer" ng-hide="truthSource.io.state.working">
-			<div class="communicationLog">				
-				Something's taking longer than it should. Perhaps you're smarter than the monkeys who made this. Take a shot at it!
-				<br/>
-				<br/>
-				{{truthSource.io.state.log}}
-
-				<!-- ng-show="truthSource.io.working">			 -->
-				
-			</div>
-		</div>
-
-		<br/>
-		<div class="topBar">
-			<span><a href="">Log Out</a></span>
-			<div class="mainTitle">NaveenTantra</div>
-			<span><div class="subTitle">Admin Panel</div></span>
-			<br/>			
-		</div>
-		
-		<br/><br/><br/><br/>
-
-		<p class="subSubTitle">Students</p>
 		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />
 		<span>		
 			<a href='' ng-click="config.student.reverse=false">Ascending</a> | 
@@ -76,14 +53,19 @@
 			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse">
 				<td>{{student.first_name + ' ' + student.middle_name + ' ' + student.last_name}}</td>
 				<td>
-					<select ng-model="student.hostel">
- 						<option value="5">5</option>
+					<select>
+						<option selected="selected" value="{{student.hostel}}">{{student.hostel}}</option>
+						<option value="5">5</option>
 						<option value="7">7</option>
 					</select>
 				</td>
 				<td>
 					<select ng-model="student.batch">
- 						<option value="07">07</option>
+						<!-- <option value="{{student.batch}}">{{student.batch}}<option> -->
+						<!-- <option ng-repeat="batch in studentFields.batches" value="{{batch}}">{{batch}}<option> -->
+
+						<option selected="selected" value="{{student.batch}}">{{student.batch}}</option>
+						<option value="07">07</option>
 						<option value="08">08</option>
 						<option value="09">09</option>
 						<option value="10">10</option>
@@ -91,16 +73,36 @@
 					</select>
 				</td>
 				<td>
-					<select ng-model="student.subject">
- 						<option value="Physics">Physics</option>
+					<!-- ng-model="student.subject" -->
+					<select>
+						<option value="{{student.subject}}">{{student.subject}}<option>
+<!-- 						<option ng-repeat="subject in studentFields.subjects" value="{{subject}}">{{subject}}<option>
+ -->						
+
+						<option selected="selected" value="{{student.subject}}">{{student.subject}}</option>
+						<option value="Physics">Physics</option>
 						<option value="Mathematics">Mathematics</option>
 						<option value="Chemistry">Chemistry</option>
 						<option value="Biology">Biology</option>
 						<option value="NA">NA</option>					
+
 					</select>
+					<!-- selected={{compareSelect(subjectF,student.subject)}} -->
 				</td>
 				<td>
+<!-- 						
+
+						<option selected="selected" value="{{student.subject}}">{{student.subject}}</option>
+						<option value="Physics">Physics</option>
+						<option value="Mathematics">Mathematics</option>
+						<option value="Chemistry">Chemistry</option>
+						<option value="Biology">Biology</option>
+						<option value="NA">NA</option>					
+ -->					
 					<select ng-model="student.sex">
+<!-- 						<option ng-repeat="sex in studentFields.sexes" selected="{{compareSelect(sex,student.sex)}}" value="{{sex}}">{{sex}}</option>						
+ -->
+ 						<option selected="selected" value="{{student.sex}}">{{student.sex}}</option>
 						<option value="Male">Male</option>
 						<option value="Female">Female</option>
 					</select>
@@ -124,13 +126,15 @@
 				</td>
 
 				<td>
-					<select ng-model="studentNew.hostel">
+					<select>
+						<option selected="selected" value="student.hostel}}">{{student.hostel}}</option>
 						<option value="5">5</option>
 						<option value="7">7</option>
 					</select>
 				</td>
 				<td>
-					<select ng-model="studentNew.batch">
+					<select>
+						<option selected="selected" value="student.batch}}">{{student.batch}}</option>
 						<option value="07">07</option>
 						<option value="08">08</option>
 						<option value="09">09</option>
@@ -154,13 +158,14 @@
 					</select>
 				</td>
 				<td>
-					<input type="text" ng-model="studentNew.reg_no" placeholder="Registration No"/>
+					<input type="text" value="{{student.reg_no}}"/>
 				</td>
 				<td>					
 				</td>
 				<td>
-					<a href="" ng-click="AddStudent(studentNew)">Add</a>
+					<a href="" ng-click="AddStudent(student.new)">Add</a>
 				</td>
+
 			</tr>		
 		</table>
 	</center>	
