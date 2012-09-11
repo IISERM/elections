@@ -547,3 +547,51 @@ Because Eloquent inherits all the features and methods of Fluent queries, deleti
 	$author->delete();
 
 Note, however, than this won't delete any related models (e.g. all the author's Book models will still exist), unless you have set up [foreign keys](/docs/database/schema#foreign-keys) and cascading deletes.
+
+
+Tables
+======
+
+Model - Table -> Columns/Data/Relation
+-----   -----    ---------------------
+
+Student - students
+	id			-	Autoincrement
+	first_name	-	String
+	middle_name	-	String
+	last_name	-	String
+	reg_no		-	String
+	role		-	Integer
+			Role (1 - Monkey, 0 - Human)
+	voted		-	Integer
+			Voted (1 - Yes, 0 - No)
+	hostel		-	Integer
+			n-1 => Hostel	(belongs to)
+	batch		-	Integer
+			n-1 => Batch	(belongs to)
+	subject		-	Integer
+			n-1 => Subject	(belongs to)
+	sex			-	Integer
+			Sex (1 - Male, 0 - Female)
+	password	-	String
+	timestamps	-	DateTimes
+
+		_Relations_
+
+				n-1 => belongs to => Hostel
+				n-1 => belongs to => Batch
+				n-1 => belongs to => Subject
+
+		_Data_
+				Integer		=>	id
+				String		=>	first_name
+				String		=>	middle_name
+				String		=>	last_name
+				String		=>	reg_no
+				Integer		=>	role
+				Integer		=>	voted
+				Integer		=>	sex
+				String		=>	password
+
+
+

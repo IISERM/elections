@@ -19,3 +19,7 @@ TODO: Complete this section
 ## License
 
 NaveenTantra is an open-sourced software, licensed under the IISER M's non-existent License.
+
+## Database Tables
+
+Follow [this link]https://raw.github.com/IISERM/elections/master/laravel/documentation/elections/tables.md "Tables") to view a description of MySQL database.
