@@ -12,7 +12,7 @@ class Admin_Controller extends Base_Controller {
 		return View::make('admin.results');
 	}
 
-	public function action_update()
+	public function action_supdate()
 	{
 		$user = Student::find(Input::get('id'));
 		if($user&&Input::get('hostel')&&Input::get('batch')&&Input::get('sex')&&Input::get('reg_no'))
@@ -30,7 +30,7 @@ class Admin_Controller extends Base_Controller {
 		}
 	}
 
-	public function action_list()
+	public function action_slist()
 	{
 		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no');
 		$users=Student::get($columns);
