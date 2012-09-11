@@ -17,6 +17,6 @@
 
 		public function subject()
 		{
-			return $this->has_one('Subject');
+			return $this->has_one('Subject','subject');
 		}
 	}

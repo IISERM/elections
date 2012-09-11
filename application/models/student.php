@@ -7,20 +7,20 @@
 
 		public function hostel()
 		{
-			return $this->has_one('Hostel');
+			return $this->has_one('Hostel','hostel');
 		}
 
 		public function batch()
 		{
-			return $this->has_one('Batch');
+			return $this->has_one('Batch','batch');
 		}
 
 		public function subject()
 		{
-			return $this->has_one('Subject');
+			return $this->has_one('Subject','subject');
 		}
 
-		public function sex()
+		/*public function sex()
 		{
 			if($this->sex == 1)
 			{
@@ -30,7 +30,7 @@
 			{
 				return 'female';
 			}
-		}
+		}*/
 
 		public function page()
 		{

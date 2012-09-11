@@ -15,25 +15,48 @@ class Admin_Controller extends Base_Controller {
 	public function action_supdate()
 	{
 		$user = Student::find(Input::get('id'));
-		if($user&&Input::get('hostel')&&Input::get('batch')&&Input::get('sex')&&Input::get('reg_no')==$user->reg_no&&Input::get('subject'))
+		if($user)
+		{
+			print("Yes");
+		}
+		if(Input::get('reg_no')==$user->reg_no)
+		{
+			print("Maybe");
+		}
+		if(Input::get('hostel'))
+		{
+			print("hostel");
+		}
+		if(Input::get('batch'))
+		{
+			print("batch");
+		}
+		if(Input::get('sex'))
+		{
+			print("sex");
+		}
+		if($user&&Input::has('hostel')&&Input::has('batch')&&Input::has('sex')&&Input::has('subject')&&Input::get('reg_no')==$user->reg_no)
 		{
 			$user->hostel = Input::get('hostel');
 			$user->batch = Input::get('batch');
 			$user->sex = Input::get('sex');
 			$user->subject = Input::get('subject');
 			$user->save();
+			print("Success");
+			print_r(Input::all());
 			print_r($user);
 		}
 		else
 		{
+			print("Failed");
 			print_r(Input::all());
 		}
 	}
 
 	public function action_slist()
 	{
-		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no');
-		$users=Student::get($columns);
+		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no','subject');
+		$users=Student::with('subject')->get($columns);
 		foreach ($users as $user)
 		{
 			$user = $user->attributes;
@@ -73,14 +96,15 @@ class Admin_Controller extends Base_Controller {
 			{
 				$user['batch'] = 'MS12';
 			}
+			if($user['sex'] == 0)
+			{
+				$user['sex'] = 'Female';
+			}
 			if($user['sex'] == 1)
 			{
 				$user['sex'] = 'Male';
 			}
-			if($user['batch'] == 0)
-			{
-				$user['sex'] = 'Female';
-			}
+			$user['subject'] = Subject::find($user['subject'])->subject;
 			// print_r($user);
 			$user_ref[]=$user;
 /*			$u = array(
