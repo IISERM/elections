@@ -121,7 +121,7 @@ function settings($scope,truthSource,$timeout){
 		,
 		sex:
 			{
-				'Male':1,'Female':2
+				'Male':1,'Female':0
 			}		
 	};
 
