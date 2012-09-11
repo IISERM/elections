@@ -31,8 +31,9 @@
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
-			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
+
 			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last==''">Last Response: {{truthSource.io.state.last}}</div>
+			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
 		</div>
 
 <!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
@@ -42,10 +43,11 @@
 			Fails, if the sun to rise, with persistence, we will fight the fierce night.
 		</div>
  -->		
-		<br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/>
+		<br/><br/><br/>
+		<br/>
 
-		<p class="subSubTitle">Students</p>
-		<!-- <a href='' ng-click="apply()">Soft Update</a> -->
+		<p class="subSubTitle">Students</p>		
 		<a href='' ng-hide="studentsCollapse=='hide'" ng-click="studentsCollapse='hide'">Collapse</a>
 		<a href='' ng-show="studentsCollapse=='hide'" ng-click="studentsCollapse='show'">Show</a>
 		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
@@ -179,6 +181,60 @@
 			</tr>		
 		</table>
 
+
+
+		<p class="subSubTitle">Posts</p>		
+		<a href='' ng-hide="postsCollapse=='hide'" ng-click="postsCollapse='hide'">Collapse</a>
+		<a href='' ng-show="postsCollapse=='hide'" ng-click="postsCollapse='show'">Show</a>
+		<a href='' ng-click="PostsRefresh()">Refresh List</a>
+		<input type="text" ng-model="config.post.search" placeholder="Quick Search" />
+		<span>		
+			<a href='' ng-click="config.post.reverse=false">Ascending</a> | 
+			<a href='' ng-click="config.post.reverse=true">Descending</a>				
+		</span>
+
+		<table>
+			<tr>
+				<th><input type="radio" name="postSort" ng-model="config.post.orderBy"
+					value="first_name" id="student_first_name"/>
+					<label for="student_first_name">Name</label></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="post in posts | filter:config.post.search | orderBy:config.post.orderBy:config.post.reverse"  class="posts_{{postsCollapse}}">
+				<td>{{post.name}}</td>
+				<td>
+					<ul>
+						<li ng-repeat="hostel in post.hostels">
+							<input  type="checkbox" ng-model="hostel.select">{{hostel.name}}</input>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li ng-repeat="batch in post.batches">
+							<input  type="checkbox" ng-model="batch.select">{{batch.name}}</input>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li ng-repeat="subject in post.subjects">
+							<input  type="checkbox" ng-model="subject.select">{{subject.name}}</input>
+						</li>
+					</ul>
+				</td>
+
+				<td>
+					<a href="" ng-click="DeleteStudent(student.id)">Remove</a>
+				</td>
+				<td>
+					<a href="" ng-click="UpdateStudent(student)">Update</a>
+				</td>
+
+			</tr>
+		</th>
+	</table>
 	</center>	
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/admin/settings.js\""; ?>> </script>
 </body>

@@ -157,8 +157,7 @@ angular.module('myApp',[])
 
 var basepathProvider="";
 
-function settings($scope,truthSource,$timeout){
-	
+function settings($scope,truthSource,$timeout){	
 	$scope.truthSource=truthSource;
 	$scope.updatingInterface=true;
 	$scope.indexify=
@@ -192,42 +191,61 @@ function settings($scope,truthSource,$timeout){
 
 	$scope.studentNew={first_name:'A',middle_name:'B',last_name:'C',hostel:'7',batch:'MS11',sex:'Female',reg_no:'MSABC'};
 	
-	$scope.studentFields={hostels:['7','5'],
-							batches:['07','08','09','10','11','12'],
-							subjects:['Physics','Mathematics','Chemistry','Biology','NA'],
-							sexes:['Male','Female']
+	$scope.studentFields={hostels:['','7','5'],
+							batches:['', '07','08','09','10','11','12'],
+							subjects:['', 'Physics','Mathematics','Chemistry','Biology','NA'],
+							sexes:['Female','Male']
 							};
-	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
+	$scope.config={student:{orderBy:'first_name',search:'',reverse:false},
+					post:{orderBy:'name',search:'',reverse:false}};
 
+	$scope.posts=[{id:1,name:'MS11 CR',number:2,hostels:[
+														{select:true,name:'7'},
+														{select:true,name:'5'}
+														],
+												batches:[
+														{select:false,name:'MS07'},
+														{select:false,name:'MS08'},
+														{select:false,name:'MS09'},
+														{select:false,name:'MS10'},
+														{select:true,name:'MS11'},
+														{select:false,name:'MS12'}														
+														],
+												subjects:[
+														{select:false,name:'Physics'},
+														{select:false,name:'Mathematics'},
+														{select:false,name:'Chemistry'},
+														{select:false,name:'Biology'},
+														{select:true,name:'Undeclared'},
+														]},
+					{id:2,name:'MS12 CR',number:2,hostels:[
+														{select:true,name:'7'},
+														{select:true,name:'5'}
+														],
+												batches:[
+														{select:false,name:'MS07'},
+														{select:false,name:'MS08'},
+														{select:false,name:'MS09'},
+														{select:false,name:'MS10'},
+														{select:false,name:'MS11'},
+														{select:true,name:'MS12'}														
+														],
+												subjects:[
+														{select:false,name:'Physics'},
+														{select:false,name:'Mathematics'},
+														{select:false,name:'Chemistry'},
+														{select:false,name:'Biology'},
+														{select:true,name:'Undeclared'},
+														]}
+				];
 	//UPDATE the values from the server
-	// truthSource.io.config.basePath=basePathProvider;
 	
 	$timeout(function(){
-		// alert(truthSource.io.config.basePath);
 		truthSource.student.fetch.Now(function(val){
-			//This is to update the UI before putting all the data in ng-repeat
-			// $scope.$digest();
-			// $scope.$apply();
-			// alert("This may take a little while");
-
 			$scope.students=val;
-
-			// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
-			// 					middle_name:$scope.students.slice(-1)[0].middle_name,
-			// 					last_name:$scope.students.slice(-1)[0].last_name,
-			// 					hostel:$scope.students.slice(-1)[0].hostel,
-			// 					batch:$scope.students.slice(-1)[0].batch,
-			// 					subject:$scope.students.slice(-1)[0].subject,
-			// 					sex:$scope.students.slice(-1)[0].sex,
-			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
-			
 			$scope.updatingInterface=false;
-			
 			$scope.$apply();
-
-			// alert("hwllo");
 		});
-
 	}, 1000);
 
 
@@ -236,19 +254,8 @@ function settings($scope,truthSource,$timeout){
 		$scope.$apply();
 		truthSource.student.fetch.Now(function(val){
 			$scope.students=val;
-
-			// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
-			// 					middle_name:$scope.students.slice(-1)[0].middle_name,
-			// 					last_name:$scope.students.slice(-1)[0].last_name,
-			// 					hostel:$scope.students.slice(-1)[0].hostel,
-			// 					batch:$scope.students.slice(-1)[0].batch,
-			// 					subject:$scope.students.slice(-1)[0].subject,
-			// 					sex:$scope.students.slice(-1)[0].sex,
-			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
-			// alert("This may take a little while");
 			$scope.updatingInterface=false;
 			$scope.$apply();
-			// alert("hwllo");
 		});
 
 	}
@@ -276,32 +283,16 @@ function settings($scope,truthSource,$timeout){
 		studentC.sex=$scope.indexify.sex[student.sex];
 		studentC.reg_no=student.reg_no;
 		studentC.id=student.id;
-		// studentC.reg_no=$scope.indexify.reg_no[student.reg_no];
-		
-		// alert(studentC.hostel);
-		// alert($scope.indexify.hostel['7']);
-		// alert(studentC.hostel);
-		// 	alert(studentC.batch);
-		// 		alert(studentC.subject);
-		// 		alert(studentC.sex);
-				// alert(studentC.reg_no);
 
 		truthSource.student.update.Now(studentC,function(val){
-			// alert(val);
 			$scope.$apply();
 			$scope.StudentsRefresh();
-			// if(val=='1')
-			// 	alert("SUCCESS");			
-			// else
-			// 	alert("FAILURE");
-
 		});
 
 	}
 
 	$scope.AddStudent=function(student){
 		var studentC={};
-		
 		studentC.hostel=$scope.indexify.hostel[student.hostel];
 		studentC.batch=$scope.indexify.batch[student.batch];
 		studentC.subject=$scope.indexify.subject[student.subject];
@@ -310,11 +301,8 @@ function settings($scope,truthSource,$timeout){
 		studentC.first_name=student.first_name;
 		studentC.middle_name=student.middle_name;
 		studentC.last_name=student.last_name;
-		// studentC.email=student.id;
 
 		truthSource.student.add.Now(studentC,function(val){
-			// alert(val);
-
 			$scope.$apply();
 			$scope.StudentsRefresh();
 		});
