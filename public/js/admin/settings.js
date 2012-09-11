@@ -50,7 +50,7 @@ angular.module('myApp',[])
 			truth.working=true;
 			$.ajax({
 				type: 'POST',
-				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.update.lnk,
 				statusCode: {
 					404: function () {
 						;
@@ -64,10 +64,12 @@ angular.module('myApp',[])
 				success: function (data) {
 					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
 					truth.io.state.last=data;
-					if(data=='1')
-						alert("Updated Successfully");
-					else
-						alert("Something went wrong");
+					alert(data);
+
+					// if(data=='1')
+					// 	alert("Updated Successfully");
+					// else
+					// 	alert("Something went wrong");
 				}
 				}).error(function() {
 					;
@@ -175,12 +177,12 @@ function settings($scope,truthSource){
 	}
 
 	$scope.UpdateStudent=function(student){
-		
 		truthSource.student.update.Now(student,function(val){
-			if(val=='1')
-				alert("SUCCESS");
-			else
-				alert("FAILURE");
+			alert(val);
+			// if(val=='1')
+			// 	alert("SUCCESS");			
+			// else
+			// 	alert("FAILURE");
 
 		});
 
