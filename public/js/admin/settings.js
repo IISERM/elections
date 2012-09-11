@@ -18,6 +18,7 @@ angular.module('myApp',[])
 
 		truth.student.fetch.Now=function(OnComplete)
 		{
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk);
 			truth.working=true;
 			$.ajax({
 				type: 'POST',
@@ -90,28 +91,26 @@ function settings($scope,truthSource){
 	$scope.truthSource=truthSource;
 
 	$scope.indexify=
-	[
-		{hostel:
-			[
-				{'7':1},{'5':2}
-			]
-		},
-		{batch:
-			[
-				{'07':1},{'08':2},{'09':3},{'10':4},{'11':5},{'12':6}
-			]
-		},
-		{subject:
-			[
-				{'Physics':1},{'Mathematics':2},{'Chemistry':3},{'Biology':4},{'NA':5}
-			]
-		},
-		{sex:
-			[
-				{'Male':1},{'Female':0}
-			]
-		}
-	];
+	{hostel:
+			{
+				'7':1,'5':2
+			}
+		,
+		batch:
+			{
+				'07':1,'08':2,'09':3,'10':4,'11':5,'12':6
+			}
+		,
+		subject:
+			{
+				'Physics':1,'Mathematics':2,'Chemistry':3,'Biology':4,'NA':5
+			}
+		,
+		sex:
+			{
+				'Male':1,'Female':0
+			}		
+	};
 
 	$scope.students=[
 	{id:1, first_name:'Atul', middle_name:'Singh', last_name:'Arora', 
@@ -177,7 +176,24 @@ function settings($scope,truthSource){
 	}
 
 	$scope.UpdateStudent=function(student){
-		truthSource.student.update.Now(student,function(val){
+		var studentC={};
+		
+		studentC.hostel=$scope.indexify.hostel[student.hostel];
+		studentC.batch=$scope.indexify.batch[student.batch];
+		studentC.subject=$scope.indexify.subject[student.subject];
+		studentC.sex=$scope.indexify.sex[student.sex];
+		studentC.reg_no=student.reg_no;
+		// studentC.reg_no=$scope.indexify.reg_no[student.reg_no];
+		
+		// alert(studentC.hostel);
+		// alert($scope.indexify.hostel['7']);
+		// alert(studentC.hostel);
+		// 	alert(studentC.batch);
+		// 		alert(studentC.subject);
+		// 		alert(studentC.sex);
+				// alert(studentC.reg_no);
+
+		truthSource.student.update.Now(studentC,function(val){
 			alert(val);
 			// if(val=='1')
 			// 	alert("SUCCESS");			

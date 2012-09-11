@@ -109,7 +109,7 @@
 					</select>
 				</td>
 				<td>
-					<input type="text" value="{{student.reg_no}}"/>
+					<input type="text" ng-model="student.reg_no"/>
 				</td>
 				<td>
 					<a href="" ng-click="DeleteStudent(student.id)">Remove</a>
