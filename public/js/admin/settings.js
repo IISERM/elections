@@ -3,7 +3,7 @@ angular.module('myApp',[])
 	//CONVENTIONS
 	//everything is small camel cased
 	//functions start with capitals
-
+//http://localhost/IISERM/elections/public
 	var truth={
 		student:{	fetch:{Now:{},lnk:'/slist'},
 					add:{Now:{},lnk:'/sadd'},
@@ -12,7 +12,7 @@ angular.module('myApp',[])
 					config:{basePath:'/admin'},
 					data:{}
 				},
-		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}}
+		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"",addIndexDotPHP:"/index.php"}}
 
 		};
 
@@ -83,10 +83,23 @@ angular.module('myApp',[])
 
 		return truth;
 
+})
+.directive('basepathwidget', function(truthSource) {
+    return {
+        restrict: 'E',
+        scope: {path:'@'},
+        replace: true,        
+        transclude:true,
+        template:'',
+        link: function($scope, elm, attrs, ctrl) {
+        	truthSource.io.config.basePath=attrs.path;
+        }
+    }
 });
 
+var basepathProvider="";
 
-function settings($scope,truthSource){
+function settings($scope,truthSource,$timeout){
 	
 	$scope.truthSource=truthSource;
 
@@ -129,21 +142,28 @@ function settings($scope,truthSource){
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false}};
 
 	//UPDATE the values from the server
-	truthSource.student.fetch.Now(function(val){
-		$scope.students=val;
+	// truthSource.io.config.basePath=basePathProvider;
+	
+	$timeout(function(){
+		// alert(truthSource.io.config.basePath);
+		truthSource.student.fetch.Now(function(val){
+			$scope.students=val;
 
-		// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
-		// 					middle_name:$scope.students.slice(-1)[0].middle_name,
-		// 					last_name:$scope.students.slice(-1)[0].last_name,
-		// 					hostel:$scope.students.slice(-1)[0].hostel,
-		// 					batch:$scope.students.slice(-1)[0].batch,
-		// 					subject:$scope.students.slice(-1)[0].subject,
-		// 					sex:$scope.students.slice(-1)[0].sex,
-		// 					reg_no:$scope.students.slice(-1)[0].reg_no};
-		alert("This may take a little while");
-		$scope.$apply();
-		// alert("hwllo");
-	});
+			// $scope.studentNew={first_name:$scope.students.slice(-1)[0].first_name,
+			// 					middle_name:$scope.students.slice(-1)[0].middle_name,
+			// 					last_name:$scope.students.slice(-1)[0].last_name,
+			// 					hostel:$scope.students.slice(-1)[0].hostel,
+			// 					batch:$scope.students.slice(-1)[0].batch,
+			// 					subject:$scope.students.slice(-1)[0].subject,
+			// 					sex:$scope.students.slice(-1)[0].sex,
+			// 					reg_no:$scope.students.slice(-1)[0].reg_no};
+			alert("This may take a little while");
+			$scope.$apply();
+			// alert("hwllo");
+		});
+
+	}, 1000);
+
 
 	$scope.StudentsRefresh = function(){
 		truthSource.student.fetch.Now(function(val){
