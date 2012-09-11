@@ -116,7 +116,10 @@ class Admin_Controller extends Base_Controller {
 	public function post_sdel()
 	{
 		$user = Student::find(Input::get('id'));
-		$user->delete();
+		if($user->delete())
+			return 'Success';
+		else
+			return 'fail';
 	}
 
 }
