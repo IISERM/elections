@@ -15,17 +15,20 @@ class Admin_Controller extends Base_Controller {
 	public function action_supdate()
 	{
 		$user = Student::find(Input::get('id'));
-		if($user&&Input::get('hostel')&&Input::get('batch')&&Input::get('sex')&&Input::get('reg_no')==$user->reg_no&&Input::get('subject'))
+		if($user&&Input::get('hostel')&&Input::get('batch')&&Input::get('sex')&&Input::get('subject')&&Input::get('reg_no')==$user->reg_no)
 		{
 			$user->hostel = Input::get('hostel');
 			$user->batch = Input::get('batch');
 			$user->sex = Input::get('sex');
 			$user->subject = Input::get('subject');
 			$user->save();
+			print("Success");
+			print_r(Input::all());
 			print_r($user);
 		}
 		else
 		{
+			print("Failed");
 			print_r(Input::all());
 		}
 	}
