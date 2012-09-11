@@ -32,7 +32,7 @@
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
 			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
-			<div class="smallStat" ng-hide="truthSource.io.state.last==''">Last Response: {{truthSource.io.state.last}}</div>
+			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last==''">Last Response: {{truthSource.io.state.last}}</div>
 		</div>
 
 <!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
@@ -134,7 +134,7 @@
 					<input type="text" ng-model="studentNew.first_name" placeholder="First"/>
 					<input type="text" ng-model="studentNew.middle_name" placeholder="Middle"/>
 					<input type="text" ng-model="studentNew.last_name" placeholder="Last"/>
-					<input type="text" ng-model="studentNew.email" placeholder="e-mail" />
+					<!-- <input type="text" ng-model="studentNew.email" placeholder="e-mail" /> -->
 				</td>
 
 				<td>

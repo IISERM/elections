@@ -7,7 +7,7 @@ angular.module('myApp',[])
 	var truth={
 		student:{	fetch:{Now:{},lnk:'/slist'},
 					add:{Now:{},lnk:'/sadd'},
-					remove:{Now:{},lnk:'/sremove'},
+					remove:{Now:{},lnk:'/sdel'},
 					update:{Now:{},lnk:'/supdate'},
 					config:{basePath:'/admin'},
 					data:{}
@@ -65,7 +65,7 @@ angular.module('myApp',[])
 				success: function (data) {
 					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
 					truth.io.state.last=data;
-					alert(data);
+					// alert(data);
 
 				}
 				}).error(function() {
@@ -80,6 +80,7 @@ angular.module('myApp',[])
 		truth.student.add.Now=function(student, OnComplete)
 		{
 			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk,
@@ -91,13 +92,13 @@ angular.module('myApp',[])
 						;
 					}
 				},
-				data: {email:student.email,first_name:student.first_name,middle_name:student.middle_name,last_name:student.last_name,
+				data: {first_name:student.first_name,middle_name:student.middle_name,last_name:student.last_name,
 				 batch:student.batch, sex:student.sex, hostel:student.hostel, 
 						reg_no:student.reg_no, subject:student.subject, ajax: '1'},
 				success: function (data) {
 					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
 					truth.io.state.last=data;
-					alert(data);
+					// alert(data);
 				}
 				}).error(function() {
 					;
@@ -108,6 +109,35 @@ angular.module('myApp',[])
 			});
 		};
 
+		truth.student.remove.Now=function(id, OnComplete)
+		{
+			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.remove.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.remove.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {id:id, ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
 
 		return truth;
 
@@ -160,7 +190,7 @@ function settings($scope,truthSource,$timeout){
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
 
-	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:'',email:''};
+	$scope.studentNew={first_name:'A',middle_name:'B',last_name:'C',hostel:'7',batch:'MS11',sex:'Female',reg_no:'MSABC'};
 	
 	$scope.studentFields={hostels:['7','5'],
 							batches:['07','08','09','10','11','12'],
@@ -203,6 +233,7 @@ function settings($scope,truthSource,$timeout){
 
 	$scope.StudentsRefresh = function(){
 		$scope.updatingInterface=true;
+		$scope.$apply();
 		truthSource.student.fetch.Now(function(val){
 			$scope.students=val;
 
@@ -230,7 +261,10 @@ function settings($scope,truthSource,$timeout){
 	}
 
 	$scope.DeleteStudent=function(id){
-		alert(id);
+		truthSource.student.remove.Now(id,function(val){			
+			$scope.$apply();
+			$scope.StudentsRefresh();
+		});		
 	}
 
 	$scope.UpdateStudent=function(student){
@@ -255,6 +289,7 @@ function settings($scope,truthSource,$timeout){
 		truthSource.student.update.Now(studentC,function(val){
 			// alert(val);
 			$scope.$apply();
+			$scope.StudentsRefresh();
 			// if(val=='1')
 			// 	alert("SUCCESS");			
 			// else
@@ -275,11 +310,13 @@ function settings($scope,truthSource,$timeout){
 		studentC.first_name=student.first_name;
 		studentC.middle_name=student.middle_name;
 		studentC.last_name=student.last_name;
-		studentC.email=student.id;
+		// studentC.email=student.id;
 
 		truthSource.student.add.Now(studentC,function(val){
 			// alert(val);
+
 			$scope.$apply();
+			$scope.StudentsRefresh();
 		});
 	}
 
