@@ -59,7 +59,7 @@ class Admin_Controller extends Base_Controller {
 			{
 				$user['sex'] = 'Female';
 			}
-			print_r($user);
+			// print_r($user);
 			$user_ref[]=$user;
 /*			$u = array(
 					'id' => $user->id,
