@@ -26,13 +26,13 @@ class Admin_Controller extends Base_Controller {
 			$user->reg_no = Input::get('reg_no');
 			$user->save();
 			print("Success");
-			print_r(Input::all());
-			print_r($user);
+			// print_r(Input::all());
+			// print_r($user);
 		}
 		else
 		{
 			print("Failed");
-			print_r(Input::all());
+			// print_r(Input::all());
 		}
 	}
 
