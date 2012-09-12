@@ -87,7 +87,7 @@
 				<th></th>
 				<th></th>
 			</tr>
-			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse | limitTo:config.student.limitTo"  class="students_{{studentsCollapse}}">
+			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse | startFrom:config.student.currentPage*config.student.limitTo | limitTo:config.student.limitTo"  class="students_{{studentsCollapse}}">
 				<td>{{student.first_name + ' ' + student.middle_name + ' ' + student.last_name}}</td>
 				<td>
 					<select ng-model="student.hostel">
@@ -111,7 +111,7 @@
 						<option value="Mathematics">Mathematics</option>
 						<option value="Chemistry">Chemistry</option>
 						<option value="Biology">Biology</option>
-						<option value="NA">NA</option>					
+						<option value="Undeclared">Undeclared</option>					
 					</select>
 				</td>
 				<td>
@@ -161,7 +161,7 @@
 						<option value="Mathematics">Mathematics</option>
 						<option value="Chemistry">Chemistry</option>
 						<option value="Biology">Biology</option>
-						<option value="NA">NA</option>					
+						<option value="Undeclared">Undeclared</option>					
 					</select>
 				</td>
 				<td>
@@ -180,14 +180,27 @@
 				</td>
 			</tr>		
 		</table>
-		<br/>
+		<br/>		
+		<button ng-disabled="config.student.currentPage==0" ng-click="config.student.currentPage=0">
+			First
+		</button>
+		<button ng-disabled="config.student.currentPage == 0" ng-click="config.student.currentPage=config.student.currentPage-1">
+	        Previous
+	    </button>
+	    {{config.student.currentPage+1}}/{{numberOfPages(students,config.student.limitTo)}}
+	    <button ng-disabled="config.student.currentPage >= students.length/config.student.limitTo - 1" ng-click="config.student.currentPage=config.student.currentPage+1">
+	        Next
+	    </button>
+		<button ng-disabled="config.student.currentPage >= students.length/config.student.limitTo - 1" ng-click="config.student.currentPage=numberOfPages(students,config.student.limitTo)-1">
+			Last
+		</button>
+		<br/><br/>	 
 		Show a maximum of <input cols="4" type="text" ng-model="config.student.limitTo" placeholder="Maximum Entries" /> rows
 		<br/>
 		<a href='' ng-click="config.student.limitTo=config.student.limitTo+10">Show 10 more</a> | 
 		<a href='' ng-click="config.student.limitTo=20">Default</a>
-
 		<br/><br/>
-		
+
 		<hr/>
 
 		<br/>
