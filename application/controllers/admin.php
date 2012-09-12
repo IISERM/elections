@@ -161,7 +161,7 @@ class Admin_Controller extends Base_Controller {
 		print_r($post);
 	}
 
-	public function get_plist()
+	public function post_plist()
 	{
 		$posts = Post::with(array('hostel','batch','subject'))->all();
 		// print_r($posts);
@@ -193,7 +193,7 @@ class Admin_Controller extends Base_Controller {
 						'name' => $hostel->hostel
 					);
 			}
-			$data['hostel'] = $h;
+			$data['hostels'] = $h;
 			$b = array();
 			foreach ($batches as $batch)
 			{
@@ -210,7 +210,7 @@ class Admin_Controller extends Base_Controller {
 						'name' => $batch->batch
 					);
 			}
-			$data['batch'] = $b;
+			$data['batches'] = $b;
 			$s = array();
 			foreach ($subjects as $subject)
 			{
@@ -227,7 +227,7 @@ class Admin_Controller extends Base_Controller {
 						'name' => $subject->subject
 					);
 			}
-			$data['subject'] = $s;
+			$data['subjects'] = $s;
 			$d[] = $data;
 		}
 	print_r(json_encode($d));
