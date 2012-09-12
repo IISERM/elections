@@ -25,7 +25,7 @@ angular.module('myApp',[])
 				config:{basePath:'/admin'},
 				data:{}
 			},
-		nomination:{ 	fetch:{Now:{},lnk:'/list'},
+		nominee:{ 	fetch:{Now:{},lnk:'/list'},
 						add:{Now:{},lnk:'/add'},
 						remove:{Now:{},lnk:'/del'},
 						data:{}
@@ -277,6 +277,40 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
+
+		truth.nominee.add.Now=function(nominee, OnComplete)
+		{
+			truth.working=true;
+			// alert(JSON.stringify(nominee));
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.add.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},				
+				data: {nominee:JSON.stringify(nominee), ajax: '1'},
+				// dataType: 'json',
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					// alert("COMPLETED");
 					truth.working=false;
 					OnComplete(truth.io.state.last);
 			});
@@ -554,4 +588,12 @@ function settings($scope,truthSource,$timeout){
 		});
 	}
 
+	$scope.AddNominee=function(nominee){
+		truthSource.nominee.add.Now(nominee,function(val){
+			$scope.$apply();
+			// $scope.NomineesRefresh();
+			
+			// alert(val);
+		});
+	}
 }

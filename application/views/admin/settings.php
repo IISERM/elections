@@ -322,23 +322,41 @@
 				<td>{{nominee.name}}</td>
 				<!-- <td><input type="input" ng-model="nominee.name" placeholder="Name of nominee"/></td> -->
 				<td>
-					<input type="input" ng-model="nominee.reg_no" placeholder="Registration Number"/>
+					<!-- <input type="input" ng-model="nominee.reg_no" placeholder="Registration Number"/> -->
+					{{nominee.reg_no}}
 				</td>
 				<td>
-					<select ng-model="nominee.post">
+					{{nominee.post}}
+				</td>
+				<td>
+					<a href="" ng-click="DeleteNominee(nominee.id)">Remove</a>
+				</td>
+			</tr>
+			<tr>
+				<td>(name will be fetched automatically in accordance with the registration number)</td>
+				<td>
+					<input type="text" ng-model="nomineeNew.reg_no" placeholder="Name of the nominee"/>
+				</td>
+				<td>
+					<select ng-model="nomineeNew.post">
 						<option ng-repeat="post in posts" value="post.id">{{post.name}}</option>
 					</select>
 				</td>
 				<td>
-					<a href="" ng-click="DeletePost(post.id)">Remove</a>
+					<a href="" ng-click="AddNominee(nomineeNew)">Add</a>
 				</td>
-				<td>
-					<a href="" ng-click="UpdatePost(post)">Update</a>
-				</td>
-
-			</tr>
+			</tr>			
 	</table>
+
+	<hr>
+	<br/><br/><br/>
+	<br/>
+	<p>Created by</p>
+	<img src=<?php echo "\"".URL::base()."/img/theDeparted.svg\""; ?> width="150px"/>
+	<p>Can't live until you die</p>
+	<p>Indian Institute of Science Education and Research, Mohali</p>
 	</center>	
+
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/admin/settings.js\""; ?>> </script>
 </body>
 
