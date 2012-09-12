@@ -1,4 +1,10 @@
 angular.module('myApp',[])
+.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+})
 .factory('truthSource',function(){
 	//CONVENTIONS
 	//everything is small camel cased
@@ -229,6 +235,10 @@ var basepathProvider="";
 
 function settings($scope,truthSource,$timeout){	
 	$scope.truthSource=truthSource;
+    $scope.numberOfPages=function(source,limitTo){
+        return Math.ceil(source.length/limitTo);
+    };
+
 	$scope.updatingInterface=true;
 	$scope.indexify=
 	{hostel:
@@ -243,7 +253,7 @@ function settings($scope,truthSource,$timeout){
 		,
 		subject:
 			{
-				'Physics':1,'Mathematics':2,'Chemistry':3,'Biology':4,'NA':5
+				'Physics':1,'Mathematics':2,'Chemistry':3,'Biology':4,'Undeclared':5
 			}
 		,
 		sex:
@@ -254,7 +264,7 @@ function settings($scope,truthSource,$timeout){
 
 	$scope.students=[
 	{id:1, first_name:'Atul', middle_name:'Singh', last_name:'Arora', 
-		hostel:'7', batch:'11',subject:'NA',sex:'Male',reg_no:'MS11003'},
+		hostel:'7', batch:'11',subject:'Undeclared',sex:'Male',reg_no:'MS11003'},
 	{id:2, first_name:'Gagan', middle_name:'Preet', last_name:'Singh', 
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
@@ -263,10 +273,10 @@ function settings($scope,truthSource,$timeout){
 	
 	$scope.studentFields={hostels:['','7','5'],
 							batches:['', '07','08','09','10','11','12'],
-							subjects:['', 'Physics','Mathematics','Chemistry','Biology','NA'],
+							subjects:['', 'Physics','Mathematics','Chemistry','Biology','Undeclared'],
 							sexes:['Female','Male']
 							};
-	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20},
+	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false}};
 
 	$scope.posts=[{id:1,name:'MS11 CR',number:2,hostels:[
@@ -341,11 +351,29 @@ function settings($scope,truthSource,$timeout){
 
 	
 	$timeout(function(){
+		$scope.init=0;
+
 		truthSource.student.fetch.Now(function(val){
 			$scope.students=val;
-			$scope.updatingInterface=false;
+			$scope.init=$scope.init+1;
+			if($scope.init==2)			
+				$scope.updatingInterface=false;
 			$scope.$apply();
 		});
+		
+		truthSource.post.fetch.Now(function(val){
+			$scope.posts=val;
+			$scope.init=$scope.init+1;
+			if($scope.init==2)
+				$scope.updatingInterface=false;
+
+			// $scope.updatingInterface=false;
+			$scope.$apply();
+		});
+
+
+		// $scope.PostsRefresh();
+
 	}, 1000);
 
 
@@ -411,9 +439,9 @@ function settings($scope,truthSource,$timeout){
 	$scope.PostsRefresh=function(){
 		$scope.updatingInterface=true;
 		$scope.$apply();
-		alert("About to start..");
+		// alert("About to start..");
 		truthSource.post.fetch.Now(function(val){
-			alert(val);
+			// alert(val);
 			$scope.posts=val;
 			$scope.updatingInterface=false;
 			$scope.$apply();

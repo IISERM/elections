@@ -23,3 +23,7 @@ NaveenTantra is an open-sourced software, licensed under the IISER M's non-exist
 ## Database Tables
 
 Follow [this link](https://github.com/IISERM/elections/blob/master/tables.md "Tables") to view a description of MySQL database.
+
+## Resources
+
+http://jsfiddle.net/WfuAh/1/
