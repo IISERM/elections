@@ -180,14 +180,8 @@ class Admin_Controller extends Base_Controller {
 			$h = array();
 			foreach ($hostels as $hostel)
 			{
-				$val = false;
-				$v = Post::with(array('hostel' => function($query) use ($hostel)
-						{
-							$query->where_in('hostel.id', $hostel->id);
-						}
-					))->where('id','=',$post->id)->count();
-				if($v == 1)
-					$val = true;
+				$v = $post->hostel()->pivot()->where('post_id','=',$post->id)->where('hostel_id','=',$hostel->id)->count();
+				$val = ($v == 1);
 				$h[] = array(
 						'select' => $val,
 						'name' => $hostel->hostel
@@ -197,14 +191,8 @@ class Admin_Controller extends Base_Controller {
 			$b = array();
 			foreach ($batches as $batch)
 			{
-				$val = false;
-				$v = Post::with(array('batch' => function($query) use ($batch)
-						{
-							$query->where_in('batch.id', $batch->id);
-						}
-					))->where('id','=',$post->id)->count();
-				if($v == 1)
-					$val = true;
+				$v = $post->batch()->pivot()->where('post_id','=',$post->id)->where('batch_id','=',$batch->id)->count();
+				$val = ($v == 1);
 				$b[] = array(
 						'select' => $val,
 						'name' => $batch->batch
@@ -214,14 +202,8 @@ class Admin_Controller extends Base_Controller {
 			$s = array();
 			foreach ($subjects as $subject)
 			{
-				$val = false;
-				$v = Post::with(array('subject' => function($query) use ($subject)
-						{
-							$query->where_in('subject.id', $subject->id);
-						}
-					))->where('id','=',$post->id)->count();
-				if($v == 1)
-					$val = true;
+				$v = $post->subject()->pivot()->where('post_id','=',$post->id)->where('subject_id','=',$subject->id)->count();
+				$val = ($v == 1);
 				$s[] = array(
 						'select' => $val,
 						'name' => $subject->subject
