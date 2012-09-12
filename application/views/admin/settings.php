@@ -32,7 +32,7 @@
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>			
 			<!-- || truthSource.io.state.last=='Success' -->
-			<div class="smallStat" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''">Last Response (db-click to hide, auto hide in: {{config.other.hideCount}}): <br/> {{truthSource.io.state.last}}</div>
+			<div class="smallStat" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''"><div class="smallFont">Last Response (Auto hide in: {{config.other.hideCount}}):</div> {{truthSource.io.state.last}}</div>
 			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div>
 		</div>
 

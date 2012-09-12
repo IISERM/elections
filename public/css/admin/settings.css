@@ -21,7 +21,9 @@ tr:hover{
 	z-index: 10;
 background-color:rgba(200,200,200,0.9);	
 }
-
+.smallFont{
+	font-size: 15px;
+}
 .communicationLog{
 	border-radius: 10px;
 	position:relative;
