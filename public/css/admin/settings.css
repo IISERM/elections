@@ -69,6 +69,9 @@ background-color:rgba(200,200,200,0.9);
 	/*opacity:0;*/
 	display:none;
 }
+.posts_hide{
+	display:none;
+}
 
 .loadingStat{
 	padding-top:10%;
