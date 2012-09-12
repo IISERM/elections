@@ -144,10 +144,40 @@ angular.module('myApp',[])
 			});
 		};
 
+		truth.post.fetch.Now=function(OnComplete)
+		{
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk);
+			truth.working=true;
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					var dat = jQuery.parseJSON(data);
+					truth.post.data=dat;					
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.post.data);
+			});
+		};
 
 		truth.post.add.Now=function(post, OnComplete)
 		{
 			truth.working=true;
+			// alert(JSON.stringify(post));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
 				type: 'POST',
@@ -161,7 +191,7 @@ angular.module('myApp',[])
 					}
 				},				
 				data: {post:JSON.stringify(post), ajax: '1'},
-				dataType: 'json',
+				// dataType: 'json',
 				success: function (data) {
 					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
 					truth.io.state.last=data;

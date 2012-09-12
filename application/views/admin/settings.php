@@ -196,8 +196,11 @@
 		<table>
 			<tr>
 				<th><input type="radio" name="postSort" ng-model="config.post.orderBy"
-					value="first_name" id="student_first_name"/>
-					<label for="student_first_name">Name</label></th>
+					value="name" id="post_name"/>
+					<label for="post_name">Name</label></th>
+				<th>Hostel</th>
+				<th>Batch</th>
+				<th>Subject</th>
 				<th></th>
 				<th></th>
 			</tr>
