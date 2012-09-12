@@ -289,8 +289,54 @@
 				</td>
 
 			</tr>
+		
+		</table>
 
-		</th>
+
+		<br/><br/>
+
+		<hr/>
+
+		<br/>
+		<p class="subSubTitle">Nominees</p>		
+		<a href='' ng-hide="nomineesCollapse=='hide'" ng-click="nomineesCollapse='hide'">Collapse</a>
+		<a href='' ng-show="nomineesCollapse=='hide'" ng-click="nomineesCollapse='show'">Show</a>
+		<a href='' ng-click="NomineesRefresh()">Refresh List</a>
+		<input type="text" ng-model="config.nominee.search" placeholder="Quick Search" />
+		<span>		
+			<a href='' ng-click="config.nominee.reverse=false">Ascending</a> | 
+			<a href='' ng-click="config.nominee.reverse=true">Descending</a>				
+		</span>
+
+		<table>
+			<tr>
+				<th><input type="radio" name="postSort" ng-model="config.nominee.orderBy"
+					value="name" id="nominee_name"/>
+					<label for="nominee_name">Name</label></th>
+				<th>Registration No.</th>
+				<th>Post</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="nominee in nominees | filter:config.nominee.search | orderBy:config.nominee.orderBy:config.nominee.reverse"  class="nominees_{{nomineesCollapse}}">
+				<td>{{nominee.name}}</td>
+				<!-- <td><input type="input" ng-model="nominee.name" placeholder="Name of nominee"/></td> -->
+				<td>
+					<input type="input" ng-model="nominee.reg_no" placeholder="Registration Number"/>
+				</td>
+				<td>
+					<select ng-model="nominee.post">
+						<option ng-repeat="post in posts" value="post.id">{{post.name}}</option>
+					</select>
+				</td>
+				<td>
+					<a href="" ng-click="DeletePost(post.id)">Remove</a>
+				</td>
+				<td>
+					<a href="" ng-click="UpdatePost(post)">Update</a>
+				</td>
+
+			</tr>
 	</table>
 	</center>	
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/admin/settings.js\""; ?>> </script>

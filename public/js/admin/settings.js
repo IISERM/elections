@@ -25,6 +25,11 @@ angular.module('myApp',[])
 				config:{basePath:'/admin'},
 				data:{}
 			},
+		nomination:{ 	fetch:{Now:{},lnk:'/list'},
+						add:{Now:{},lnk:'/add'},
+						remove:{Now:{},lnk:'/del'},
+						data:{}
+			},
 		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"",addIndexDotPHP:"/index.php"}}
 		};
 
@@ -341,6 +346,10 @@ function settings($scope,truthSource,$timeout){
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false},
 					other:{hideCount:0,hideAfter:5}};
+
+	$scope.nominees=[{id:1,name:'Atul Singh Arora',reg_no:'MS11003',post:''},
+					{id:2,name:'Gagan Preet Singh',reg_no:'MS08021',post:''}
+					];
 
 	$scope.posts=[{id:1,name:'MS11 CR',number:2,hostels:[
 														{select:true,name:'7'},
