@@ -15,13 +15,10 @@ class Create_Nominee_Table {
 			$table->increments('id')->unsigned();
 
 			// Name
-			$table->string('name');
+			$table->string('student_id');
 
 			// Post
-			$table->integer('post');
-
-			// Image
-			$table->string('img');
+			$table->integer('post_id');
 
 			// Timestamps
 			$table->timestamps();

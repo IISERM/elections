@@ -260,6 +260,56 @@ class Admin_Controller extends Base_Controller {
 		$input = Input::get('id');
 		$post = Post::find($input);
 		$post->delete();
+		return "Removed Successfully";
+	}
+
+	public function post_add()
+	{
+		if($user = Student::where('reg_no','=',Input::get('reg_no'))->first())
+		{
+			Nominee::create(
+				array(
+					'student_id' => $user->id,
+					'post_id' => Input::get('post')
+				)
+			);
+			return "Nomination Added Successfully";
+		}
+		else
+		{
+			return "Failed: Nomination Not Added";
+		}
+	}
+
+	public function get_list()
+	{
+		$nomin = Nominee::all();
+		$n = array();
+		foreach($nomin as $nom)
+		{
+			$stu = Student::find($nom->student_id);
+			$data = array(
+				'id' => $nom->id,
+				'name' => $stu->first_name.' '.$stu->middle_name.' '.$stu->last_name,
+				'reg_no' => $stu->reg_no,
+				'post' => Post::find($nom->post_id)->post
+				);
+			$n[] = $data;
+		}
+		return json_encode($n);
+	}
+
+	public function post_del()
+	{
+		if($nomin = Nominee::find(Input::get('id')))
+		{
+			$nomin->delete();
+			return "Nomination Delete Successful";
+		}
+		else
+		{
+			return "Nomination Delete Failed";
+		}
 	}
 }
 
