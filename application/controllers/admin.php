@@ -219,6 +219,7 @@ class Admin_Controller extends Base_Controller {
 	{
 		$input = json_decode((Input::get('post')));
 		$post = Post::find($input->id);
+		$post->post = $input->name;
 		$post->save();
 		$hostel = array();
 		$batch = array();
