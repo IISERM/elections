@@ -233,6 +233,38 @@
 				</td>
 
 			</tr>
+			<tr>
+				<td><input type="input" ng-model="postNew.name" placeholder="Name of Post"/></td>
+				<td>
+					<ul>
+						<li ng-repeat="hostel in postNew.hostels">
+							<input  type="checkbox" ng-model="hostel.select">{{hostel.name}}</input>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li ng-repeat="batch in postNew.batches">
+							<input  type="checkbox" ng-model="batch.select">{{batch.name}}</input>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li ng-repeat="subject in postNew.subjects">
+							<input  type="checkbox" ng-model="subject.select">{{subject.name}}</input>
+						</li>
+					</ul>
+				</td>
+
+				<td>					
+				</td>
+				<td>
+					<a href="" ng-click="AddPost(postNew)">Add</a>
+				</td>
+
+			</tr>
+
 		</th>
 	</table>
 	</center>	

@@ -12,6 +12,11 @@ angular.module('myApp',[])
 					config:{basePath:'/admin'},
 					data:{}
 				},
+		post:{	fetch:{Now:{},lnk:'/plist'},
+				add:{Now:{},lnk:'/padd'},
+				config:{basePath:'/admin'},
+				data:{}
+			},
 		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"",addIndexDotPHP:"/index.php"}}
 
 		};
@@ -139,6 +144,38 @@ angular.module('myApp',[])
 			});
 		};
 
+
+		truth.post.add.Now=function(post, OnComplete)
+		{
+			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.add.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},				
+				data: {post:JSON.stringify(post), ajax: '1'},
+				dataType: 'json',
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
 		return truth;
 
 })
@@ -238,7 +275,37 @@ function settings($scope,truthSource,$timeout){
 														{select:true,name:'Undeclared'},
 														]}
 				];
+	$scope.postNew={id:1,name:'Faggot of the Year',number:2,hostels:[
+														{select:true,name:'7'},
+														{select:true,name:'5'}
+														],
+												batches:[
+														{select:true,name:'MS07'},
+														{select:true,name:'MS08'},
+														{select:true,name:'MS09'},
+														{select:true,name:'MS10'},
+														{select:true,name:'MS11'},
+														{select:true,name:'MS12'}														
+														],
+												subjects:[
+														{select:false,name:'Physics'},
+														{select:false,name:'Mathematics'},
+														{select:false,name:'Chemistry'},
+														{select:false,name:'Biology'},
+														{select:true,name:'Undeclared'},
+														]};
+
+
 	//UPDATE the values from the server
+
+
+	$scope.compareSelect=function(var1,var2){
+		if(var1==var2)
+			return "selected";
+		else
+			return "";	
+	}
+
 	
 	$timeout(function(){
 		truthSource.student.fetch.Now(function(val){
@@ -258,13 +325,6 @@ function settings($scope,truthSource,$timeout){
 			$scope.$apply();
 		});
 
-	}
-
-	$scope.compareSelect=function(var1,var2){
-		if(var1==var2)
-			return "selected";
-		else
-			return "";	
 	}
 
 	$scope.DeleteStudent=function(id){
@@ -308,5 +368,21 @@ function settings($scope,truthSource,$timeout){
 		});
 	}
 
+	$scope.AddPost=function(post){
+		truthSource.post.add.Now(post,function(val){
+			$scope.$apply();
+			alert(val);
+		});
+	}
 
+	$scope.PostsRefresh=function(){
+		$scope.updatingInterface=true;
+		$scope.$apply();
+		truthSource.post.fetch.Now(function(val){
+			$scope.posts=val;
+			$scope.updatingInterface=false;
+			$scope.$apply();
+		});
+
+	}
 }
