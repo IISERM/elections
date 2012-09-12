@@ -21,6 +21,7 @@ angular.module('myApp',[])
 		post:{	fetch:{Now:{},lnk:'/plist'},
 				add:{Now:{},lnk:'/padd'},
 				update:{Now:{},lnk:'/pupdate'},
+				remove:{Now:{},lnk:'/pdel'},
 				config:{basePath:'/admin'},
 				data:{}
 			},
@@ -236,6 +237,36 @@ angular.module('myApp',[])
 					truth.io.state.last=data;
 					// alert(data);
 
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
+		truth.post.remove.Now=function(id, OnComplete)
+		{
+			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.remove.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.remove.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {id:id, ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
 				}
 				}).error(function() {
 					;
@@ -505,4 +536,13 @@ function settings($scope,truthSource,$timeout){
 		});
 
 	}
+
+	$scope.DeletePost=function(id){
+		truthSource.post.remove.Now(id,function(val){
+			$scope.$apply();
+			$scope.PostsRefresh();
+			// alert(val);
+		});
+	}
+
 }

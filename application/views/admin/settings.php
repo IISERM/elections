@@ -251,7 +251,7 @@
 				</td>
 
 				<td>
-					<a href="" ng-click="DeleteStudent(student.id)">Remove</a>
+					<a href="" ng-click="DeletePost(post.id)">Remove</a>
 				</td>
 				<td>
 					<a href="" ng-click="UpdatePost(post)">Update</a>
