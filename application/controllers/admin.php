@@ -258,7 +258,7 @@ class Admin_Controller extends Base_Controller {
 	public function post_pdel()
 	{
 		$input = Input::get('id');
-		$post = Post::find($input->id);
+		$post = Post::find($input);
 		$post->delete();
 	}
 }
