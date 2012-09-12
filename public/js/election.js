@@ -75,7 +75,7 @@ angular.module('myApp',[])
 		truth.userInfo.Fetch=function(OnComplete)
 		{
 			$.ajax({
-				type: 'POST',
+				type: 'GET',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.userInfo.lnk,
 				// url: 'http://localhost/IISERM/elections/public/index.php/vote/details',
 				statusCode: {

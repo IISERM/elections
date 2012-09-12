@@ -46,13 +46,12 @@
 		<br/><br/><br/>
 		<br/><br/><br/>
 		<br/>
-
+		<hr/>
 		<p class="subSubTitle">Students</p>		
 		<a href='' ng-hide="studentsCollapse=='hide'" ng-click="studentsCollapse='hide'">Collapse</a>
 		<a href='' ng-show="studentsCollapse=='hide'" ng-click="studentsCollapse='show'">Show</a>
 		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
-		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />
-		<input type="text" ng-model="config.student.limitTo" placeholder="Maximum Entries" />
+		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />		
 		<span>		
 			<a href='' ng-click="config.student.reverse=false">Ascending</a> | 
 			<a href='' ng-click="config.student.reverse=true">Descending</a>				
@@ -181,9 +180,17 @@
 				</td>
 			</tr>		
 		</table>
+		<br/>
+		Show a maximum of <input cols="4" type="text" ng-model="config.student.limitTo" placeholder="Maximum Entries" /> rows
+		<br/>
+		<a href='' ng-click="config.student.limitTo=config.student.limitTo+10">Show 10 more</a> | 
+		<a href='' ng-click="config.student.limitTo=20">Default</a>
 
+		<br/><br/>
+		
+		<hr/>
 
-
+		<br/>
 		<p class="subSubTitle">Posts</p>		
 		<a href='' ng-hide="postsCollapse=='hide'" ng-click="postsCollapse='hide'">Collapse</a>
 		<a href='' ng-show="postsCollapse=='hide'" ng-click="postsCollapse='show'">Show</a>

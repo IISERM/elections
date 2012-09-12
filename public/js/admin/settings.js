@@ -145,7 +145,7 @@ angular.module('myApp',[])
 
 		truth.post.fetch.Now=function(OnComplete)
 		{
-			alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk);
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk);
 			truth.working=true;
 			$.ajax({
 				type: 'POST',
@@ -162,13 +162,14 @@ angular.module('myApp',[])
 				data: {ajax: '1'},
 				success: function (data) {
 					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
-					// var dat = jQuery.parseJSON(data);
-					// truth.post.data=dat;
+					var dat = jQuery.parseJSON(data);
+					truth.post.data=dat;
 				}
 				}).error(function() {
-					alert("ERROR");;
+					// alert("ERROR");
+					;
 				}).complete(function() {
-					alert("DONE");
+					// alert("DONE");
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					truth.working=false;
 					OnComplete(truth.post.data);
