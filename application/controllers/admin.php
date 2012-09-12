@@ -161,42 +161,76 @@ class Admin_Controller extends Base_Controller {
 		print_r($post);
 	}
 
-	public function post_plist()
+	public function get_plist()
 	{
-		$input = Input::json();
-		$post = new Post(array('post' => $input['name']));
-		$hostel = array();
-		$batch = array();
-		$subject = array();
-		$par = $input['hostels'];
-		foreach ($par as $p)
+		$posts = Post::with(array('hostel','batch','subject'))->all();
+		// print_r($posts);
+		$d = array();
+		$data = array();
+		$hostels = Hostel::all();
+		$batches = Batch::all();
+		$subjects = Subject::all();
+		foreach ($posts as $post)
 		{
-			if($p['select']==true)
+			$data = array(
+					'id' => $post->id,
+					'name' => $post->post,
+					'number' => $post->number
+				);
+			$h = array();
+			foreach ($hostels as $hostel)
 			{
-				$hostel[] = Hostel::where('hostel', '=', $p['name'])->first()->id;
+				$val = false;
+				$v = Post::with(array('hostel' => function($query) use ($hostel)
+						{
+							$query->where_in('hostel.id', $hostel->id);
+						}
+					))->where('id','=',$post->id)->count();
+				if($v == 1)
+					$val = true;
+				$h[] = array(
+						'select' => $val,
+						'name' => $hostel->hostel
+					);
 			}
-		}
-		$par = $input['batches'];
-		foreach ($par as $p)
-		{
-			if($p['select']==true)
+			$data['hostel'] = $h;
+			$b = array();
+			foreach ($batches as $batch)
 			{
-				$batch[] = Batch::where('batch', '=', $p['name'])->first()->id;
+				$val = false;
+				$v = Post::with(array('batch' => function($query) use ($batch)
+						{
+							$query->where_in('batch.id', $batch->id);
+						}
+					))->where('id','=',$post->id)->count();
+				if($v == 1)
+					$val = true;
+				$b[] = array(
+						'select' => $val,
+						'name' => $batch->batch
+					);
 			}
-		}
-		$par = $input['subjects'];
-		foreach ($par as $p)
-		{
-			if($p['select']==true)
+			$data['batch'] = $b;
+			$s = array();
+			foreach ($subjects as $subject)
 			{
-				$subject[] = Subject::where('subject', '=', $p['name'])->first()->id;
+				$val = false;
+				$v = Post::with(array('subject' => function($query) use ($subject)
+						{
+							$query->where_in('subject.id', $subject->id);
+						}
+					))->where('id','=',$post->id)->count();
+				if($v == 1)
+					$val = true;
+				$s[] = array(
+						'select' => $val,
+						'name' => $subject->subject
+					);
 			}
+			$data['subject'] = $s;
+			$d[] = $data;
 		}
-		$post->hostel()->sync($hostel);
-		$post->batch()->sync($batch);
-		$post->subject()->sync($subject);
-		$post->save();
-		print("list");
+	print_r(json_encode($d));
 	}
-
 }
+

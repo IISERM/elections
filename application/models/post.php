@@ -22,7 +22,7 @@
 
 		public function hostel()
 		{
-			return $this->has_many_and_belongs_to('Hostel','hostel_post');
+			return $this->has_many_and_belongs_to('Hostel','hostel_post')->with('id','hostel');
 		}
 
 	}
