@@ -4,13 +4,14 @@
 	{
 		// public $restful = true;
 		public $error = false;
+		public $restful = true;
 
-		public function action_index()
+		public function get_index()
 		{
 			return View::make('login.elections.elections');
 		}
 
-		public function action_details()
+		public function get_details()
 		{
 			$user = Auth::user();
 			$details = array(
@@ -25,19 +26,19 @@
 			return json_encode($details);
 		}
 
-		public function action_options()
+		public function get_options()
 		{
 			$user = Auth::user();
 			$options = $user;
 			return json_encode($options->to_array());
 		}
 
-		public function action_vote()
+		public function post_vote()
 		{
 			//
 		}
 
-		public function action_check()
+		public function get_check()
 		{
 			//
 		}

@@ -90,10 +90,10 @@ class Admin_Controller extends Base_Controller {
 			$user['subject'] = Subject::find($user['subject'])->subject;
 			// print_r($user);
 			$user_ref[]=$user;
-/*			$u = array(
+			/*$u = array(
 					'id' => $user->id,
-				);
-*/		}
+				);*/
+		}
 		return json_encode($user_ref);
 	}
 
@@ -120,6 +120,81 @@ class Admin_Controller extends Base_Controller {
 			return 'Success';
 		else
 			return 'fail';
+	}
+
+	public function post_padd()
+	{
+		$input = Input::json();
+		$post = new Post(array('post' => $input['name']));
+		$hostel = array();
+		$batch = array();
+		$subject = array();
+		$par = $input['hostels'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$hostel[] = Hostel::where('hostel', '=', $p['name'])->first()->id;
+			}
+		}
+		$par = $input['batches'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$batch[] = Batch::where('batch', '=', $p['name'])->first()->id;
+			}
+		}
+		$par = $input['subjects'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$subject[] = Subject::where('subject', '=', $p['name'])->first()->id;
+			}
+		}
+		$post->hostel()->sync($hostel);
+		$post->batch()->sync($batch);
+		$post->subject()->sync($subject);
+		$post->save();
+		print_r($post);
+	}
+
+	public function post_plist()
+	{
+		$input = Input::json();
+		$post = new Post(array('post' => $input['name']));
+		$hostel = array();
+		$batch = array();
+		$subject = array();
+		$par = $input['hostels'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$hostel[] = Hostel::where('hostel', '=', $p['name'])->first()->id;
+			}
+		}
+		$par = $input['batches'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$batch[] = Batch::where('batch', '=', $p['name'])->first()->id;
+			}
+		}
+		$par = $input['subjects'];
+		foreach ($par as $p)
+		{
+			if($p['select']==true)
+			{
+				$subject[] = Subject::where('subject', '=', $p['name'])->first()->id;
+			}
+		}
+		$post->hostel()->sync($hostel);
+		$post->batch()->sync($batch);
+		$post->subject()->sync($subject);
+		$post->save();
 	}
 
 }

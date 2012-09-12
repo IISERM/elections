@@ -61,7 +61,7 @@
 			));
 
 			Subject::create(array(
-				'subject' => 'Undecided'
+				'subject' => 'Undeclared'
 			));
 
 			DB::query('TRUNCATE TABLE students');
@@ -2180,7 +2180,7 @@
 			));
 			Student::create(array(
 				'role' => 0,
-				'first_name' => ' Divya',
+				'first_name' => 'Divya',
 				'last_name' => 'Sharma',
 				'reg_no' => 'MS10099',
 				'hostel' => 1,
