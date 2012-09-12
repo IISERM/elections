@@ -308,7 +308,8 @@ function settings($scope,truthSource,$timeout){
 							sexes:['Female','Male']
 							};
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
-					post:{orderBy:'name',search:'',reverse:false}};
+					post:{orderBy:'name',search:'',reverse:false},
+					other:{hideCount:0,hideAfter:5}};
 
 	$scope.posts=[{id:1,name:'MS11 CR',number:2,hostels:[
 														{select:true,name:'7'},
@@ -380,7 +381,23 @@ function settings($scope,truthSource,$timeout){
 			return "";	
 	}
 
-	
+	var autoHide=function(){
+		$scope.config.other.hideCount=$scope.config.other.hideCount-1;
+		if($scope.config.other.hideCount<=0)
+		{
+			$scope.config.other.hideCount=0;
+			truthSource.io.state.last='';
+		}
+		$timeout(autoHide,1000);
+	};
+	autoHide();
+
+	$scope.$watch('truthSource.io.state.last',function(newVal,oldVal){
+		if(newVal!=oldVal){
+			$scope.config.other.hideCount=$scope.config.other.hideAfter;
+		}
+	});
+
 	$timeout(function(){
 		$scope.init=0;
 

@@ -30,9 +30,9 @@
 		<div class="topBar">
 			<span><a href="">Log Out</a></span>
 			<div class="mainTitle">NaveenTantra</div>
-			<span><div class="subTitle">Admin Panel</div></span>
-
-			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last=='' || truthSource.io.state.last=='Success'">Last Response (click to hide): <br/> {{truthSource.io.state.last}}</div>
+			<span><div class="subTitle">Admin Panel</div></span>			
+			<!-- || truthSource.io.state.last=='Success' -->
+			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last==''">Last Response (click to hide, auto hide in: {{config.other.hideCount}}): <br/> {{truthSource.io.state.last}}</div>
 			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
 		</div>
 
