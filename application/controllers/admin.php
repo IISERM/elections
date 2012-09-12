@@ -260,6 +260,7 @@ class Admin_Controller extends Base_Controller {
 		$input = Input::get('id');
 		$post = Post::find($input);
 		$post->delete();
+		return "Removed Successfully"
 	}
 }
 
