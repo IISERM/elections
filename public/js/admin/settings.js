@@ -432,7 +432,7 @@ function settings($scope,truthSource,$timeout){
 	$scope.AddPost=function(post){
 		truthSource.post.add.Now(post,function(val){
 			$scope.$apply();
-			alert(val);
+			// alert(val);
 		});
 	}
 

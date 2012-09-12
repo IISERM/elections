@@ -197,7 +197,7 @@
 		<br/><br/>	 
 		Show a maximum of <input cols="4" type="text" ng-model="config.student.limitTo" placeholder="Maximum Entries" /> rows
 		<br/>
-		<a href='' ng-click="config.student.limitTo=config.student.limitTo+10">Show 10 more</a> | 
+		<a href='' ng-click="config.student.limitTo= (+config.student.limitTo)+10">Show 10 more</a> | 
 		<a href='' ng-click="config.student.limitTo=20">Default</a>
 		<br/><br/>
 
