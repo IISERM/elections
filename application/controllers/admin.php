@@ -124,9 +124,9 @@ class Admin_Controller extends Base_Controller {
 
 	public function post_padd()
 	{
-		echo "string";
+		// echo "string";
 		// print_r('hi');
-/*		$input = Input::json();
+		$input = Input::json();
 		print_r(Input::all());
 		print_r($input);
 		$post = new Post(array('post' => $input['name']));
@@ -162,7 +162,7 @@ class Admin_Controller extends Base_Controller {
 		$post->subject()->sync($subject);
 		$post->save();
 		print_r($post);
-*/	}
+	}
 
 	public function post_plist()
 	{
