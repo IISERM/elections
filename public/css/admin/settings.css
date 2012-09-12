@@ -86,9 +86,14 @@ background-color:rgba(200,200,200,0.9);
 	height:100%;
 	width:100%;
 }
-li{
+ul, li{
 	list-style-type: none;
 	float:left;	
+	padding-left: 0px;
+	margin-left: 0px;
+}
+ul{
+	margin-left:2px;
 }
 .smallStat{
 	text-align: center;

@@ -226,7 +226,8 @@
 				<th></th>
 			</tr>
 			<tr ng-repeat="post in posts | filter:config.post.search | orderBy:config.post.orderBy:config.post.reverse"  class="posts_{{postsCollapse}}">
-				<td>{{post.name}}</td>
+				<!-- <td>{{post.name}}</td> -->
+				<td><input type="input" ng-model="post.name" placeholder="Name of Post"/></td>
 				<td>
 					<ul>
 						<li ng-repeat="hostel in post.hostels">
