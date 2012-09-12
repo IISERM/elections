@@ -218,7 +218,7 @@ class Admin_Controller extends Base_Controller {
 	public function post_pupdate()
 	{
 		$input = json_decode((Input::get('post')));
-		$post = Post::find($input['id']);
+		$post = Post::find($input->id);
 		$post->save();
 		$hostel = array();
 		$batch = array();
@@ -251,7 +251,14 @@ class Admin_Controller extends Base_Controller {
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
 		$post->save();
-		print_r($post);
+		return "Success";
+	}
+
+	public function post_pdel()
+	{
+		$input = Input::get('id');
+		$post = Post::find($input->id);
+		$post->delete();
 	}
 }
 
