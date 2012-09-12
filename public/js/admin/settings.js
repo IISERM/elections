@@ -265,7 +265,7 @@ function settings($scope,truthSource,$timeout){
 							subjects:['', 'Physics','Mathematics','Chemistry','Biology','NA'],
 							sexes:['Female','Male']
 							};
-	$scope.config={student:{orderBy:'first_name',search:'',reverse:false},
+	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20},
 					post:{orderBy:'name',search:'',reverse:false}};
 
 	$scope.posts=[{id:1,name:'MS11 CR',number:2,hostels:[

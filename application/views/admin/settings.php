@@ -52,6 +52,7 @@
 		<a href='' ng-show="studentsCollapse=='hide'" ng-click="studentsCollapse='show'">Show</a>
 		<a href='' ng-click="StudentsRefresh()">Refresh List</a>
 		<input type="text" ng-model="config.student.search" placeholder="Quick Search" />
+		<input type="text" ng-model="config.student.limitTo" placeholder="Maximum Entries" />
 		<span>		
 			<a href='' ng-click="config.student.reverse=false">Ascending</a> | 
 			<a href='' ng-click="config.student.reverse=true">Descending</a>				
@@ -87,7 +88,7 @@
 				<th></th>
 				<th></th>
 			</tr>
-			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse"  class="students_{{studentsCollapse}}">
+			<tr ng-repeat="student in students | filter:config.student.search | orderBy:config.student.orderBy:config.student.reverse | limitTo:config.student.limitTo"  class="students_{{studentsCollapse}}">
 				<td>{{student.first_name + ' ' + student.middle_name + ' ' + student.last_name}}</td>
 				<td>
 					<select ng-model="student.hostel">

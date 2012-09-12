@@ -96,4 +96,6 @@ li{
 	color:white;
 	font-size:20px;
 	font-family: monospace;	
+	width:100%;
+	position:fixed;
 }
