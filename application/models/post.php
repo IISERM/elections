@@ -12,17 +12,17 @@
 
 		public function subject()
 		{
-			return $this->has_many_and_belongs_to('Subject','post_subject')
+			return $this->has_many_and_belongs_to('Subject','post_subject');
 		}
 
 		public function batch()
 		{
-			return $this->has_many_and_belongs_to('Batch','batch_post')
+			return $this->has_many_and_belongs_to('Batch','batch_post');
 		}
 
 		public function hostel()
 		{
-			return $this->has_many_and_belongs_to('Hostel','hostel_post')
+			return $this->has_many_and_belongs_to('Hostel','hostel_post');
 		}
 
 	}
