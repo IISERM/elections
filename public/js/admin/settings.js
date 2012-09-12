@@ -331,7 +331,7 @@ function settings($scope,truthSource,$timeout){
 		hostel:'7', batch:'08',subject:'Physics',sex:'Male',reg_no:'MS08021'}	
 	];
 
-	$scope.studentNew={first_name:'A',middle_name:'B',last_name:'C',hostel:'7',batch:'MS11',sex:'Female',reg_no:'MSABC'};
+	$scope.studentNew={first_name:'',middle_name:'',last_name:'',hostel:'',batch:'',sex:'',reg_no:''};
 	
 	$scope.studentFields={hostels:['','7','5'],
 							batches:['', '07','08','09','10','11','12'],
@@ -424,9 +424,9 @@ function settings($scope,truthSource,$timeout){
 	autoHide();
 
 	$scope.$watch('truthSource.io.state.last',function(newVal,oldVal){
-		if(newVal!=oldVal){
+		// if(newVal!=oldVal){
 			$scope.config.other.hideCount=$scope.config.other.hideAfter;
-		}
+		// }
 	});
 
 	$timeout(function(){
