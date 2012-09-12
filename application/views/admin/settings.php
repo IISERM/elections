@@ -339,7 +339,7 @@
 				</td>
 				<td>
 					<select ng-model="nomineeNew.post">
-						<option ng-repeat="post in posts" value="post.id">{{post.name}}</option>
+						<option ng-repeat="post in posts" value="{{post.id}}">{{post.name}}</option>
 					</select>
 				</td>
 				<td>

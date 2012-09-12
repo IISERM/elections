@@ -28,6 +28,7 @@ angular.module('myApp',[])
 		nominee:{ 	fetch:{Now:{},lnk:'/list'},
 						add:{Now:{},lnk:'/add'},
 						remove:{Now:{},lnk:'/del'},
+						config:{basePath:'/admin'},
 						data:{}
 			},
 		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"",addIndexDotPHP:"/index.php"}}
@@ -286,7 +287,7 @@ angular.module('myApp',[])
 		truth.nominee.add.Now=function(nominee, OnComplete)
 		{
 			truth.working=true;
-			// alert(JSON.stringify(nominee));
+			alert(JSON.stringify(nominee));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
 				type: 'POST',
@@ -592,7 +593,7 @@ function settings($scope,truthSource,$timeout){
 		truthSource.nominee.add.Now(nominee,function(val){
 			$scope.$apply();
 			// $scope.NomineesRefresh();
-			
+
 			// alert(val);
 		});
 	}
