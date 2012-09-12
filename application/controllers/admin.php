@@ -158,7 +158,7 @@ class Admin_Controller extends Base_Controller {
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
 		$post->save();
-		print_r($post);
+		return 'Success';
 	}
 
 	public function post_plist()
@@ -213,6 +213,45 @@ class Admin_Controller extends Base_Controller {
 			$d[] = $data;
 		}
 	print_r(json_encode($d));
+	}
+
+	public function post_pupdate()
+	{
+		$input = json_decode((Input::get('post')));
+		$post = Post::find($input->id);
+		$post->save();
+		$hostel = array();
+		$batch = array();
+		$subject = array();
+		$par = $input->hostels;
+		foreach ($par as $p)
+		{
+			if($p->select==true)
+			{
+				$hostel[] = Hostel::where('hostel', '=', $p->name)->first()->id;
+			}
+		}
+		$par = $input->batches;
+		foreach ($par as $p)
+		{
+			if($p->select==true)
+			{
+				$batch[] = Batch::where('batch', '=', $p->name)->first()->id;
+			}
+		}
+		$par = $input->subjects;
+		foreach ($par as $p)
+		{
+			if($p->select==true)
+			{
+				$subject[] = Subject::where('subject', '=', $p->name)->first()->id;
+			}
+		}
+		$post->hostel()->sync($hostel);
+		$post->batch()->sync($batch);
+		$post->subject()->sync($subject);
+		$post->save();
+		print_r($post);
 	}
 }
 
