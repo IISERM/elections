@@ -124,37 +124,34 @@ class Admin_Controller extends Base_Controller {
 
 	public function post_padd()
 	{
-		// echo "string";
-		// print_r('hi');
-		$input = Input::json();
-		print_r(Input::all());
-		print_r($input);
-		$post = new Post(array('post' => $input['name']));
+		$input = json_decode((Input::get('post')));
+		$post = new Post(array('post' => $input->name));
+		$post->save();
 		$hostel = array();
 		$batch = array();
 		$subject = array();
-		$par = $input['hostels'];
+		$par = $input->hostels;
 		foreach ($par as $p)
 		{
-			if($p['select']==true)
+			if($p->select==true)
 			{
-				$hostel[] = Hostel::where('hostel', '=', $p['name'])->first()->id;
+				$hostel[] = Hostel::where('hostel', '=', $p->name)->first()->id;
 			}
 		}
-		$par = $input['batches'];
+		$par = $input->batches;
 		foreach ($par as $p)
 		{
-			if($p['select']==true)
+			if($p->select==true)
 			{
-				$batch[] = Batch::where('batch', '=', $p['name'])->first()->id;
+				$batch[] = Batch::where('batch', '=', $p->name)->first()->id;
 			}
 		}
-		$par = $input['subjects'];
+		$par = $input->subjects;
 		foreach ($par as $p)
 		{
-			if($p['select']==true)
+			if($p->select==true)
 			{
-				$subject[] = Subject::where('subject', '=', $p['name'])->first()->id;
+				$subject[] = Subject::where('subject', '=', $p->name)->first()->id;
 			}
 		}
 		$post->hostel()->sync($hostel);
