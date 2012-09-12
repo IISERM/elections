@@ -68,7 +68,8 @@ angular.module('myApp',[])
 
 	var truth={
 		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},category:{Fetch:{}},
-		io:{state:{log:{},last:{}},config:{basePath:"http://localhost/IISERM/elections/public",addIndexDotPHP:"/index.php"}},
+		//http://localhost/IISERM/elections/public
+		io:{state:{log:{},last:{}},config:{basePath:"",addIndexDotPHP:"/index.php"}},
 		};
 
 		truth.userInfo.Fetch=function(OnComplete)
@@ -104,11 +105,22 @@ angular.module('myApp',[])
 
 		return truth;
 
+}).directive('basepathwidget', function(truthSource) {
+    return {
+        restrict: 'E',
+        scope: {path:'@'},
+        replace: true,        
+        transclude:true,
+        template:'',
+        link: function($scope, elm, attrs, ctrl) {
+        	truthSource.io.config.basePath=attrs.path;
+        }
+    }
 });
 
 var ext_hideSideF_show;
 
-function elections($scope,truthSource){
+function elections($scope,truthSource,$timeout){
 	$scope.categories=[
 	{id:1, title:'Category 1',selected:{id:'-1'},
 									list:[
@@ -127,11 +139,14 @@ function elections($scope,truthSource){
 										{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
 										]}
 	];
-	
-	truthSource.userInfo.Fetch(function(val){		
-		$scope.user=val;
-		$scope.$digest();
-	});
+	$timeout(function(){
+		// alert("About to trigger");
+		truthSource.userInfo.Fetch(function(val){		
+			$scope.user=val;
+			$scope.$digest();
+		});
+	},100);
+
 	
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};

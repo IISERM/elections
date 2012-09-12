@@ -41,6 +41,7 @@ body{
 .thumbnail{
 	height:150px;
 	margin:5px;
+	/*z-index:100;*/
 }
 .selection_state{
 	background-color:rgba(200,200,200,0.9);
@@ -60,6 +61,7 @@ tt{
 h1{
 	font-family:capText;	
 	font-size: 50px;
+	/*z-index:100;*/
 	/*font-weight: ;*/
 }
 

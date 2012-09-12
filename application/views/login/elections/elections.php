@@ -23,6 +23,7 @@
 		</div>
 
 	</div>
+	<basepathwidget path="<?php echo URL::base(); ?>" fall="DAMN"> </basepathwidget>
 	<div class="Bar_height"></div>
 
 	<div ng-hide="user.voted">
