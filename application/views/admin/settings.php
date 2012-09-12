@@ -32,7 +32,7 @@
 			<div class="mainTitle">NaveenTantra</div>
 			<span><div class="subTitle">Admin Panel</div></span>
 
-			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last==''">Last Response (click to hide): <br/> {{truthSource.io.state.last}}</div>
+			<div class="smallStat" ng-click="truthSource.io.state.last=''" ng-hide="truthSource.io.state.last=='' || truthSource.io.state.last=='Success'">Last Response (click to hide): <br/> {{truthSource.io.state.last}}</div>
 			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading..</div>
 		</div>
 
@@ -253,7 +253,7 @@
 					<a href="" ng-click="DeleteStudent(student.id)">Remove</a>
 				</td>
 				<td>
-					<a href="" ng-click="UpdatePost(student)">Update</a>
+					<a href="" ng-click="UpdatePost(post)">Update</a>
 				</td>
 
 			</tr>
