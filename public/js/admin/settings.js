@@ -20,6 +20,7 @@ angular.module('myApp',[])
 				},
 		post:{	fetch:{Now:{},lnk:'/plist'},
 				add:{Now:{},lnk:'/padd'},
+				update:{Now:{},lnk:'/pupdate'},
 				config:{basePath:'/admin'},
 				data:{}
 			},
@@ -210,6 +211,36 @@ angular.module('myApp',[])
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					// alert("COMPLETED");
+					truth.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
+		truth.post.update.Now=function(post, OnComplete)
+		{
+			truth.working=true;
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.update.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {post:JSON.stringify(post), ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					truth.working=false;
 					OnComplete(truth.io.state.last);
 			});
@@ -432,6 +463,7 @@ function settings($scope,truthSource,$timeout){
 	$scope.AddPost=function(post){
 		truthSource.post.add.Now(post,function(val){
 			$scope.$apply();
+			$scope.PostsRefresh();
 			// alert(val);
 		});
 	}
@@ -445,6 +477,14 @@ function settings($scope,truthSource,$timeout){
 			$scope.posts=val;
 			$scope.updatingInterface=false;
 			$scope.$apply();
+		});
+	}
+
+	$scope.UpdatePost=function(post){
+		truthSource.post.update.Now(post,function(val){			
+			$scope.$apply();
+			$scope.PostsRefresh();
+			// alert(val);
 		});
 
 	}
