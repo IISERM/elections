@@ -383,7 +383,7 @@ class Admin_Controller extends Base_Controller {
 					$student = Student::find($n->student_id);
 					$data[] = array(
 							'name' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
-							'number' => Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count();
+							'number' => Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count()
 						);
 				}
 			}
