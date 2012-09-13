@@ -334,22 +334,30 @@ class Admin_Controller extends Base_Controller {
 		$d = array();
 		foreach($posts as $post)
 		{
+			$count = 0;
 			$data = array();
 			foreach($nom as $n)
 			{
 				if($n->post_id == $post->id)
 				{
+					$num = Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count();
 					$student = Student::find($n->student_id);
 					$data[] = array(
-							'name' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
-							'number' => Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count()
+							'label' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
+							'value' => $num
 						);
+					$count = $count + $num;
 				}
 			}
+			$total = Votec::where('post_id','=',$post->id)->count();
+			$data[] = array(
+					'label' => 'Abstane',
+					'value' => ($total - $count)
+				);
 			$d[] = array(
-					'post' => $post->post,
-					'list' => $data,
-					'total' => Nominee::with('post_id','=',$post->id)->count()
+					'title' => $post->post,
+					'data' => $data,
+					'total' => $total
 				);
 		}
 		return json_encode($d);
