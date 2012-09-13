@@ -283,9 +283,26 @@ class Admin_Controller extends Base_Controller {
 				$subject[] = Subject::where('subject', '=', $p->name)->first()->id;
 			}
 		}
+		$sex = 0;
+		$par = $input->sexes;
+		foreach($par as $p)
+		{
+			if($p->select==true)
+			{
+				if($p->name == "Male")
+				{
+					$sex=$sex+2;
+				}
+				if($p->name == "Female")
+				{
+					$sex=$sex+1;
+				}
+			}
+		}
 		$post->hostel()->sync($hostel);
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
+		$post->sex = $sex;
 		$post->save();
 		return "Success";
 	}
