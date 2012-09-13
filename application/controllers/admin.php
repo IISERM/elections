@@ -371,10 +371,28 @@ class Admin_Controller extends Base_Controller {
 	public function get_res()
 	{
 		$posts = Post::all();
+		$nom = Nominee::with(array('post_id','student_id'))->all();
+		$d = array();
 		foreach($posts as $post)
 		{
-			
+			$data = array();
+			foreach($nom as $n)
+			{
+				if($n->post_id == $post->id)
+				{
+					$student = Student::find($n->student_id);
+					$data[] = array(
+							'name' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
+							'number' => Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count();
+						);
+				}
+			}
+			$d[] = array(
+					'post' => $post->post,
+					'list' => $data
+				);
 		}
+		return json_encode($d);
 	}
 }
 
