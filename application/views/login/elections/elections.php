@@ -50,7 +50,7 @@
 		</div>
 		<center>
 			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" selected="category.selected" ng-model="category.selected" >				
-					<nominee ng-repeat="person in category.list" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
+					<nominee ng-repeat="person in category.list | orderBy:'name'" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
 			</votepanel>
 			<br/>
 			<p class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</p>
