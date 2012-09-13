@@ -71,8 +71,19 @@
 			$user = Auth::user();
 			if($user->voted)
 			{
+				$votes = Input::json_decode(Input::get('vote'));
 				$name = Crypter::encrypt($user->password);
-				Vote::create(array('vote' => $name));
+				$voter = Vote::create(array('vote' => $name));
+				foreach($votes as $vote)
+				{
+					Votec::create(
+							array(
+									'post_id' => $vote->id,
+									'nominee_id' => $vote->selected->id,
+									'votes_id' => $voter->id
+								)
+						);
+				}
 				$user->voted = true;
 				return "Your vote has been casted. Your pseudo name is: ".$name;
 			}
