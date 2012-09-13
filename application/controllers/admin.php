@@ -348,7 +348,8 @@ class Admin_Controller extends Base_Controller {
 			}
 			$d[] = array(
 					'post' => $post->post,
-					'list' => $data
+					'list' => $data,
+					'total' => Nominee::with('post_id','=',$post->id)->count()
 				);
 		}
 		return json_encode($d);
