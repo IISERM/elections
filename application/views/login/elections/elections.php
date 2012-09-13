@@ -59,8 +59,11 @@
 	</div>
 	<div ng-show="user.voted">
 		<center>
-			<div class="main_group">
+			<div class="main_group" ng-show="voteCastMsg=''">
 				Waiting for Server...
+			</div>
+			<div class="main_group" ng-hide="voteCastMsg=''">
+				{{voteCastMsg}}
 			</div>
 		</center>
 
