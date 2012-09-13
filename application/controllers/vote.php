@@ -28,6 +28,7 @@
 			$user = Auth::user();
 			$options = Post::all();
 			$nom = Nominee::all();
+			$data = array();
 			foreach($options as $option)
 			{
 				$op = array();
@@ -57,6 +58,8 @@
 									'selected' => array('id' => -1),
 									'list' => $op
 								);
+							// print_r($data);
+							// print_r($op);
 							$op = array();
 						}
 					}
@@ -64,7 +67,7 @@
 			}
 			// $posts = Post::where('hostel',)->where()->get();
 			// $post->hostel()->pivot()->where('post_id','=',$post->id)->where('hostel_id','=',$user->hostel)->get();
-			return json_encode($options->to_array());
+			return json_encode($data);
 		}
 
 		public function post_vote()
