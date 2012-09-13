@@ -72,7 +72,7 @@
 			if($user->voted)
 			{
 				$name = Crypter::encrypt($user->password);
-				Vote::create('vote' => $name);
+				Vote::create(array('vote' => $name));
 				$user->voted = true;
 				return "Your vote has been casted. Your pseudo name is: ".$name;
 			}
