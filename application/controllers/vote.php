@@ -36,7 +36,7 @@
 				{
 					if($option->batch()->pivot()->where('batch_id','=',$user->hostel)->count() == 1)
 					{
-						if($option->subject()->pivot()->where('subject_id','=',$user->hostel)->count() == 1)
+						if($option->subject()->pivot()->where('subject_id','=',$user->subject)->count() == 1)
 						{
 							foreach($nom as $n)
 							{
