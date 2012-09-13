@@ -35,7 +35,7 @@ class Create_Votesmachine {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('votec');
 	}
 
 }
