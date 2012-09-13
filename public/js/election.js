@@ -283,7 +283,7 @@ function elections($scope,truthSource,$timeout){
 	    		$scope.user.voted=true;
 				truthSource.voteCast.Cast(categories,function(val){
 					$scope.voteCastMsg=val;
-					alert(val);
+					// alert(val);
 					$scope.$apply();					
 				});
 
