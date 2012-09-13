@@ -116,7 +116,7 @@ th, td {
 	position:relative;
 	padding-bottom:0px;
 	margin-bottom:0px;
-
+	/*float:left;*/
 	left: 50px;
 	font-family:"league-gothic-1", sans-serif;
 	font-size:70px;
@@ -129,10 +129,10 @@ th, td {
 	/*-webkit-animation: fadefromblack 2s;*/
 }
 .Page_SubHeading{
+	float:left;
 	position:relative;
 	padding-top:0px;
-	margin-top:0px;
-	float:left;
+	margin-top:0px;	
 	left: 40px;
 	font-family:"paraText", sans-serif;
 	font-size:30px;
