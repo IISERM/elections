@@ -137,3 +137,126 @@ ul{
 	width:100%;
 	position:fixed;
 }
+
+.category{
+	position:relative;
+	height:200px;
+	/*background-color: rgba(20,25,50,0.8);*/
+	color:white;
+	width:auto;
+	font-family: monospace;
+	/*left:50%;*/
+	width:100%;
+}
+.barCoContainer{
+	position:relative;
+	/*background-color: rgba(100,0,0,1);*/
+	/*width:50%;*/
+	/*width:300px;*/
+	/*height:300px;*/
+	margin: 0 auto;
+	/*left:-50%;*/
+}
+
+.barContainer{
+	/*background-color: rgba(24,24,24,1);*/
+	/*margin:0 auto;*/
+	/*display:table;*/
+	position:relative;
+	vertical-align: bottom;
+	float:left;
+	text-align: center;
+	/*padding-left:10px;*/
+	/*padding-right:10px;	*/
+	margin:0 0 0 0;
+	/*text-align: center;*/
+	height:130px;
+}
+.bar{
+	/*display:table-cell;*/
+	position:absolute;
+	width:10px;	
+	background-color: rgba(100,100,100,1);
+	margin: 0 auto;
+	left:50%;
+	bottom:0px;
+	/*left:50%;*/
+}
+.barC{
+	/*display:table-cell;*/
+	position:absolute;
+	/*height:100px;*/
+	width:10px;	
+	background-color: rgba(100,100,100,1);
+	margin: 0 auto;
+	right:50%;
+	bottom:0px;
+	/*left:50%;*/
+}
+.barContainer:hover > .bar,.barContainer:hover > .barC{
+	background-color: rgba(150,150,150,1);
+}
+
+
+
+
+
+
+#outer{
+	width:780px;
+	margin:auto;
+	text-align:left;
+	background-color: rgba(40,50,100,0.8);	
+	/*border:1px solid #000;*/
+}
+#outer{position:relative}
+.navwrap{
+	float:right;
+	position:relative;
+	left:-50%;
+	text-align:left;
+	margin-bottom:2em;
+}
+.navwrap ul{
+	list-style:none; 
+	position:relative;
+	left:50%;
+	margin:0;
+	padding:0;
+} 
+.navwrap li{	
+	/*border:1px solid #eff2df;*/
+	float:left;
+	margin:0 10px 0 0;
+	/*background:#809900;*/
+
+}
+.navwrap li.last{margin-right:0}
+/*.navwrap li a{
+	float:left;
+	border:1px solid #4c7300;
+	position:relative;
+	left:-2px;
+	top:-2px;
+	background:#eff2df;
+	color:#4c7300;
+	text-decoration:none;
+	padding:6px 10px;
+	font-weight:bold;
+}
+*/
+/*.navwrap li a:hover{
+	background:#809900;
+	color:#fff;
+}*/
+/*p{clear:both;padding:10px}*/
+h1{text-align:center;margin:1em 0;}
+.clearer{
+	height:1px;
+	overflow:hidden;
+	margin-top:-1px;
+	clear:both;
+}
+
+
+

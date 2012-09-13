@@ -397,8 +397,41 @@
 				</tr>			
 			</table>
 		</div>
+	</center>
+
+		<div ng-hide="isoNominees || isoStudents">
+			<hr/>
+
+			<br/>
+			<p class="subSubTitle">Results</p>		
+			<a href='' ng-click="isoResults=1">Isolate</a> | <a href='' ng-click="isoResults=0">Normal</a>
+			<br/><br/>
 
 	
+			<div ng-repeat="result in results" id="outer">
+				<h1>{{result.post}}</h1>
+				<div class="navwrap">
+					<ul>
+						<li ng-repeat="list in result.list">
+							<div class="barContainer">
+								<div class="bar" ng-style="{height:(list.number)+'px'}">
+								</div>
+								<div class="barC" ng-style="{height:(list.number)+'px'}">
+								</div>
+								{{list.name}}
+								<br/>
+								{{list.number}}
+							</div>							
+						</li>
+					</ul>
+				</div>
+				<div class="clearer"></div>
+			</div>
+
+
+		</div>	
+
+	<center>
 	<hr>
 	<br/><br/><br/>
 	<br/>
