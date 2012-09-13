@@ -31,7 +31,7 @@
 			$data = array();
 			foreach($options as $option)
 			{
-				if(($options->sex == ($user->sex + 1))||($options->sex == 3))
+				if(($option->sex == ($user->sex + 1))||($option->sex == 3))
 				{
 					$op = array();
 					if($option->hostel()->pivot()->where('hostel_id','=',$user->hostel)->count() == 1)
