@@ -83,7 +83,7 @@
 			
 		</div>
 	</div>
-	<div ng-show="user.voted==3">
+	<div ng-show="user.voted==1">
 		<center>
 			<div class="main_group" ng-show="voteCastMsg==''">
 				In accordance with our records, you've already exercised your right to cast a vote.<br/>
