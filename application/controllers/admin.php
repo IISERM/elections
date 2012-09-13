@@ -174,6 +174,7 @@ class Admin_Controller extends Base_Controller {
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
 		$post->sex = $sex;
+		$post->number = $input->number;
 		$post->save();
 		return 'Success';
 	}
@@ -245,6 +246,7 @@ class Admin_Controller extends Base_Controller {
 			{
 				$data['sexes'][1]['select'] = true;
 			}
+			$data['number'] = $post->number;
 			$d[] = $data;
 		}
 	print_r(json_encode($d));
@@ -303,6 +305,7 @@ class Admin_Controller extends Base_Controller {
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
 		$post->sex = $sex;
+		$post->number = $input->number;
 		$post->save();
 		return "Success";
 	}
