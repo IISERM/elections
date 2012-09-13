@@ -162,6 +162,7 @@ ul{
 	/*background-color: rgba(24,24,24,1);*/
 	/*margin:0 auto;*/
 	/*display:table;*/
+	-webkit-transition:all 2s;
 	position:relative;
 	vertical-align: bottom;
 	float:left;
@@ -174,9 +175,10 @@ ul{
 }
 .bar{
 	/*display:table-cell;*/
+	-webkit-transition:all 2s;
 	position:absolute;
-	width:10px;	
-	background-color: rgba(100,100,100,1);
+	width:15px;	
+	background-color: rgba(150,150,150,1);
 	margin: 0 auto;
 	left:50%;
 	bottom:0px;
@@ -184,20 +186,36 @@ ul{
 }
 .barC{
 	/*display:table-cell;*/
+	-webkit-transition:all 2s;
 	position:absolute;
 	/*height:100px;*/
-	width:10px;	
-	background-color: rgba(100,100,100,1);
+	width:15px;	
+	background-color: rgba(150,150,150,1);
 	margin: 0 auto;
 	right:50%;
 	bottom:0px;
 	/*left:50%;*/
 }
-.barContainer:hover > .bar,.barContainer:hover > .barC{
-	background-color: rgba(150,150,150,1);
+.categoryTitle{
+	-webkit-transition:all 1s;
+	font-size:30px;
+	text-align:left;
+	margin-left:50px;
+	font-family:sans-serif;
+	color:gray;	
+}
+#outer:hover > .categoryTitle{
+	font-size:50px;
 }
 
+.barContainer:hover > .bar,.barContainer:hover > .barC{
+	background-color: rgba(180,180,180,1);
+	width:45px;
+}
 
+.barContainer:hover{
+	font-size:40px;
+}
 
 
 
@@ -206,7 +224,8 @@ ul{
 	width:780px;
 	margin:auto;
 	text-align:left;
-	background-color: rgba(40,50,100,0.8);	
+	background-color: rgba(200,200,200,0.8);
+	margin-bottom:10px;
 	/*border:1px solid #000;*/
 }
 #outer{position:relative}

@@ -581,11 +581,11 @@ function settings($scope,truthSource,$timeout){
 	$scope.$watch('truthSource.io.state.working',function(newVal,oldVal){
 		$scope.config.other.hideCount=$scope.config.other.hideAfter;
 	});
-	$scope.$results=[{"post":"Human of the Year","list":
-													[{"name":"Neelam Singh","number":1}]},
-					{"post":"Fucucious of the Sem","list":
-													[{"name":"Manmohan ","number":4},
-													{"name":"Nitesh Bhardwaj","number":1}]}
+	$scope.$results=[{"title":"Human of the Year","total":1,"data":
+													[{"label":"Neelam Singh","value":1}]},
+					{"title":"Fucucious of the Sem","total":5, "data":
+													[{"label":"Manmohan ","value":4},
+													{"label":"Nitesh Bhardwaj","value":1}]}
 												];
 
 	$timeout(function(){

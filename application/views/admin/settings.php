@@ -409,18 +409,21 @@
 
 	
 			<div ng-repeat="result in results" id="outer">
-				<h1>{{result.post}}</h1>
+				<br/>
+				<div class="categoryTitle">{{result.title}}</div>
+				<br/>
 				<div class="navwrap">
 					<ul>
-						<li ng-repeat="list in result.list">
-							<div class="barContainer">
-								<div class="bar" ng-style="{height:(list.number)+'px'}">
+						<li ng-repeat="data in result.data">
+							<div class="barContainer" title="{{data.value}}">
+								<div class="bar" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
+									<!-- <div class="bar" ng-style="{height:parseInt( ( ( (+data.value)/result.total)  * 100), 10)+'px'}"> -->
 								</div>
-								<div class="barC" ng-style="{height:(list.number)+'px'}">
+								<div class="barC" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
 								</div>
-								{{list.name}}
-								<br/>
-								{{list.number}}
+								{{data.label}}
+								<!-- <br/> -->
+								<!-- {{data.value}} -->
 							</div>							
 						</li>
 					</ul>
