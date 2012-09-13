@@ -287,7 +287,7 @@ angular.module('myApp',[])
 		truth.nominee.add.Now=function(nominee, OnComplete)
 		{
 			truth.working=true;
-			alert(JSON.stringify(nominee));
+			// alert(JSON.stringify(nominee));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
 				type: 'POST',
@@ -347,6 +347,36 @@ angular.module('myApp',[])
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					truth.working=false;
 					OnComplete(truth.nominee.data);
+			});
+		};
+
+		truth.nominee.remove.Now=function(id, OnComplete)
+		{
+			truth.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.remove.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.remove.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {id:id, ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.working=false;
+					OnComplete(truth.io.state.last);
 			});
 		};
 
@@ -512,7 +542,7 @@ function settings($scope,truthSource,$timeout){
 		truthSource.student.fetch.Now(function(val){
 			$scope.students=val;
 			$scope.init=$scope.init+1;
-			if($scope.init==2)			
+			if($scope.init==3)			
 				$scope.updatingInterface=false;
 			$scope.$apply();
 		});
@@ -520,13 +550,23 @@ function settings($scope,truthSource,$timeout){
 		truthSource.post.fetch.Now(function(val){
 			$scope.posts=val;
 			$scope.init=$scope.init+1;
-			if($scope.init==2)
+			if($scope.init==3)
 				$scope.updatingInterface=false;
 
 			// $scope.updatingInterface=false;
 			$scope.$apply();
 		});
 
+		truthSource.nominee.fetch.Now(function(val){
+			// alert(val);
+			$scope.nominees=val;
+			$scope.init=$scope.init+1;
+			if($scope.init==3)
+				$scope.updatingInterface=false;
+			
+			// $scope.updatingInterface=false;
+			$scope.$apply();
+		});
 
 		// $scope.PostsRefresh();
 
@@ -643,4 +683,11 @@ function settings($scope,truthSource,$timeout){
 		});
 	}
 
+	$scope.DeleteNominee=function(id){
+		truthSource.nominee.remove.Now(id,function(val){
+			$scope.$apply();
+			$scope.NomineesRefresh();
+			// alert(val);
+		});
+	}
 }

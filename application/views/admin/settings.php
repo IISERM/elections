@@ -313,8 +313,12 @@
 				<th><input type="radio" name="postSort" ng-model="config.nominee.orderBy"
 					value="name" id="nominee_name"/>
 					<label for="nominee_name">Name</label></th>
-				<th>Registration No.</th>
-				<th>Post</th>
+				<th><input type="radio" name="postSort" ng-model="config.nominee.orderBy"
+					value="reg_no" id="nominee_reg_no"/>
+					<label for="nominee_reg_no">Registration No.</label></th>
+				<th><input type="radio" name="postSort" ng-model="config.nominee.orderBy"
+					value="post" id="nominee_post"/>
+					<label for="nominee_post">Post</label></th>
 				<th></th>
 				<th></th>
 			</tr>
