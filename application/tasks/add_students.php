@@ -68,26 +68,6 @@
 			
 			Student::create(array(
 				'role' => 0,
-				'first_name' => 'Gagan',
-				'middle_name' => 'Preet',
-				'last_name' => 'Singh',
-				'reg_no' => 'MS08021A',
-				'hostel' => 1,
-				'batch' => 1,
-				'voted' => false
-			));
-			Student::create(array(
-				'role' => 0,
-				'first_name' => 'Atul',
-				'middle_name' => 'Singh',
-				'last_name' => 'Arora',
-				'reg_no' => 'MS11003A',
-				'hostel' => 1,
-				'batch' => 1,
-				'voted' => false
-			));
-			Student::create(array(
-				'role' => 0,
 				'first_name' => 'Achyut',
 				'middle_name' => 'Priya',
 				'last_name' => 'Shukla',
