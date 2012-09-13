@@ -1,15 +1,20 @@
-tr{
+table tr{
 	/*-webkit-transition:all 1s;*/
 	background-color:rgba(255,255,255,0.0);
 }
-/*
-tr:nth-child(even){
+
+table tr:nth-child(even){
 	background-color: #eee;
 }
-*/
-tr:hover{
+
+table:hover tr{
+	background-color: rgba(255,255,255,0.0);
+}
+
+
+table:hover tr:hover{
 	background-color:rgba(230,230,230,0.8);
-	/*color:white;*/
+	
 }
 
 .fullWidthContainer{
@@ -78,7 +83,9 @@ background-color:rgba(200,200,200,0.9);
 .posts_hide{
 	display:none;
 }
-
+.nominees_hide{
+	display:none;
+}
 .loadingStat{
 	padding-top:10%;
 	display:fixed;
