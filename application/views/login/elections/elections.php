@@ -87,7 +87,7 @@
 	<div ng-show="user.voted==1">
 		<center>
 			<div class="main_group" ng-show="voteCastMsg==''">
-				In accordance with our records, you've already exercised your right to cast a vote.<br/>
+				According to our records, you've already exercised your right to cast a vote.<br/>
 				If this information is inaccurate, please contact the Election Commission immediately.
 			</div>
 		</center>		
