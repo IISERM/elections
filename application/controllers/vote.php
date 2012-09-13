@@ -31,34 +31,37 @@
 			$data = array();
 			foreach($options as $option)
 			{
-				$op = array();
-				if($option->hostel()->pivot()->where('hostel_id','=',$user->hostel)->count() == 1)
+				if(($options->sex == ($user->sex + 1))||($options->sex == 3))
 				{
-					if($option->batch()->pivot()->where('batch_id','=',$user->batch)->count() == 1)
+					$op = array();
+					if($option->hostel()->pivot()->where('hostel_id','=',$user->hostel)->count() == 1)
 					{
-						if($option->subject()->pivot()->where('subject_id','=',$user->subject)->count() == 1)
+						if($option->batch()->pivot()->where('batch_id','=',$user->batch)->count() == 1)
 						{
-							foreach($nom as $n)
+							if($option->subject()->pivot()->where('subject_id','=',$user->subject)->count() == 1)
 							{
-								if($n->post_id == $option->id)
+								foreach($nom as $n)
 								{
-									$student = Student::find($n->student_id);
-									$name = $student->first_name.' '.$student->middle_name.' '.$student->last_name;
-									$op[] = array(
-											'id' => $n->id,
-											'name' => $name,
-											'link' => $student->reg_no.'.jpg',
-											'reg_no' => $student->reg_no
-										);
+									if($n->post_id == $option->id)
+									{
+										$student = Student::find($n->student_id);
+										$name = $student->first_name.' '.$student->middle_name.' '.$student->last_name;
+										$op[] = array(
+												'id' => $n->id,
+												'name' => $name,
+												'link' => $student->reg_no.'.jpg',
+												'reg_no' => $student->reg_no
+											);
+									}
 								}
+								$data[] = array(
+										'id' => $option->id,
+										'title' => $option->post,
+										'selected' => array('id' => -1),
+										'list' => $op
+									);
+								$op = array();
 							}
-							$data[] = array(
-									'id' => $option->id,
-									'title' => $option->post,
-									'selected' => array('id' => -1),
-									'list' => $op
-								);
-							$op = array();
 						}
 					}
 				}
