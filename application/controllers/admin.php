@@ -9,11 +9,6 @@ class Admin_Controller extends Base_Controller {
 		return View::make('admin.settings');
 	}
 
-	public function get_result()
-	{
-		return View::make('admin.results');
-	}
-
 	public function post_supdate()
 	{
 		$user = Student::find(Input::get('id'));
@@ -26,58 +21,23 @@ class Admin_Controller extends Base_Controller {
 			$user->reg_no = Input::get('reg_no');
 			$user->save();
 			print("Success");
-			// print_r(Input::all());
-			// print_r($user);
 		}
 		else
 		{
 			print("Failed");
-			// print_r(Input::all());
 		}
 	}
 
 	public function post_slist()
 	{
 		$columns = array('id','first_name','middle_name','last_name','hostel','batch','sex','reg_no','subject');
-		$users=Student::with('subject')->get($columns);
+		$users=Student::with('subject')->where('role','=','0')->get($columns);
 		foreach ($users as $user)
 		{
 			$user = $user->attributes;
 			if($user['middle_name'] == NULL)
 			{
 				$user['middle_name'] = ' ';
-			}
-			if($user['hostel'] == 1)
-			{
-				$user['hostel'] = 7;
-			}
-			if($user['hostel'] == 2)
-			{
-				$user['hostel'] = 5;
-			}
-			if($user['batch'] == 1)
-			{
-				$user['batch'] = 'MS07';
-			}
-			if($user['batch'] == 2)
-			{
-				$user['batch'] = 'MS08';
-			}
-			if($user['batch'] == 3)
-			{
-				$user['batch'] = 'MS09';
-			}
-			if($user['batch'] == 4)
-			{
-				$user['batch'] = 'MS10';
-			}
-			if($user['batch'] == 5)
-			{
-				$user['batch'] = 'MS11';
-			}
-			if($user['batch'] == 6)
-			{
-				$user['batch'] = 'MS12';
 			}
 			if($user['sex'] == 0)
 			{
@@ -87,12 +47,11 @@ class Admin_Controller extends Base_Controller {
 			{
 				$user['sex'] = 'Male';
 			}
+
+			$user['hostel'] = Hostel::find($user['hostel'])->hostel;
+			$user['batch'] = Batch::find($user['batch'])->batch;
 			$user['subject'] = Subject::find($user['subject'])->subject;
-			// print_r($user);
 			$user_ref[]=$user;
-			/*$u = array(
-					'id' => $user->id,
-				);*/
 		}
 		return json_encode($user_ref);
 	}
@@ -375,21 +334,30 @@ class Admin_Controller extends Base_Controller {
 		$d = array();
 		foreach($posts as $post)
 		{
+			$count = 0;
 			$data = array();
 			foreach($nom as $n)
 			{
 				if($n->post_id == $post->id)
 				{
+					$num = Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count();
 					$student = Student::find($n->student_id);
 					$data[] = array(
-							'name' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
-							'number' => Votec::where('post_id','=',$post->id)->where('nominee_id','=',$n->id)->count()
+							'label' => $student->first_name.' '.$student->middle_name.' '.$student->last_name,
+							'value' => $num
 						);
+					$count = $count + $num;
 				}
 			}
+			$total = Votec::where('post_id','=',$post->id)->count();
+			$data[] = array(
+					'label' => 'Abstane',
+					'value' => ($total - $count)
+				);
 			$d[] = array(
-					'post' => $post->post,
-					'list' => $data
+					'title' => $post->post,
+					'data' => $data,
+					'total' => $total
 				);
 		}
 		return json_encode($d);
