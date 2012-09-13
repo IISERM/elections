@@ -67,6 +67,16 @@
 			DB::query('TRUNCATE TABLE students');
 			
 			Student::create(array(
+				'role' => 1,
+				'first_name' => 'Administrator',
+				'middle_name' => 'Election',
+				'last_name' => 'Commission',
+				'reg_no' => 'Admin',
+				'hostel' => 1,
+				'batch' => 1,
+				'voted' => true
+			));
+			Student::create(array(
 				'role' => 0,
 				'first_name' => 'Achyut',
 				'middle_name' => 'Priya',
