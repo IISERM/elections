@@ -16,7 +16,7 @@
 	<input id="basePathProvider" type="text" value="<?php echo URL::base(); ?>" class="hidden"/>
 	<basepathwidget path="<?php echo URL::base(); ?>" fall="DAMN"> </basepathwidget>
 	<center>
-		<div ng-hide="isoNominees || isoPosts || isoStudents">
+		<!-- <div ng-hide="isoNominees || isoPosts || isoStudents"> -->
 			<div class="fullWidthContainer">
 				<div class="communicationLog">				
 					Something's taking longer than it should. Perhaps you're smarter than the monkeys who made this. Take a shot at it!
@@ -49,7 +49,7 @@
 			<br/><br/><br/>
 			<br/><br/><br/>
 			<br/>
-		</div>
+		<!-- </div> -->
 
 		<div ng-hide="isoNominees || isoPosts">
 			<hr/>
@@ -399,7 +399,7 @@
 		</div>
 	</center>
 
-		<div ng-hide="isoNominees || isoStudents">
+		<div ng-hide="isoNominees || isoStudents || isoPosts">
 			<hr/>
 
 			<br/>
@@ -407,16 +407,17 @@
 			<center>
 			<a href='' ng-show="config.result.autoUpdate" ng-click="config.result.autoUpdate=false">Disable Auto Update</a>
 			<a href='' ng-hide="config.result.autoUpdate" ng-click="config.result.autoUpdate=true">Enable Auto Update</a>
+			| <a href='' ng-click="ResultsRefresh()">Refresh Now</a>
 			<br/>
 			<div ng-show="config.result.autoUpdate"> 
 				Auto Update After: 
-				<input placeholder="Auto Update After" size="5" ng-model="config.result.autoUpdateAfter"/> 
+				<input placeholder="Auto Update After" size="5" ng-model="config.result.autoUpdateAfter"/> 				
 			</div>
 			<br/><br/>			
 				<table>
 					<tr>
 						<th>Post Name</th>
-						<th width="200">Nominee</th>
+						<th width="250">Nominee</th>
 						<th>Total<th>
 					</tr>
 					<tr ng-repeat="result in results">
@@ -425,7 +426,7 @@
 							<table>
 								<tr ng-repeat="data in result.data">
 									<td width="200">{{data.label}} > </td>
-									<td>{{data.value}}</td>
+									<td width="50">{{data.value}}</td>
 								</tr>
 							</table>
 						
@@ -442,7 +443,7 @@
 				<br/><br/>
 			</center>
 	
-			<div ng-repeat="result in results" id="outer">
+			<div ng-repeat="result in results" class="outer">
 				<br/>
 				<div class="categoryTitle">{{result.title}}</div>
 				<br/>
