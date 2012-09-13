@@ -439,9 +439,10 @@ function settings($scope,truthSource,$timeout){
 	
 	$scope.studentFields={hostels:['','7','5'],
 							batches:['', '07','08','09','10','11','12'],
-							subjects:['', 'Physics','Mathematics','Chemistry','Biology','Undeclared'],
-							sexes:['Female','Male']
+							subjects:[{name:'Physics'},{name:'Mathematics'},{name:'Chemistry'},{name:'Biology'},{name:'Undeclared'}],
+							sexes:[{name:'Female'},{name:'Male'}]
 							};
+	$scope.subjectsField=[{name:'Physics'},{name:'Mathematics'},{name:'Chemistry'},{name:'Biology'},{name:'Undeclared'}];
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false},
 					other:{hideCount:0,hideAfter:10}};
@@ -489,7 +490,7 @@ function settings($scope,truthSource,$timeout){
 														{select:true,name:'Undeclared'},
 														]}
 				];
-	$scope.postNew={id:1,name:'Faggot of the Year',number:2,hostels:[
+	$scope.postNew={id:1,name:'Human of the Year',number:2,hostels:[
 														{select:true,name:'7'},
 														{select:true,name:'5'}
 														],
@@ -507,7 +508,12 @@ function settings($scope,truthSource,$timeout){
 														{select:false,name:'Chemistry'},
 														{select:false,name:'Biology'},
 														{select:true,name:'Undeclared'},
-														]};
+														],
+												sexes:[
+														{select:true,name:'Male'},
+														{select:true,name:'Female'}
+														]
+														};
 
 
 	//UPDATE the values from the server

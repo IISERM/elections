@@ -3,7 +3,7 @@
 
 <head>
 	<meta chrset="utf-8">
-	<title>Online Elections @ IISER M</title>
+	<title>Naveen Tantra</title>
 
 	<link rel="Shortcut Icon" href=<?php echo "\"".URL::base()."/img/favicon.ico\""; ?> />
 	<link rel="stylesheet" type="text/css" href=<?php echo "\"".URL::base()."/css/election.css\""; ?> />
@@ -16,7 +16,8 @@
 	<div class="Bar">
 		<div class="Vertical_Align_Top Bar_height">
 			<div class="Bar_link"><a class="Bar_link" href= "<?php echo URL::base()."/index.php/logout" ?> "  >Sign Out</a></div>
-			<div class="Page_Heading">Elections @ IISER M</div>
+			<div class="Page_Heading">NaveenTantra</div>
+			<div class="Page_SubHeading">(Online Elections @ IISER M)</div>
 			<div class="selection_state">{{user.name}}<br/>
 				{{user.gender}}, {{user.batch}} batch, Hostel {{user.hostel}}
 			</div>			
@@ -50,7 +51,7 @@
 		</div>
 		<center>
 			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" selected="category.selected" ng-model="category.selected" >				
-					<nominee ng-repeat="person in category.list" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
+					<nominee ng-repeat="person in category.list | orderBy:'name'" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
 			</votepanel>
 			<br/>
 			<p class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</p>
@@ -83,7 +84,7 @@
 			
 		</div>
 	</div>
-	<div ng-show="user.voted==3">
+	<div ng-show="user.voted==1">
 		<center>
 			<div class="main_group" ng-show="voteCastMsg==''">
 				In accordance with our records, you've already exercised your right to cast a vote.<br/>

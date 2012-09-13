@@ -35,7 +35,7 @@
 				<!-- || truthSource.io.state.last=='Success' -->
 				<div class="smallStat2" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''"><div class="smallFont">Last Response (Auto hide in: {{config.other.hideCount}}):</div> {{truthSource.io.state.last}}</div>				
 				<div ng-show="updatingInterface" class="smallStat">Processing Data<br/> Please Wait</div>
-				<div ng-show="truthSource.io.state.working" class="smallStat3">Fetching Data from Server<br/> Please Wait</div>								
+				<div ng-show="truthSource.io.state.working" class="smallStat3">Talking to the Server<br/> Please Wait</div>								
 				<!-- <div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div> -->
 			</div>
 
@@ -116,11 +116,14 @@
 					</td>
 					<td>
 						<select ng-model="student.subject">
+							<!-- <option ng-repeat="sub in subjectsField" value="{{sub.name}}">{{sub.name}}</option> -->
+
 	 						<option value="Physics">Physics</option>
 							<option value="Mathematics">Mathematics</option>
 							<option value="Chemistry">Chemistry</option>
 							<option value="Biology">Biology</option>
 							<option value="Undeclared">Undeclared</option>					
+						
 						</select>
 					</td>
 					<td>
@@ -236,6 +239,8 @@
 					<th>Hostel</th>
 					<th>Batch</th>
 					<th>Subject</th>
+					<th>Sex</th>
+					<th>#Humans</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -263,7 +268,16 @@
 							</li>
 						</ul>
 					</td>
-
+					<td>
+						<ul>
+							<li ng-repeat="sex in post.sexes">
+								<input  type="checkbox" ng-model="sex.select">{{sex.name}}</input>
+							</li>
+						</ul>
+					</td>
+					<td>
+						<input type="input" size="3" ng-model="post.number" placeholder="Max #humans"/>
+					</td>
 					<td>
 						<a href="" ng-click="DeletePost(post.id)">Remove</a>
 					</td>
@@ -294,6 +308,16 @@
 								<input  type="checkbox" ng-model="subject.select">{{subject.name}}</input>
 							</li>
 						</ul>
+					</td>
+					<td>
+						<ul>
+							<li ng-repeat="sex in postNew.sexes">
+								<input  type="checkbox" ng-model="sex.select">{{sex.name}}</input>
+							</li>
+						</ul>
+					</td>
+					<td>
+						<input type="input" size="3" ng-model="postNew.number" placeholder="Max #humans"/>
 					</td>
 
 					<td>					
