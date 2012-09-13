@@ -31,7 +31,42 @@ angular.module('myApp',[])
 						config:{basePath:'/admin'},
 						data:{}
 			},
+		result:{ 	fetch:{Now:{},lnk:'/res'},
+					config:{basePath:'/admin'},
+						data:{}
+			},
+
 		io:{state:{log:'NaveenTantra Admin Panel Log\n',last:'',working:false},config:{basePath:"",addIndexDotPHP:"/index.php"}}
+		};
+		truth.result.fetch.Now=function(OnComplete)
+		{
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk);
+			truth.io.state.working=true;
+			$.ajax({
+				type: 'GET',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.result.config.basePath + truth.result.fetch.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					var dat = jQuery.parseJSON(data);
+					truth.result.data=dat;					
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					// alert("done");
+					truth.io.state.working=false;
+					OnComplete(truth.result.data);
+			});
 		};
 
 		truth.student.fetch.Now=function(OnComplete)
@@ -445,7 +480,8 @@ function settings($scope,truthSource,$timeout){
 	$scope.subjectsField=[{name:'Physics'},{name:'Mathematics'},{name:'Chemistry'},{name:'Biology'},{name:'Undeclared'}];
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false},
-					other:{hideCount:0,hideAfter:10}};
+					other:{hideCount:0,hideAfter:10},
+					result:{autoUpdate:false,autoUpdateCount:0,autoUpdateAfter:10}};
 
 	$scope.nominees=[{id:1,name:'Atul Singh Arora',reg_no:'MS11003',post:''},
 					{id:2,name:'Gagan Preet Singh',reg_no:'MS08021',post:''}
@@ -537,6 +573,17 @@ function settings($scope,truthSource,$timeout){
 	};
 	autoHide();
 
+	var autoUpdateResult=function(){
+		if($scope.config.result.autoUpdate)
+		{
+			$scope.ResultsRefresh();
+			
+		}
+		// alert("CALLED");
+		$timeout(autoUpdateResult,$scope.config.result.autoUpdateAfter*1000);
+	}
+	autoUpdateResult();
+
 	$scope.$watch('truthSource.io.state.last',function(newVal,oldVal){
 		// if(newVal!=oldVal){
 			// alert("Changed");
@@ -546,6 +593,12 @@ function settings($scope,truthSource,$timeout){
 	$scope.$watch('truthSource.io.state.working',function(newVal,oldVal){
 		$scope.config.other.hideCount=$scope.config.other.hideAfter;
 	});
+	$scope.$results=[{"title":"Human of the Year","total":1,"data":
+													[{"label":"Neelam Singh","value":1}]},
+					{"title":"Fucucious of the Sem","total":5, "data":
+													[{"label":"Manmohan ","value":4},
+													{"label":"Nitesh Bhardwaj","value":1}]}
+												];
 
 	$timeout(function(){
 		$scope.init=0;
@@ -581,6 +634,11 @@ function settings($scope,truthSource,$timeout){
 			// $scope.updatingInterface=false;
 			$scope.$apply();
 		});
+
+		truthSource.result.fetch.Now(function(val){
+			$scope.results=val;
+			$scope.$apply();
+		})
 
 		// $scope.PostsRefresh();
 
@@ -719,4 +777,32 @@ function settings($scope,truthSource,$timeout){
 			// alert(val);
 		});
 	}
+
+   //  $scope.myprop = function(val) {
+   //      return {
+   //          // display: $scope.master.display,
+   //          // backgroundColor: "#333",
+   //          // width: $scope.master.width + 'px',
+   //          // height: $scope.master.height + 'px',
+   //          'height': val + 'px',
+			// 'position':'absolute',
+			// 'width':'10px',
+			// 'background-color':'rgba(100,100,100,1)',
+			// 'margin': '0 auto',
+			// 'left':'50%',
+			// 'bottom':'0px'
+   //          // color: "#FFF"
+   //      };
+   //  };
+	$scope.ResultsRefresh = function(){
+		truthSource.result.fetch.Now(function(val){
+			$scope.$apply();
+			$scope.updatingInterface=true;
+			$scope.$apply();
+			$scope.results=val;
+			$scope.updatingInterface=false;
+			$scope.$apply();
+		});
+	}
+
 }

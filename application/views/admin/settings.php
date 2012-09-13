@@ -16,7 +16,7 @@
 	<input id="basePathProvider" type="text" value="<?php echo URL::base(); ?>" class="hidden"/>
 	<basepathwidget path="<?php echo URL::base(); ?>" fall="DAMN"> </basepathwidget>
 	<center>
-		<div ng-hide="isoNominees || isoPosts || isoStudents">
+		<!-- <div ng-hide="isoNominees || isoPosts || isoStudents"> -->
 			<div class="fullWidthContainer">
 				<div class="communicationLog">				
 					Something's taking longer than it should. Perhaps you're smarter than the monkeys who made this. Take a shot at it!
@@ -49,7 +49,7 @@
 			<br/><br/><br/>
 			<br/><br/><br/>
 			<br/>
-		</div>
+		<!-- </div> -->
 
 		<div ng-hide="isoNominees || isoPosts">
 			<hr/>
@@ -397,13 +397,83 @@
 				</tr>			
 			</table>
 		</div>
+	</center>
 
+		<div ng-hide="isoNominees || isoStudents || isoPosts">
+			<hr/>
+
+			<br/>
+			<p class="subSubTitle">Results</p>					
+			<center>
+			<a href='' ng-show="config.result.autoUpdate" ng-click="config.result.autoUpdate=false">Disable Auto Update</a>
+			<a href='' ng-hide="config.result.autoUpdate" ng-click="config.result.autoUpdate=true">Enable Auto Update</a>
+			| <a href='' ng-click="ResultsRefresh()">Refresh Now</a>
+			<br/>
+			<div ng-show="config.result.autoUpdate"> 
+				Auto Update After: 
+				<input placeholder="Auto Update After" size="5" ng-model="config.result.autoUpdateAfter"/> 				
+			</div>
+			<br/><br/>			
+				<table>
+					<tr>
+						<th>Post Name</th>
+						<th width="250">Nominee</th>
+						<th>Total<th>
+					</tr>
+					<tr ng-repeat="result in results">
+						<td>{{result.title}}</td>
+						<td>
+							<table>
+								<tr ng-repeat="data in result.data">
+									<td width="200">{{data.label}} > </td>
+									<td width="50">{{data.value}}</td>
+								</tr>
+							</table>
+						
+<!--  						<ul>
+ 							<li ng-repeat="data in result.data">
+ 								[{{data.label}} | {{data.value}}]
+ 							</li>
+ 						</ul>
+ -->						
+						</td>
+						<td>{{result.total}}</td>
+					</tr>
+				</table>
+				<br/><br/>
+			</center>
 	
+			<div ng-repeat="result in results" class="outer">
+				<br/>
+				<div class="categoryTitle">{{result.title}}</div>
+				<br/>
+				<div class="navwrap">
+					<ul>
+						<li ng-repeat="data in result.data">
+							<div class="barContainer" title="{{data.value}}">
+								<div class="bar" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
+									<!-- <div class="bar" ng-style="{height:parseInt( ( ( (+data.value)/result.total)  * 100), 10)+'px'}"> -->
+								</div>
+								<div class="barC" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
+								</div>
+								{{data.label}}
+								<!-- <br/> -->
+								<!-- {{data.value}} -->
+							</div>							
+						</li>
+					</ul>
+				</div>
+				<div class="clearer"></div>
+			</div>
+
+		</div>	
+
+	<center>
 	<hr>
 	<br/><br/><br/>
 	<br/>
 	<p>Created by</p>
-	<img src=<?php echo "\"".URL::base()."/img/theDeparted.svg\""; ?> width="150px"/>
+	<a target="_blank" href="http://www.github.com/theDeparted/"><img src=<?php echo "\"".URL::base()."/img/theDeparted.svg\""; ?> width="150px"/></a>
 	<p>Can't live until you die</p>
 	<p>Indian Institute of Science Education and Research, Mohali</p>
 	</center>	
