@@ -287,12 +287,13 @@ class Admin_Controller extends Base_Controller {
 		$n = array();
 		foreach($nomin as $nom)
 		{
+			$post = Post::find($nom->post_id);
 			$stu = Student::find($nom->student_id);
 			$data = array(
 				'id' => $nom->id,
 				'name' => $stu->first_name.' '.$stu->middle_name.' '.$stu->last_name,
 				'reg_no' => $stu->reg_no,
-				'post' => Post::find($nom->post_id)->post
+				'post' => $post->post
 				);
 			$n[] = $data;
 		}
