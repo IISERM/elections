@@ -59,6 +59,7 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					// alert("done");
 					truth.io.state.working=false;
 					OnComplete(truth.student.data);
 			});
@@ -581,9 +582,10 @@ function settings($scope,truthSource,$timeout){
 
 
 	$scope.StudentsRefresh = function(){
-		$scope.updatingInterface=true;
-		$scope.$apply();
 		truthSource.student.fetch.Now(function(val){
+			$scope.$apply();
+			$scope.updatingInterface=true;
+			$scope.$apply();
 			$scope.students=val;
 			$scope.updatingInterface=false;
 			$scope.$apply();
@@ -641,14 +643,21 @@ function settings($scope,truthSource,$timeout){
 	}
 
 	$scope.PostsRefresh=function(){
-		$scope.updatingInterface=true;
-		$scope.$apply();
+		// $scope.updatingInterface=true;
+		// $scope.$apply();
 		// alert("About to start..");
 		truthSource.post.fetch.Now(function(val){
-			// alert(val);
+			$scope.$apply();
+			$scope.updatingInterface=true;
+			$scope.$apply();
 			$scope.posts=val;
 			$scope.updatingInterface=false;
 			$scope.$apply();
+
+			// alert(val);
+			// $scope.posts=val;
+			// $scope.updatingInterface=false;
+			// $scope.$apply();
 		});
 	}
 
@@ -679,14 +688,21 @@ function settings($scope,truthSource,$timeout){
 	}
 
 	$scope.NomineesRefresh=function(){
-		$scope.updatingInterface=true;
-		$scope.$apply();
+		// $scope.updatingInterface=true;
+		// $scope.$apply();
 		// alert("About to start..");
 		truthSource.nominee.fetch.Now(function(val){
 			// alert(val);
+			$scope.$apply();
+			$scope.updatingInterface=true;
+			$scope.$apply();
 			$scope.nominees=val;
 			$scope.updatingInterface=false;
 			$scope.$apply();
+
+			// $scope.nominees=val;
+			// $scope.updatingInterface=false;
+			// $scope.$apply();
 		});
 	}
 

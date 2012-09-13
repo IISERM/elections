@@ -280,7 +280,7 @@ function elections($scope,truthSource,$timeout){
 	    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
 	    	if(r==1)
 	    	{
-	    		$scope.user.voted=true;
+	    		$scope.user.voted=2;
 				truthSource.voteCast.Cast(categories,function(val){
 					$scope.voteCastMsg=val;
 					// alert(val);

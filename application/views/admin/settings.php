@@ -16,38 +16,41 @@
 	<input id="basePathProvider" type="text" value="<?php echo URL::base(); ?>" class="hidden"/>
 	<basepathwidget path="<?php echo URL::base(); ?>" fall="DAMN"> </basepathwidget>
 	<center>
-		<div class="fullWidthContainer" ng-hide="truthSource.io.state.working">
-			<div class="communicationLog">				
-				Something's taking longer than it should. Perhaps you're smarter than the monkeys who made this. Take a shot at it!
-				<br/>
-				<br/>
-				{{truthSource.io.state.log}}
-				<!-- ng-show="truthSource.io.working">			 -->				
+		<div ng-hide="isoNominees || isoPosts || isoStudents">
+			<div class="fullWidthContainer">
+				<div class="communicationLog">				
+					Something's taking longer than it should. Perhaps you're smarter than the monkeys who made this. Take a shot at it!
+					<br/>
+					<br/>
+					{{truthSource.io.state.log}}
+					<!-- ng-show="truthSource.io.working">			 -->				
+				</div>
 			</div>
+
+			<br/>
+			<div class="topBar">
+				<span><a href="">Log Out</a></span>
+				<div class="mainTitle">NaveenTantra</div>
+				<span><div class="subTitle">Admin Panel</div></span>			
+				<!-- || truthSource.io.state.last=='Success' -->
+				<div class="smallStat2" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''"><div class="smallFont">Last Response (Auto hide in: {{config.other.hideCount}}):</div> {{truthSource.io.state.last}}</div>				
+				<div ng-show="updatingInterface" class="smallStat">Processing Data<br/> Please Wait</div>
+				<div ng-show="truthSource.io.state.working" class="smallStat3">Fetching Data from Server<br/> Please Wait</div>								
+				<!-- <div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div> -->
+			</div>
+
+	<!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
+				The supernatural is being invoked and data processed,<br/>
+				Sit tight, and for your sins, you may now confess. <br/>
+				The morning shall reveal, hidden faces, protected and concealed <br/>
+				Fails, if the sun to rise, with persistence, we will fight the fierce night.
+			</div>
+	 -->		
+			<br/><br/><br/>
+			<br/><br/><br/>
+			<br/>
 		</div>
 
-		<br/>
-		<div class="topBar">
-			<span><a href="">Log Out</a></span>
-			<div class="mainTitle">NaveenTantra</div>
-			<span><div class="subTitle">Admin Panel</div></span>			
-			<!-- || truthSource.io.state.last=='Success' -->
-			<div class="smallStat" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''"><div class="smallFont">Last Response (Auto hide in: {{config.other.hideCount}}):</div> {{truthSource.io.state.last}}</div>
-			<div ng-show="truthSource.io.state.working" class="smallStat">Fetching Data from Server<br/> Please Wait</div>
-			<div ng-show="updatingInterface" class="smallStat">Processing Data<br/> Please Wait</div>
-			<!-- <div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div> -->
-		</div>
-
-<!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
-			The supernatural is being invoked and data processed,<br/>
-			Sit tight, and for your sins, you may now confess. <br/>
-			The morning shall reveal, hidden faces, protected and concealed <br/>
-			Fails, if the sun to rise, with persistence, we will fight the fierce night.
-		</div>
- -->		
-		<br/><br/><br/>
-		<br/><br/><br/>
-		<br/>
 		<div ng-hide="isoNominees || isoPosts">
 			<hr/>
 			<p class="subSubTitle">Students</p>

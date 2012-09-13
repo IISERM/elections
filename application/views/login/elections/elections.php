@@ -26,7 +26,7 @@
 	<basepathwidget path="<?php echo URL::base(); ?>" fall="DAMN"> </basepathwidget>
 	<div class="Bar_height"></div>
 
-	<div ng-hide="user.voted">
+	<div ng-show="user.voted==0">
 		<!-- Just to have the right value -->
 		<!-- <input ng-model="base_path" value="haha" /> -->
 		<!-- value="<?php echo URL::base()."/img/"; ?>" /> -->
@@ -57,7 +57,7 @@
 		</center>
 
 	</div>
-	<div ng-show="user.voted">
+	<div ng-show="user.voted==2">
 		<center>
 			<div class="main_group" ng-show="voteCastMsg==''">
 				Waiting for Server...
@@ -83,7 +83,14 @@
 			
 		</div>
 	</div>
-	
+	<div ng-show="user.voted==3">
+		<center>
+			<div class="main_group" ng-show="voteCastMsg==''">
+				In accordance with our records, you've already exercised your right to cast a vote.<br/>
+				If this information is inaccurate, please contact the Election Commission immediately.
+			</div>
+		</center>		
+	</div>
 
 	<script type="text/javascript" src=<?php echo "\"".URL::base()."/js/election.js\""; ?>> </script>
 		
