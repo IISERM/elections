@@ -140,6 +140,7 @@ angular.module('myApp',[])
 		truth.voteCast.Cast=function(voteCast, OnComplete)
 		{
 			truth.io.state.working=true;
+			alert(JSON.stringify(voteCast));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.voteCast.config.basePath + truth.voteCast.add.lnk);
 			$.ajax({
 				type: 'POST',
@@ -279,9 +280,10 @@ function elections($scope,truthSource,$timeout){
 	    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
 	    	if(r==1)
 	    	{
-	    		$scope.user.voted=true;
+	    		$scope.user.voted=2;
 				truthSource.voteCast.Cast(categories,function(val){
 					$scope.voteCastMsg=val;
+					// alert(val);
 					$scope.$apply();					
 				});
 

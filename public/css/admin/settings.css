@@ -1,15 +1,21 @@
-tr{
+table tr{
 	/*-webkit-transition:all 1s;*/
 	background-color:rgba(255,255,255,0.0);
 }
-/*
-tr:nth-child(even){
+
+table tr:nth-child(even){
 	background-color: #eee;
 }
-*/
-tr:hover{
-	background-color:rgba(230,230,230,0.8);
-	/*color:white;*/
+
+table:hover tr{
+	background-color: rgba(255,255,255,0.0);
+	/*text-decoration: line-through;*/
+}
+
+
+table:hover tr:hover{
+	background-color:rgba(230,230,230,0.8);	
+	/*text-decoration: none;	*/
 }
 
 .fullWidthContainer{
@@ -78,7 +84,9 @@ background-color:rgba(200,200,200,0.9);
 .posts_hide{
 	display:none;
 }
-
+.nominees_hide{
+	display:none;
+}
 .loadingStat{
 	padding-top:10%;
 	display:fixed;
@@ -104,6 +112,25 @@ ul{
 .smallStat{
 	text-align: center;
 	background-color: rgba(0,0,0,0.4);
+	color:white;
+	font-size:20px;
+	font-family: monospace;	
+	width:100%;
+	position:fixed;
+}
+.smallStat2{
+	text-align: center;
+	background-color: rgba(230,230,230,0.8);
+	color:black;
+	font-size:20px;
+	font-family: monospace;	
+	font-weight: bold;
+	width:100%;
+	position:fixed;
+}
+.smallStat3{
+	text-align: center;
+	background-color: rgba(20,25,50,0.8);
 	color:white;
 	font-size:20px;
 	font-family: monospace;	
