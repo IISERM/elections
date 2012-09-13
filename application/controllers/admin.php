@@ -4,6 +4,17 @@ class Admin_Controller extends Base_Controller {
 
 	public $restful = true;
 
+	function __construct()
+	{
+		parent::__construct();
+		$this->filter('before', 'auth2');
+	}
+
+	public function get_index()
+	{
+		return $this->get_settings();
+	}
+
 	public function get_settings()
 	{
 		return View::make('admin.settings');

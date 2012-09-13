@@ -2,9 +2,16 @@
 
 	class Vote_Controller extends Base_Controller
 	{
+
 		public $error = false;
 		public $restful = true;
 
+		function __construct()
+		{
+			parent::__construct();
+			$this->filter('before', 'auth');
+		}
+		
 		public function get_index()
 		{
 			return View::make('login.elections.elections');

@@ -49,8 +49,17 @@ Route::get('logout', function()
 );
 
 // Login Things
-Route::controller(array('login','vote','admin'));
+Route::controller(array('login','vote'));
 
+// Admin
+Route::controller(array('admin'));
+
+
+Route::any('(:any)',function()
+	{
+		return Redirect::to('admin/settings');
+	}
+);
 // Vote Things
 // Route::controller(array('vote'));
 
@@ -71,7 +80,8 @@ Route::controller(array('login','vote','admin'));
 
 Event::listen('404', function()
 {
-	return Response::error('404');
+	// return Response::error('404');
+	return Redirect::to('admin/settings');
 });
 
 Event::listen('500', function()
@@ -125,4 +135,10 @@ Route::filter('csrf', function()
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
+	if (Auth::user()->role==1) return Redirect::to('admin/settings');
+});
+
+Route::filter('auth2', function()
+{
+	if (!Auth::user()->role==1) return Redirect::to('vote');
 });
