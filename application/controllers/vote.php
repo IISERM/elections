@@ -34,7 +34,7 @@
 				$op = array();
 				if($option->hostel()->pivot()->where('hostel_id','=',$user->hostel)->count() == 1)
 				{
-					if($option->batch()->pivot()->where('batch_id','=',$user->hostel)->count() == 1)
+					if($option->batch()->pivot()->where('batch_id','=',$user->batch)->count() == 1)
 					{
 						if($option->subject()->pivot()->where('subject_id','=',$user->subject)->count() == 1)
 						{
@@ -69,31 +69,32 @@
 		public function post_vote()
 		{
 			$user = Auth::user();
-			if(!$user->voted)
-			{
-				$votes = Input::json_decode(Input::get('vote'));
-				$name = Crypter::encrypt($user->password);
-				$voter = new Vote;
-				$voter->vote = $name;
-				$voter->save();
-				foreach($votes as $vote)
-				{
-					$votec = Votec::create(
-							array(
-									'post_id' => $vote->id,
-									'nominee_id' => $vote->selected->id,
-									'votes_id' => $voter->id
-								)
-						);
-					$votec->save();
-				}
-				$user->voted = true;
-				return "Your vote has been casted. Your pseudo name is: ".$name;
-			}
-			else
-			{
-				return "Already Voted";
-			}
+
+			// if($user->voted == 0)
+			// {
+			// 	$votes = Input::json_decode(Input::get('vote'));
+			// 	$name = Crypter::encrypt($user->password);
+			// 	$voter = new Vote;
+			// 	$voter->vote = $name;
+			// 	$voter->save();
+			// 	foreach($votes as $vote)
+			// 	{
+			// 		$votec = Votec::create(
+			// 				array(
+			// 						'post_id' => $vote->id,
+			// 						'nominee_id' => $vote->selected->id,
+			// 						'votes_id' => $voter->id
+			// 					)
+			// 			);
+			// 		$votec->save();
+			// 	}
+			// 	$user->voted = 1;
+			// 	return "Your vote has been casted. Your pseudo name is: ".$name;
+			// }
+			// else
+			// {
+			// 	return "Already Voted";
+			// }
 		}
 
 		public function get_check()
