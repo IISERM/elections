@@ -71,9 +71,7 @@
 			$user = Auth::user();
 			if($user->voted == 0)
 			{
-				// print_r(Input::get('vote'));
 				$votes = json_decode(Input::get('vote'));
-				// print_r($votes);
 				$name = substr(Crypter::encrypt($user->password),5,7);
 				$voter = new Vote;
 				$voter->vote = $name;
@@ -99,8 +97,4 @@
 			}
 		}
 
-		public function get_check()
-		{
-			//
-		}
 	}

@@ -154,9 +154,26 @@ class Admin_Controller extends Base_Controller {
 				$subject[] = Subject::where('subject', '=', $p->name)->first()->id;
 			}
 		}
+		$sex = 0;
+		$par = $input->sexes;
+		foreach($par as $p)
+		{
+			if($p->select==true)
+			{
+				if($p->name == "Male")
+				{
+					$sex=$sex+2;
+				}
+				if($p->name == "Female")
+				{
+					$sex=$sex+1;
+				}
+			}
+		}
 		$post->hostel()->sync($hostel);
 		$post->batch()->sync($batch);
 		$post->subject()->sync($subject);
+		$post->sex = $sex;
 		$post->save();
 		return 'Success';
 	}
@@ -210,6 +227,24 @@ class Admin_Controller extends Base_Controller {
 					);
 			}
 			$data['subjects'] = $s;
+			$data['sexes'] = array(
+					array(
+							'name' => 'Male',
+							'select' => false
+						),
+					array(
+							'name' => 'Female',
+							'select' => false
+						)
+				);
+			if(($post->sex == 2)||($post->sex == 3))
+			{
+				$data['sexes'][0]['select'] = true;
+			}
+			if(($post->sex == 1)||($post->sex == 3))
+			{
+				$data['sexes'][1]['select'] = true;
+			}
 			$d[] = $data;
 		}
 	print_r(json_encode($d));

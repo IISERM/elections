@@ -20,6 +20,9 @@ class Create_Posts {
 			// Number of Posts
 			$table->integer('number')->default(1);
 
+			// Sexes
+			$table->integer('sex')->default(0);
+
 			// Timestamps
 			$table->timestamps();
 		});
