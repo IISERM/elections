@@ -69,32 +69,34 @@
 		public function post_vote()
 		{
 			$user = Auth::user();
-
-			// if($user->voted == 0)
-			// {
-			// 	$votes = Input::json_decode(Input::get('vote'));
-			// 	$name = Crypter::encrypt($user->password);
-			// 	$voter = new Vote;
-			// 	$voter->vote = $name;
-			// 	$voter->save();
-			// 	foreach($votes as $vote)
-			// 	{
-			// 		$votec = Votec::create(
-			// 				array(
-			// 						'post_id' => $vote->id,
-			// 						'nominee_id' => $vote->selected->id,
-			// 						'votes_id' => $voter->id
-			// 					)
-			// 			);
-			// 		$votec->save();
-			// 	}
-			// 	$user->voted = 1;
-			// 	return "Your vote has been casted. Your pseudo name is: ".$name;
-			// }
-			// else
-			// {
-			// 	return "Already Voted";
-			// }
+			if($user->voted == 0)
+			{
+				// print_r(Input::get('vote'));
+				$votes = json_decode(Input::get('vote'));
+				// print_r($votes);
+				$name = substr(Crypter::encrypt($user->password),5,7);
+				$voter = new Vote;
+				$voter->vote = $name;
+				$voter->save();
+				foreach($votes as $vote)
+				{
+					$votec = Votec::create(
+							array(
+									'post_id' => $vote->id,
+									'nominee_id' => $vote->selected->id,
+									'votes_id' => $voter->id
+								)
+						);
+					$votec->save();
+				}
+				$user->voted = 1;
+				$user->save();
+				return "Your vote has been casted. Your pseudo name is: ".$name;
+			}
+			else
+			{
+				return "Already Voted";
+			}
 		}
 
 		public function get_check()
