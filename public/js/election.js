@@ -67,7 +67,10 @@ angular.module('myApp',[])
 	//functions start with capitals
 
 	var truth={
-		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},category:{Fetch:{}},
+		userInfo:{Fetch:{},lnk:'/vote/details',data:{}},
+		category:{Fetch:{},lnk:'/vote/options',data:{}},
+		voteCast:{Cast:{},lnk:'/vote/vote',data:{}},
+
 		//http://localhost/IISERM/elections/public
 		io:{state:{log:{},last:{}},config:{basePath:"",addIndexDotPHP:"/index.php"}},
 		};
@@ -103,6 +106,68 @@ angular.module('myApp',[])
 			});
 		};
 
+
+		truth.category.Fetch=function(OnComplete)
+		{
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.category.config.basePath + truth.category.fetch.lnk);
+			truth.io.state.working=true;
+			$.ajax({
+				type: 'GET',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.category.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					var dat = jQuery.parseJSON(data);
+					truth.category.data=dat;					
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.io.state.working=false;
+					OnComplete(truth.category.data);
+			});
+		};
+
+		truth.voteCast.Cast=function(voteCast, OnComplete)
+		{
+			truth.io.state.working=true;
+			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.voteCast.config.basePath + truth.voteCast.add.lnk);
+			$.ajax({
+				type: 'POST',
+				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.voteCast.lnk,
+				statusCode: {
+					404: function () {
+						;
+					},
+					500: function () {
+						;
+					}
+				},
+				data: {vote:JSON.stringify(voteCast), ajax: '1'},
+				success: function (data) {
+					truth.io.state.log = truth.io.state.log + '<br/><br/>' + data;
+					truth.io.state.last=data;
+					// alert(data);
+				}
+				}).error(function() {
+					;
+				}).complete(function() {
+					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
+					truth.io.state.working=false;
+					OnComplete(truth.io.state.last);
+			});
+		};
+
+
 		return truth;
 
 }).directive('basepathwidget', function(truthSource) {
@@ -121,36 +186,45 @@ angular.module('myApp',[])
 var ext_hideSideF_show;
 
 function elections($scope,truthSource,$timeout){
-	$scope.categories=[
-	{id:1, title:'Category 1',selected:{id:'-1'},
-									list:[
-										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
-										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
-										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
-										{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg'},
-										{id:5,name:'Muffin 5',link:'487384_410881738958783_1398366316_n.jpg'},
-										{id:6,name:'Muffin 6',link:'487384_410881738958783_1398366316_n.jpg'},
-										]},
-	{id:2, title:'Category 2',selected:{id:'-1'},
-									list:[
-										{id:1,name:'MuffinB 1',link:'Image1 Link :)'},
-										{id:2,name:'MuffinB 2',link:'Image2 Link :)'},
-										{id:3,name:'MuffinB 3',link:'Image3 Link :)'},
-										{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
-										]}
-	];
+	$scope.categories=[]
+
+	// $scope.categories=[
+	// {id:1, title:'Category 1',selected:{id:'-1'},
+	// 								list:[
+	// 									{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
+	// 									{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
+	// 									{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
+	// 									{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg'},
+	// 									{id:5,name:'Muffin 5',link:'487384_410881738958783_1398366316_n.jpg'},
+	// 									{id:6,name:'Muffin 6',link:'487384_410881738958783_1398366316_n.jpg'},
+	// 									]},
+	// {id:2, title:'Category 2',selected:{id:'-1'},
+	// 								list:[
+	// 									{id:1,name:'MuffinB 1',link:'Image1 Link :)'},
+	// 									{id:2,name:'MuffinB 2',link:'Image2 Link :)'},
+	// 									{id:3,name:'MuffinB 3',link:'Image3 Link :)'},
+	// 									{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
+	// 									]}
+	// ];
 	$timeout(function(){
 		// alert("About to trigger");
 		truthSource.userInfo.Fetch(function(val){		
 			$scope.user=val;
-			$scope.$digest();
+			$scope.$apply();
 		});
+
+	truthSource.category.Fetch(function(val){
+		$scope.categories=val;
+		$scope.$apply();
+	});
+
 	},100);
 
 	
 	$scope.likethis="1";
 	$scope.select={selected:'so far so good'};
 	$scope.custom={showvotes:false};
+	$scope.voteCastMsg="";
 	$scope.toggle_votes=function(){
 		if($scope.custom.showvotes) 
 			$scope.custom.showvotes=false;
@@ -204,7 +278,15 @@ function elections($scope,truthSource,$timeout){
 		{
 	    	var r=confirm("Ensure your selections are accurate. This can NOT be undone.");
 	    	if(r==1)
+	    	{
 	    		$scope.user.voted=true;
+				truthSource.voteCast.Cast(categories,function(val){
+					$scope.voteCastMsg=val;
+					$scope.$apply();					
+				});
+
+	    	}
+	    		
 		}
 		else
 		{

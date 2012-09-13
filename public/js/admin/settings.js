@@ -37,7 +37,7 @@ angular.module('myApp',[])
 		truth.student.fetch.Now=function(OnComplete)
 		{
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk);
-			truth.working=true;
+			truth.io.state.working=true;
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.fetch.lnk,
@@ -59,14 +59,14 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.student.data);
 			});
 		};
 
 		truth.student.update.Now=function(student, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.update.lnk,
@@ -90,14 +90,14 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
 
 		truth.student.add.Now=function(student, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
 				type: 'POST',
@@ -122,14 +122,14 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
 
 		truth.student.remove.Now=function(id, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.remove.lnk);
 			$.ajax({
 				type: 'POST',
@@ -152,7 +152,7 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
@@ -160,7 +160,7 @@ angular.module('myApp',[])
 		truth.post.fetch.Now=function(OnComplete)
 		{
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk);
-			truth.working=true;
+			truth.io.state.working=true;
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.fetch.lnk,
@@ -185,14 +185,14 @@ angular.module('myApp',[])
 				}).complete(function() {
 					// alert("DONE");
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.post.data);
 			});
 		};
 
 		truth.post.add.Now=function(post, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(JSON.stringify(post));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
@@ -218,14 +218,14 @@ angular.module('myApp',[])
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					// alert("COMPLETED");
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
 
 		truth.post.update.Now=function(post, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			$.ajax({
 				type: 'POST',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.update.lnk,
@@ -248,14 +248,14 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
 
 		truth.post.remove.Now=function(id, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.post.config.basePath + truth.post.remove.lnk);
 			$.ajax({
 				type: 'POST',
@@ -278,7 +278,7 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
@@ -286,7 +286,7 @@ angular.module('myApp',[])
 
 		truth.nominee.add.Now=function(nominee, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(JSON.stringify(nominee));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.student.config.basePath + truth.student.add.lnk);
 			$.ajax({
@@ -312,7 +312,7 @@ angular.module('myApp',[])
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
 					// alert("COMPLETED");
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
@@ -320,7 +320,7 @@ angular.module('myApp',[])
 		truth.nominee.fetch.Now=function(OnComplete)
 		{
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.fetch.lnk);
-			truth.working=true;
+			truth.io.state.working=true;
 			$.ajax({
 				type: 'GET',
 				url: truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.fetch.lnk,
@@ -345,14 +345,14 @@ angular.module('myApp',[])
 				}).complete(function() {
 					// alert("DONE");
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.nominee.data);
 			});
 		};
 
 		truth.nominee.remove.Now=function(id, OnComplete)
 		{
-			truth.working=true;
+			truth.io.state.working=true;
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.nominee.config.basePath + truth.nominee.remove.lnk);
 			$.ajax({
 				type: 'POST',
@@ -375,7 +375,7 @@ angular.module('myApp',[])
 					;
 				}).complete(function() {
 					// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.io.userInfo.lnk);
-					truth.working=false;
+					truth.io.state.working=false;
 					OnComplete(truth.io.state.last);
 			});
 		};
@@ -443,7 +443,7 @@ function settings($scope,truthSource,$timeout){
 							};
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false},
-					other:{hideCount:0,hideAfter:5}};
+					other:{hideCount:0,hideAfter:10}};
 
 	$scope.nominees=[{id:1,name:'Atul Singh Arora',reg_no:'MS11003',post:''},
 					{id:2,name:'Gagan Preet Singh',reg_no:'MS08021',post:''}
@@ -532,14 +532,19 @@ function settings($scope,truthSource,$timeout){
 
 	$scope.$watch('truthSource.io.state.last',function(newVal,oldVal){
 		// if(newVal!=oldVal){
+			// alert("Changed");
 			$scope.config.other.hideCount=$scope.config.other.hideAfter;
 		// }
+	});
+	$scope.$watch('truthSource.io.state.working',function(newVal,oldVal){
+		$scope.config.other.hideCount=$scope.config.other.hideAfter;
 	});
 
 	$timeout(function(){
 		$scope.init=0;
 
 		truthSource.student.fetch.Now(function(val){
+			// alert("Hello1");
 			$scope.students=val;
 			$scope.init=$scope.init+1;
 			if($scope.init==3)			
@@ -548,6 +553,7 @@ function settings($scope,truthSource,$timeout){
 		});
 		
 		truthSource.post.fetch.Now(function(val){
+			// alert("Hello2");
 			$scope.posts=val;
 			$scope.init=$scope.init+1;
 			if($scope.init==3)
@@ -558,12 +564,13 @@ function settings($scope,truthSource,$timeout){
 		});
 
 		truthSource.nominee.fetch.Now(function(val){
+			// alert("Hello3");
 			// alert(val);
 			$scope.nominees=val;
 			$scope.init=$scope.init+1;
 			if($scope.init==3)
 				$scope.updatingInterface=false;
-			
+
 			// $scope.updatingInterface=false;
 			$scope.$apply();
 		});

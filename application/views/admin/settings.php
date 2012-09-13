@@ -33,7 +33,9 @@
 			<span><div class="subTitle">Admin Panel</div></span>			
 			<!-- || truthSource.io.state.last=='Success' -->
 			<div class="smallStat" ng-dblclick="truthSource.io.state.last=''" ng-click="config.other.hideCount=60" ng-hide="truthSource.io.state.last==''"><div class="smallFont">Last Response (Auto hide in: {{config.other.hideCount}}):</div> {{truthSource.io.state.last}}</div>
-			<div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div>
+			<div ng-show="truthSource.io.state.working" class="smallStat">Fetching Data from Server<br/> Please Wait</div>
+			<div ng-show="updatingInterface" class="smallStat">Processing Data<br/> Please Wait</div>
+			<!-- <div ng-show="truthSource.io.state.working || updatingInterface" class="smallStat">Loading<br/> Please Wait</div> -->
 		</div>
 
 <!-- 		<div class="loadingStat" ng-show="truthSource.io.state.working || updatingInterface">	
