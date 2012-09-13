@@ -403,10 +403,44 @@
 			<hr/>
 
 			<br/>
-			<p class="subSubTitle">Results</p>		
-			<a href='' ng-click="isoResults=1">Isolate</a> | <a href='' ng-click="isoResults=0">Normal</a>
-			<br/><br/>
-
+			<p class="subSubTitle">Results</p>					
+			<center>
+			<a href='' ng-show="config.result.autoUpdate" ng-click="config.result.autoUpdate=false">Disable Auto Update</a>
+			<a href='' ng-hide="config.result.autoUpdate" ng-click="config.result.autoUpdate=true">Enable Auto Update</a>
+			<br/>
+			<div ng-show="config.result.autoUpdate"> 
+				Auto Update After: 
+				<input placeholder="Auto Update After" size="5" ng-model="config.result.autoUpdateAfter"/> 
+			</div>
+			<br/><br/>			
+				<table>
+					<tr>
+						<th>Post Name</th>
+						<th width="200">Nominee</th>
+						<th>Total<th>
+					</tr>
+					<tr ng-repeat="result in results">
+						<td>{{result.title}}</td>
+						<td>
+							<table>
+								<tr ng-repeat="data in result.data">
+									<td width="200">{{data.label}} > </td>
+									<td>{{data.value}}</td>
+								</tr>
+							</table>
+						
+<!--  						<ul>
+ 							<li ng-repeat="data in result.data">
+ 								[{{data.label}} | {{data.value}}]
+ 							</li>
+ 						</ul>
+ -->						
+						</td>
+						<td>{{result.total}}</td>
+					</tr>
+				</table>
+				<br/><br/>
+			</center>
 	
 			<div ng-repeat="result in results" id="outer">
 				<br/>
@@ -430,7 +464,6 @@
 				</div>
 				<div class="clearer"></div>
 			</div>
-
 
 		</div>	
 

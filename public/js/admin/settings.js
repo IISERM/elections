@@ -480,7 +480,8 @@ function settings($scope,truthSource,$timeout){
 	$scope.subjectsField=[{name:'Physics'},{name:'Mathematics'},{name:'Chemistry'},{name:'Biology'},{name:'Undeclared'}];
 	$scope.config={student:{orderBy:'first_name',search:'',reverse:false,limitTo:20,currentPage:0},
 					post:{orderBy:'name',search:'',reverse:false},
-					other:{hideCount:0,hideAfter:10}};
+					other:{hideCount:0,hideAfter:10},
+					result:{autoUpdate:false,autoUpdateCount:0,autoUpdateAfter:10}};
 
 	$scope.nominees=[{id:1,name:'Atul Singh Arora',reg_no:'MS11003',post:''},
 					{id:2,name:'Gagan Preet Singh',reg_no:'MS08021',post:''}
@@ -571,6 +572,17 @@ function settings($scope,truthSource,$timeout){
 		$timeout(autoHide,1000);
 	};
 	autoHide();
+
+	var autoUpdateResult=function(){
+		if($scope.config.result.autoUpdate)
+		{
+			$scope.ResultsRefresh();
+			
+		}
+		// alert("CALLED");
+		$timeout(autoUpdateResult,$scope.config.result.autoUpdateAfter*1000);
+	}
+	autoUpdateResult();
 
 	$scope.$watch('truthSource.io.state.last',function(newVal,oldVal){
 		// if(newVal!=oldVal){
@@ -782,5 +794,15 @@ function settings($scope,truthSource,$timeout){
    //          // color: "#FFF"
    //      };
    //  };
+	$scope.ResultsRefresh = function(){
+		truthSource.result.fetch.Now(function(val){
+			$scope.$apply();
+			$scope.updatingInterface=true;
+			$scope.$apply();
+			$scope.results=val;
+			$scope.updatingInterface=false;
+			$scope.$apply();
+		});
+	}
 
 }
