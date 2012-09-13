@@ -58,21 +58,28 @@
 									'selected' => array('id' => -1),
 									'list' => $op
 								);
-							// print_r($data);
-							// print_r($op);
 							$op = array();
 						}
 					}
 				}
 			}
-			// $posts = Post::where('hostel',)->where()->get();
-			// $post->hostel()->pivot()->where('post_id','=',$post->id)->where('hostel_id','=',$user->hostel)->get();
 			return json_encode($data);
 		}
 
 		public function post_vote()
 		{
-			//
+			$user = Auth::user();
+			if($user->voted)
+			{
+				$name = Crypter::encrypt($user->password);
+				Vote::create('vote' => $name);
+				$user->voted = true;
+				return "Your vote has been casted. Your pseudo name is: ".$name;
+			}
+			else
+			{
+				return "Already Voted";
+			}
 		}
 
 		public function get_check()

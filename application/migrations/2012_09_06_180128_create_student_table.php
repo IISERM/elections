@@ -36,10 +36,10 @@ class Create_Student_Table {
 			$table->integer('batch')->length(4);
 
 			// Subject
-			$table->integer('subject')->default(1);
+			$table->integer('subject')->default(5);
 
 			// Sex
-			$table->integer('sex')->length(1);
+			$table->integer('sex')->length(1)->default(1);
 
 			// Email ID and Password
 			$table->string('password')->nullable()->length(64);
