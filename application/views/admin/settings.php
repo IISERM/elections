@@ -403,7 +403,7 @@
 	<br/><br/><br/>
 	<br/>
 	<p>Created by</p>
-	<img src=<?php echo "\"".URL::base()."/img/theDeparted.svg\""; ?> width="150px"/>
+	<a target="_blank" href="http://www.github.com/theDeparted/"><img src=<?php echo "\"".URL::base()."/img/theDeparted.svg\""; ?> width="150px"/></a>
 	<p>Can't live until you die</p>
 	<p>Indian Institute of Science Education and Research, Mohali</p>
 	</center>	

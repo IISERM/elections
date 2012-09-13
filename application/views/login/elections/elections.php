@@ -16,7 +16,7 @@
 	<div class="Bar">
 		<div class="Vertical_Align_Top Bar_height">
 			<div class="Bar_link"><a class="Bar_link" href= "<?php echo URL::base()."/index.php/logout" ?> "  >Sign Out</a></div>
-			<div class="Page_Heading">NaveenTantra</div>
+			<div class="Page_Heading">Naveen Tantra</div>
 			<div class="Page_SubHeading">(Online Elections @ IISER M)</div>
 			<div class="selection_state">{{user.name}}<br/>
 				{{user.gender}}, {{user.batch}} batch, Hostel {{user.hostel}}
