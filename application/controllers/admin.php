@@ -367,5 +367,14 @@ class Admin_Controller extends Base_Controller {
 			return "Nomination Delete Failed";
 		}
 	}
+
+	public function get_res()
+	{
+		$posts = Post::all();
+		foreach($posts as $post)
+		{
+			
+		}
+	}
 }
 
