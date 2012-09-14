@@ -218,7 +218,7 @@ function elections($scope,truthSource,$timeout){
 		// alert("About to trigger");
 		truthSource.userInfo.Fetch(function(val){		
 			$scope.user=val;
-			$scope.user.voted=0;
+			// $scope.user.voted=0;
 			$scope.$apply();
 		});
 
@@ -270,7 +270,7 @@ function elections($scope,truthSource,$timeout){
 						categories[i].list[j].selected=false;
 				}
 				$scope.categories[i].selected=count;
-				if(count==categories[i].number)
+				if(count<=categories[i].number && count>0)
 					categories[i].passed=true;
 			}
 		}

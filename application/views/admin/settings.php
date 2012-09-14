@@ -51,7 +51,7 @@
 			<br/>
 		<!-- </div> -->
 
-		<div ng-hide="isoNominees || isoPosts">
+		<div ng-hide="isoNominees || isoPosts || isoResults">
 			<hr/>
 			<p class="subSubTitle">Students</p>
 			<a href='' ng-click="isoStudents=1">Isolate</a> | <a href='' ng-click="isoStudents=0">Normal</a>
@@ -214,7 +214,7 @@
 			<br/><br/>
 		</div>
 
-		<div ng-hide="isoNominees || isoStudents">
+		<div ng-hide="isoNominees || isoStudents || isoResults">
 			<hr/>
 
 			<br/>
@@ -334,7 +334,7 @@
 			<br/><br/>
 		</div>
 
-		<div ng-hide="isoPosts || isoStudents">
+		<div ng-hide="isoPosts || isoStudents || isoResults">
 			<hr/>
 
 			<br/>
@@ -401,10 +401,12 @@
 
 		<div ng-hide="isoNominees || isoStudents || isoPosts">
 			<hr/>
-
 			<br/>
 			<p class="subSubTitle">Results</p>					
 			<center>
+			<a href='' ng-click="isoResults=1">Isolate</a> | <a href='' ng-click="isoResults=0">Normal</a>
+			<br/><br/>
+			<br/>
 			<a href='' ng-show="config.result.autoUpdate" ng-click="config.result.autoUpdate=false">Disable Auto Update</a>
 			<a href='' ng-hide="config.result.autoUpdate" ng-click="config.result.autoUpdate=true">Enable Auto Update</a>
 			| <a href='' ng-click="ResultsRefresh()">Refresh Now</a>
@@ -451,11 +453,13 @@
 					<ul>
 						<li ng-repeat="data in result.data">
 							<div class="barContainer" title="{{data.value}}">
-								<div class="bar" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
+								<div class="barHost">
+									<div class="bar" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
 									<!-- <div class="bar" ng-style="{height:parseInt( ( ( (+data.value)/result.total)  * 100), 10)+'px'}"> -->
+									</div>
 								</div>
-								<div class="barC" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}">
-								</div>
+								<!-- <div class="barC" ng-style="{height:(( (+data.value) / (+result.total) * 80) )+'px'}"> -->
+								<!-- </div> -->
 								{{data.label}}
 								<!-- <br/> -->
 								<!-- {{data.value}} -->
