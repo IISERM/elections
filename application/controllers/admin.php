@@ -373,5 +373,21 @@ class Admin_Controller extends Base_Controller {
 		}
 		return json_encode($d);
 	}
+
+	public function get_pass()
+	{
+		$str = '<html><head><title>Passwords | NaveenTantra</title></head><body><h1>Passwords</h1><table style:"border:1"><tr><th>Name</th><th>Registration Number</th><th>Password</th></tr>';
+		$students = Student::where('role','=','0')->get();
+		foreach($students as $student)
+		{
+			$pass = Hash::make($student->reg_no);
+			$pass = substr($pass,10,5);
+			$student->password = Hash::make($pass);
+			$student->save();
+			$str = $str.'<tr><td>'.$student->first_name.' '.$student->middle_name.' '.$student->last_name.'</td><td>'.$student->reg_no.'</td><td>'.$pass.'</td></tr>';
+		}
+		$str = $str.'</table></body></html>';
+		return $str;
+	}
 }
 

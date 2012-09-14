@@ -57,15 +57,16 @@
 												'id' => $n->id,
 												'name' => $name,
 												'link' => $student->reg_no.'.jpg',
-												'reg_no' => $student->reg_no
+												'reg_no' => $student->reg_no,
+												'selected' => false
 											);
 									}
 								}
 								$data[] = array(
 										'id' => $option->id,
 										'title' => $option->post,
-										'selected' => array('id' => -1),
-										'list' => $op
+										'list' => $op,
+										'number' => $option->number
 									);
 								$op = array();
 							}
@@ -88,18 +89,24 @@
 				$voter->save();
 				foreach($votes as $vote)
 				{
-					$votec = Votec::create(
-							array(
-									'post_id' => $vote->id,
-									'nominee_id' => $vote->selected->id,
-									'votes_id' => $voter->id
-								)
-						);
-					$votec->save();
+					foreach($vote->list as $v)
+					{
+						if($v->selected == true)
+						{
+							$votec = Votec::create(
+										array(
+												'post_id' => $vote->id,
+												'nominee_id' => $v->id,
+												'votes_id' => $voter->id
+										)
+								);
+							$votec->save();
+						}
+					}
 				}
 				$user->voted = 1;
 				$user->save();
-				return "Your vote has been casted. Your pseudo name is: ".$name;
+				return "Your vote has been casted. Your pseudo name is: ".$name.". Please note this down as it will not be retrivable.";
 			}
 			else
 			{
