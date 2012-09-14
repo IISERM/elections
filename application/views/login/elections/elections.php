@@ -40,15 +40,13 @@
 			 	</tr>
 			 	<tr ng-repeat="category in categories" >
 			 		<td>{{category.title}}</td>
-			 		<td>
-						<div>--</div>
-			 			<table ng-hide="category.abstane">
-			 				<tr ng-repeat="list in category.list" ng-show="list.selected">
-			 					<td>{{list.name}}</td>
-			 				</tr>
-			 			</table>
-			 			<div ng-show="category.abstane">ABSTANED</div>
-			 			<div>--</div>
+			 		<td>						
+			 			<ul ng-hide="category.abstane">
+			 				<li ng-repeat="list in category.list" ng-show="list.selected">
+			 					{{list.name}}
+			 				</li>
+			 			</ul>
+			 			<div ng-show="category.abstane">ABSTANED</div>			 			
 			 		</td>
 
 			 	</tr>
@@ -99,20 +97,18 @@
 			 	</tr>
 			 	<tr ng-repeat="category in categories" >
 			 		<td>{{category.title}}</td>
-			 		<td>
-						<div>--</div>
-			 			<table ng-hide="category.abstane">
-			 				<tr ng-repeat="list in category.list" ng-show="list.selected">
-			 					<td>{{list.name}}</td>
-			 				</tr>
-			 			</table>
-			 			<div ng-show="category.abstane">ABSTANED</div>
-			 			<div>--</div>
+			 		<td>						
+			 			<ul ng-hide="category.abstane">
+			 				<li ng-repeat="list in category.list" ng-show="list.selected">
+			 					{{list.name}}
+			 				</li>
+			 			</ul>
+			 			<div ng-show="category.abstane">ABSTANED</div>			 			
 			 		</td>
 
 			 	</tr>
 			 </table>
- 
+
 		</div>
 	</div>
 	<div ng-show="user.voted==1">
