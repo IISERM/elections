@@ -33,18 +33,26 @@
 		<!-- value="<?php echo URL::base()."/img/"; ?>" /> -->
 
 		<div class="selection_state {{hideSide}}">
-			<!-- <table>
-				<tr>
-					<th>Category</th>
-					<th>Selection</th>
-				</tr>
+			 <table>
+			 	<tr>
+			 		<th>Category</th>
+			 		<th>Selection</th>
+			 	</tr>
+			 	<tr ng-repeat="category in categories" >
+			 		<td>{{category.title}}</td>
+			 		<td>
+						<div>--</div>
+			 			<table ng-hide="category.abstane">
+			 				<tr ng-repeat="list in category.list" ng-show="list.selected">
+			 					<td>{{list.name}}</td>
+			 				</tr>
+			 			</table>
+			 			<div ng-show="category.abstane">ABSTANED</div>
+			 			<div>--</div>
+			 		</td>
 
-				<tr ng-repeat="category in categories" class="selected_{{category.selected.id}}">
-					<td>{{category.title}}</td>
-					<td>{{getNameFromList(category,category.selected.id)}}</td>
-				</tr>
-			</table>
-			 -->
+			 	</tr>
+			 </table>
 			<!-- <p>{{categories}}</p> -->
 			<p class="linklike" ng-click="cast()">Cast My Vote!</p>
 			<p class="smallLink" ng-click="hideSideF()">{{hideSide}}</p>
@@ -72,7 +80,7 @@
 
 		<p class="linklike" ng-click="toggle_votes()">Show/Hide who I voted for</p>
 		<div ng-show="custom.showvotes" class="selection_state">
-			<table>
+<!-- 			<table>
 				<tr>
 					<th>Category</th>
 					<th>Selection</th>
@@ -83,7 +91,28 @@
 					<td>{{getNameFromList(category,category.selected.id)}}</td>
 				</tr>
 			</table>
-			
+ -->			
+			 <table>
+			 	<tr>
+			 		<th>Category</th>
+			 		<th>Selection</th>
+			 	</tr>
+			 	<tr ng-repeat="category in categories" >
+			 		<td>{{category.title}}</td>
+			 		<td>
+						<div>--</div>
+			 			<table ng-hide="category.abstane">
+			 				<tr ng-repeat="list in category.list" ng-show="list.selected">
+			 					<td>{{list.name}}</td>
+			 				</tr>
+			 			</table>
+			 			<div ng-show="category.abstane">ABSTANED</div>
+			 			<div>--</div>
+			 		</td>
+
+			 	</tr>
+			 </table>
+ 
 		</div>
 	</div>
 	<div ng-show="user.voted==1">

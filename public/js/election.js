@@ -222,10 +222,10 @@ function elections($scope,truthSource,$timeout){
 			$scope.$apply();
 		});
 
-	// truthSource.category.Fetch(function(val){
-	// 	$scope.categories=val;
-	// 	$scope.$apply();
-	// });
+	truthSource.category.Fetch(function(val){
+		$scope.categories=val;
+		$scope.$apply();
+	});
 
 	},100);
 
