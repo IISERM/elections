@@ -33,7 +33,7 @@
 		<!-- value="<?php echo URL::base()."/img/"; ?>" /> -->
 
 		<div class="selection_state {{hideSide}}">
-			<table>
+			<!-- <table>
 				<tr>
 					<th>Category</th>
 					<th>Selection</th>
@@ -44,14 +44,16 @@
 					<td>{{getNameFromList(category,category.selected.id)}}</td>
 				</tr>
 			</table>
+			 -->
+			<!-- <p>{{categories}}</p> -->
 			<p class="linklike" ng-click="cast()">Cast My Vote!</p>
 			<p class="smallLink" ng-click="hideSideF()">{{hideSide}}</p>
 
 			<!-- <div ng-repeat="category in categories"> <p><tt>For Category:</tt>{{category.title}}, <br> <tt>you've selected:</tt>{{getNameFromList(category,category.selected.id)}}</p>	</div> -->
 		</div>
 		<center>
-			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" selected="category.selected" ng-model="category.selected" >				
-					<nominee ng-repeat="person in category.list | orderBy:'name'" category="{{category.id}}" selected="category.selected" ng-model="category.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>				
+			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" abstane="category.abstane" ng-model="category.abstane" number="{{category.number}}" selected="{{category.selected}}">
+					<nominee ng-repeat="person in category.list | orderBy:'name'" category="{{category.id}}" abstane="category.abstane" selected="person.selected" ng-model="person.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>
 			</votepanel>
 			<br/>
 			<p class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</p>

@@ -9,16 +9,21 @@ angular.module('myApp',[])
 		scope:{id:'@',
 				catName:'@',
 				list:'@',				
-				selected:'='},
+				abstane:'=',
+				selected:'@',
+				number:'@'
+				},
 		transclude: true,
 		template: '<div class="main_group"> \
 						<h1>{{catName}}</h1> \
+						<p ng-hide="abstane">{{selected}} of {{number}} Selected</p> \
+						<p ng-show="abstane">ABSTANED</p> \
 						<div ng-transclude></div> \
 						<div class="categoryChild"> \
 							<label for="{{id}}_abstane"> \
 								<div class="abstane"> ABSTANE </div> \
 							</label> \
-							<input type="radio" name="{{id}}" ng-model="selected.id" value="0" id="{{id}}_abstane">I vote for neither of them!</input> \
+							<input type="checkbox" name="{{id}}" ng-model="abstane" value=true id="{{id}}_abstane">I vote for neither of them!</option> \
 						</div> \
 					</div>',		
 		compile:function (tElement, tAttrs)
@@ -41,12 +46,13 @@ angular.module('myApp',[])
 				link:'@',
 				basepath:'@',
 				selected:'=',				
-				category:'@'},
+				category:'@',
+				abstane:'@'},				
 
 		// transclude: true,
 		template:  '<div class="categoryChild" > \
 		<label for="{{category}}_{{id}}"> <img class="thumbnail" src="{{basepath+link}}" /> </label>\
-		<div id={{id}}> <input type="radio" name="{{category}}" ng-model="selected.id" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
+		<div id={{id}}> <input type="checkbox" name="{{category}}" ng-model="selected" value="{{id}}" id="{{category}}_{{id}}" /><label for="{{category}}_{{id}}">{{name}}</label> \
 		</div> \
 		</div>',
 		compile:function (tElement, tAttrs)
@@ -187,37 +193,39 @@ angular.module('myApp',[])
 var ext_hideSideF_show;
 
 function elections($scope,truthSource,$timeout){
-	$scope.categories=[]
+	// $scope.categories=[]
 
-	// $scope.categories=[
-	// {id:1, title:'Category 1',selected:{id:'-1'},
-	// 								list:[
-	// 									{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg'},
-	// 									{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg'},
-	// 									{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg'},
-	// 									{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg'},
-	// 									{id:5,name:'Muffin 5',link:'487384_410881738958783_1398366316_n.jpg'},
-	// 									{id:6,name:'Muffin 6',link:'487384_410881738958783_1398366316_n.jpg'},
-	// 									]},
-	// {id:2, title:'Category 2',selected:{id:'-1'},
-	// 								list:[
-	// 									{id:1,name:'MuffinB 1',link:'Image1 Link :)'},
-	// 									{id:2,name:'MuffinB 2',link:'Image2 Link :)'},
-	// 									{id:3,name:'MuffinB 3',link:'Image3 Link :)'},
-	// 									{id:4,name:'MuffinB 4',link:'Image4 Link :)'},
-	// 									]}
-	// ];
+	$scope.categories=[
+	{id:1, title:'Category 1',number:2,abstane:'0',selected:0,passed:false,
+									list:[
+										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg',selected:false},
+										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg',selected:false},
+										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg',selected:false},
+										{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg',selected:false},
+										{id:5,name:'Muffin 5',link:'487384_410881738958783_1398366316_n.jpg',selected:false},
+										{id:6,name:'Muffin 6',link:'487384_410881738958783_1398366316_n.jpg',selected:false}
+										]},
+	{id:2, title:'Category 2',number:2,abstane:'0',selected:0,passed:false,
+									list:[
+										{id:1,name:'Muffin 1',link:'487384_410881738958783_1398366316_n.jpg',selected:false},
+										{id:2,name:'Muffin 2',link:'386115_267265833390661_507550667_n.jpg',selected:false},
+										{id:3,name:'Muffin 3',link:'487384_410881738958783_1398366316_n.jpg',selected:false},
+										{id:4,name:'Muffin 4',link:'386115_267265833390661_507550667_n.jpg',selected:false}
+										]}
+	];
+
 	$timeout(function(){
 		// alert("About to trigger");
 		truthSource.userInfo.Fetch(function(val){		
 			$scope.user=val;
+			$scope.user.voted=0;
 			$scope.$apply();
 		});
 
-	truthSource.category.Fetch(function(val){
-		$scope.categories=val;
-		$scope.$apply();
-	});
+	// truthSource.category.Fetch(function(val){
+	// 	$scope.categories=val;
+	// 	$scope.$apply();
+	// });
 
 	},100);
 
@@ -233,6 +241,42 @@ function elections($scope,truthSource,$timeout){
 			$scope.custom.showvotes=true;
 	}
 
+	$scope.$watch('categories',function(){
+		var categories=$scope.categories;
+		// alert('something happened');		
+		var i,j,count;
+		for(i=0;i<categories.length;i++)
+		{
+			count=0;
+			categories[i].passed=false;
+			if(categories[i].abstane==true)
+			{
+				for(j=0;j<categories[i].list.length;j++)
+				{
+					categories[i].list[j].selected=0;
+				}
+				categories[i].passed=true;
+			}
+			else
+			{			
+				for(j=0;j<categories[i].list.length;j++)
+				{
+					if(categories[i].list[j].selected)
+						count=count+1;
+				}
+				if(count>categories[i].number)
+				{
+					for(j=0;j<categories[i].list.length;j++)
+						categories[i].list[j].selected=false;
+				}
+				$scope.categories[i].selected=count;
+				if(count==categories[i].number)
+					categories[i].passed=true;
+			}
+		}
+		// if(passed==false)
+
+	},true);
 
 	// $scope.$watch('categories',function(){
  //    	var i,passed=true;
@@ -272,7 +316,7 @@ function elections($scope,truthSource,$timeout){
 
 		for(i=0;i<categories.length;i++)
 		{
-			if(categories[i].selected.id==-1)
+			if(categories[i].passed!=true)
 				passed=false;
 		}
 		if(passed)
