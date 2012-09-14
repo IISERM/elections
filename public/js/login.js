@@ -100,6 +100,7 @@ p\
 	//Auto Initializations
 	{
 		var base_path=$('#lara_path').val()+'/index.php';
+		var base_path_o=$('#lara_path').val();
 		var processing_last_request=false;
 		var reg_no_selected="guest";
 		var login_invoked=false;
@@ -314,7 +315,7 @@ p\
 			user_type_string="h";
 		}
 
-		var img_path=base_path + "/img/";
+		var img_path=base_path_o + "/img/";
 		if(user_img=='0')
 			img_path=img_path+"default_" + user_type_string;
 		else

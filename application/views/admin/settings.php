@@ -29,7 +29,7 @@
 
 			<br/>
 			<div class="topBar">
-				<span><a href="">Log Out</a></span>
+				<span><a href= "<?php echo URL::base()."/index.php/logout" ?> ">Sign Out</a></span>
 				<div class="mainTitle">NaveenTantra</div>
 				<span><div class="subTitle">Admin Panel</div></span>			
 				<!-- || truthSource.io.state.last=='Success' -->

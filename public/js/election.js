@@ -140,7 +140,7 @@ angular.module('myApp',[])
 		truth.voteCast.Cast=function(voteCast, OnComplete)
 		{
 			truth.io.state.working=true;
-			alert(JSON.stringify(voteCast));
+			// alert(JSON.stringify(voteCast));
 			// alert(truth.io.config.basePath + truth.io.config.addIndexDotPHP + truth.voteCast.config.basePath + truth.voteCast.add.lnk);
 			$.ajax({
 				type: 'POST',

@@ -176,6 +176,10 @@ ul{
 }
 .bar{
 	/*display:table-cell;*/
+	border:1px solid rgb(150,150,150);
+/*	border-color:rgba(150,150,150,1);
+	border-width:10px;
+*/
 	-webkit-transition:all 2s;
 	position:absolute;
 	width:15px;	
@@ -187,7 +191,10 @@ ul{
 }
 .barC{
 	/*display:table-cell;*/
-	-webkit-transition:all 2s;
+	border:1px solid rgb(150,150,150);
+/*	border-color:rgba(150,150,150,1);
+	border-width:10px;
+*/	-webkit-transition:all 2s;
 	position:absolute;
 	/*height:100px;*/
 	width:15px;	

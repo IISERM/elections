@@ -526,7 +526,7 @@ function settings($scope,truthSource,$timeout){
 														{select:true,name:'Undeclared'},
 														]}
 				];
-	$scope.postNew={id:1,name:'Human of the Year',number:2,hostels:[
+	$scope.postNew={id:1,name:'',number:'',hostels:[
 														{select:true,name:'7'},
 														{select:true,name:'5'}
 														],
@@ -539,10 +539,10 @@ function settings($scope,truthSource,$timeout){
 														{select:true,name:'MS12'}														
 														],
 												subjects:[
-														{select:false,name:'Physics'},
-														{select:false,name:'Mathematics'},
-														{select:false,name:'Chemistry'},
-														{select:false,name:'Biology'},
+														{select:true,name:'Physics'},
+														{select:true,name:'Mathematics'},
+														{select:true,name:'Chemistry'},
+														{select:true,name:'Biology'},
 														{select:true,name:'Undeclared'},
 														],
 												sexes:[
