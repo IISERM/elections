@@ -106,6 +106,8 @@
 					</td>
 					<td>
 						<select ng-model="student.batch">
+	 						<option value="Int. PhD">Int. PhD</option>
+							<option value="PhD">PhD</option>
 	 						<option value="MS07">MS07</option>
 							<option value="MS08">MS08</option>
 							<option value="MS09">MS09</option>
@@ -159,6 +161,8 @@
 					</td>
 					<td>
 						<select ng-model="studentNew.batch">
+	 						<option value="Int. PhD">Int. PhD</option>
+							<option value="PhD">PhD</option>							
 							<option value="MS07">MS07</option>
 							<option value="MS08">MS08</option>
 							<option value="MS09">MS09</option>

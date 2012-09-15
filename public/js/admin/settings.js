@@ -449,7 +449,7 @@ function settings($scope,truthSource,$timeout){
 		,
 		batch:
 			{
-				'MS07':1,'MS08':2,'MS09':3,'MS10':4,'MS11':5,'MS12':6
+				'MS07':1,'MS08':2,'MS09':3,'MS10':4,'MS11':5,'MS12':6,'Int. PhD':7,'PhD':8
 			}
 		,
 		subject:

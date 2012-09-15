@@ -25,6 +25,8 @@ table:hover tr:hover{
 	width:100%;	
 	top:-450px;		
 	z-index: 10;
+	margin:0 0 0 0;
+	padding: 0 0 0 0;
 background-color:rgba(200,200,200,0.9);	
 }
 .smallFont{
@@ -42,7 +44,7 @@ background-color:rgba(200,200,200,0.9);
 	background-color:rgba(200,200,200,0.9);	
 }
 
-.fullWidthContainer:hover{
+.fullWidthContainer:hover{	
 	top:0px;
 }
 

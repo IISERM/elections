@@ -27,3 +27,7 @@ Follow [this link](https://github.com/IISERM/elections/blob/master/tables.md "Ta
 ## Resources
 
 http://jsfiddle.net/WfuAh/1/
+
+## Known Issues
+
+1. Nominations don't get deleted when posts are deleted

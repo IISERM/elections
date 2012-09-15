@@ -52,7 +52,10 @@
 			 	</tr>
 			 </table>
 			<!-- <p>{{categories}}</p> -->
-			<p class="linklike" ng-click="cast()">Cast My Vote!</p>
+			<br/><br/>
+			<center>
+				<div class="linklike" ng-click="cast()">Cast My Vote!</div>			
+			</center>
 			<p class="smallLink" ng-click="hideSideF()">{{hideSide}}</p>
 
 			<!-- <div ng-repeat="category in categories"> <p><tt>For Category:</tt>{{category.title}}, <br> <tt>you've selected:</tt>{{getNameFromList(category,category.selected.id)}}</p>	</div> -->
@@ -61,8 +64,8 @@
 			<votepanel ng-repeat="category in categories" id="{{category.id}}" cat-name="{{category.title}}" abstane="category.abstane" ng-model="category.abstane" number="{{category.number}}" selected="{{category.selected}}">
 					<nominee ng-repeat="person in category.list | orderBy:'name'" category="{{category.id}}" abstane="category.abstane" selected="person.selected" ng-model="person.selected" id="{{person.id}}" name="{{person.name}}" link="{{person.link}}" basepath="<?php echo URL::base()."/img/"; ?>"/>
 			</votepanel>
-			<br/>
-			<p class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</p>
+			<br/>			
+			<div class="linklike" ng-click="hideSideF()">Show/Hide Vote Panel</div>			
 		</center>
 
 	</div>
@@ -74,9 +77,9 @@
 			<div class="main_group" ng-hide="voteCastMsg==''">
 				{{voteCastMsg}}
 			</div>
+			<p class="linklike" ng-click="toggle_votes()">Show/Hide who I voted for</p>
 		</center>
-
-		<p class="linklike" ng-click="toggle_votes()">Show/Hide who I voted for</p>
+		
 		<div ng-show="custom.showvotes" class="selection_state">
 <!-- 			<table>
 				<tr>
