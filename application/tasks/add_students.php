@@ -42,6 +42,14 @@
 				'batch' => 'MS12'
 			));
 
+			Batch::create(array(
+				'batch' => 'Int. PhD'
+			));
+
+			Batch::create(array(
+				'batch' => 'PhD'
+			));
+
 			DB::query('TRUNCATE TABLE subjects');
 
 			Subject::create(array(

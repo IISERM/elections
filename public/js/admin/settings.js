@@ -536,7 +536,9 @@ function settings($scope,truthSource,$timeout){
 														{select:true,name:'MS09'},
 														{select:true,name:'MS10'},
 														{select:true,name:'MS11'},
-														{select:true,name:'MS12'}														
+														{select:true,name:'MS12'},
+														{select:true,name:'Int. PhD'},
+														{select:true,name:'PhD'}
 														],
 												subjects:[
 														{select:true,name:'Physics'},
